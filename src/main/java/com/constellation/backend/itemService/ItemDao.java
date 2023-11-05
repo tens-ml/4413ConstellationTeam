@@ -1,17 +1,41 @@
-package com.constellation.backend.itemService;
+package com.constellation.backend.itemservice;
 
+import com.constellation.backend.db.SQLiteConnection;
+
+import org.sqlite.JDBC;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDao {
-	private static List<Item> items = new ArrayList<Item>();
 	public void addItem(Item item) {
-		items.add(item);
+		String sql = "INSERT INTO items(name) VALUES(?)";
+
+		try (Connection conn = SQLiteConnection.connect();
+			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, item.getName());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
+
 	public List<Item> getItems() {
-		if (items.size() == 0) {
-			Item newItem = new Item(1, "Bob");
-			items.add(newItem);
+		List<Item> items = new ArrayList<>();
+		String sql = "SELECT id, name FROM items";
+
+		try (Connection conn = SQLiteConnection.connect();
+			 Statement stmt  = conn.createStatement();
+			 ResultSet rs    = stmt.executeQuery(sql)) {
+
+			while (rs.next()) {
+				Item newItem = new Item(
+						rs.getInt("id"),
+						rs.getString("name"));
+				items.add(newItem);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
 		return items;
 	}
