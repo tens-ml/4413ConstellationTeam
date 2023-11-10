@@ -5,7 +5,7 @@
     <Resource name="jdbc/EECS"
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
               type="javax.sql.DataSource" driverClassName="org.sqlite.JDBC"
-              url="jdbc:sqlite:C:/Users/k899e/IdeaProjects/4413ConstellationTeam/database.sqlite"/>
+              url="jdbc:sqlite:/Users/alish/Downloads/payments.db"/>
     <ResourceLink global="jdbc/EECS" name="jdbc/EECS"
                   type="javax.sql.DataSource" />
 </Context>
