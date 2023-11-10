@@ -1,0 +1,150 @@
+@charset "UTF-8";
+body { 
+
+    font-family: Arial, sans-serif; 
+
+    line-height: 1.6; 
+
+    margin: 0; 
+
+    padding: 0; 
+
+    background-color: #f4f4f4; 
+
+} 
+
+  
+
+header { 
+
+    background: #50b3a2; 
+
+    color: #ffffff; 
+
+    padding: 1em 0; 
+
+    text-align: center; 
+
+} 
+
+  
+
+footer { 
+
+    background: #50b3a2; 
+
+    color: #ffffff; 
+
+    text-align: center; 
+
+    padding: 1em 0; 
+
+    position: absolute; 
+
+    bottom: 0; 
+
+    width: 100%; 
+
+} 
+
+  
+
+form { 
+
+    background: #ffffff; 
+
+    margin: 2em 0; 
+
+    padding: 2em; 
+
+    border-radius: 8px; 
+
+    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.2); 
+
+} 
+
+  
+
+label { 
+
+    display: block; 
+
+    margin: 0 0 1em 0; 
+
+} 
+
+  
+
+input { 
+
+    width: 100%; 
+
+    padding: 8px; 
+
+    box-sizing: border-box; 
+
+    margin-bottom: 1em; 
+
+    border-radius: 4px; 
+
+    border: 1px solid #ccc; 
+
+} 
+
+  
+
+input[type="submit"] { 
+
+    cursor: pointer; 
+
+    background-color: #50b3a2; 
+
+    color: #ffffff; 
+
+    border: none; 
+
+    padding: 10px 20px; 
+
+    border-radius: 4px; 
+
+} 
+
+  
+
+input[type="submit"]:hover { 
+
+    background-color: #4a9188; 
+
+} 
+
+  
+
+table { 
+
+    width: 100%; 
+
+    border-collapse: collapse; 
+
+    margin: 2em 0; 
+
+} 
+
+  
+
+th, td { 
+
+    padding: 8px 12px; 
+
+    border: 1px solid #ddd; 
+
+} 
+
+  
+
+th { 
+
+    background-color: #50b3a2; 
+
+    color: white; 
+
+} 
