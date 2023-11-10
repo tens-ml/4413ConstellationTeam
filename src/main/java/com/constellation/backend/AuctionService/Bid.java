@@ -1,4 +1,4 @@
-package com.constellation.AuctionService;
+package com.constellation.backend.AuctionService;
 
 
 import java.sql.Date;

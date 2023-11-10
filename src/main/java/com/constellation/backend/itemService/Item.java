@@ -1,4 +1,4 @@
-package com.constellation.backend.itemservice;
+package com.constellation.backend.itemService;
 
 public class Item {
 	private int id;

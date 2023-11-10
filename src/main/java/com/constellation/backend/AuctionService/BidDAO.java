@@ -1,4 +1,4 @@
-package com.constellation.AuctionService;
+package com.constellation.backend.AuctionService;
 
 import java.sql.Connection;
 
@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.constellation.AuctionService.Database.AuctionBidsDatabaseConnection;
+import com.constellation.backend.AuctionService.Database.AuctionBidsDatabaseConnection;
 
 
 public class BidDAO {

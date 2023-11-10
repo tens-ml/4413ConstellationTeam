@@ -1,4 +1,4 @@
-package com.constellation.AuctionService.Database;
+package com.constellation.backend.AuctionService.Database;
 
 import java.sql.Connection;
 import java.sql.SQLException;

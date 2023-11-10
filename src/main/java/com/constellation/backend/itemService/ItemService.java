@@ -1,6 +1,7 @@
-package com.constellation.backend.itemservice;
+package com.constellation.backend.itemService;
 
 import jakarta.ws.rs.*;
+
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
