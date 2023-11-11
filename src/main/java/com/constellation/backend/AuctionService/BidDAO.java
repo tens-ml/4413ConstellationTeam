@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,27 +18,33 @@ public class BidDAO {
 	
 	public List<Bid> readAll() {
 		 String sql = "SELECT BiddingID, HighestBidderID, HighestPrice, EndTime FROM bids";
-		 List<Bid> auctions = new ArrayList<>();
+		 List<Bid> bids = new ArrayList<>();
 
 		 try ( Connection conn = AuctionBidsDatabaseConnection.connect();
 				 Statement stmt = conn.createStatement();
 				 ResultSet rs = stmt.executeQuery(sql) ){
 
 			 while (rs.next()) {
-				 Bid auction = new Bid();
-				 auction.setBiddingID(rs.getInt("BiddingID"));
-				 auction.setHighestBidderID(rs.getInt("HighestBidderID"));
-				 auction.setHighestPrice(rs.getDouble("HighestPrice"));
-				 auction.setEndTime(rs.getDate("EndTime"));
+				 Bid bid = new Bid();
+				 
+				 System.out.println("Bid regular 1 Endtime:"+bid.getEndTime());
+				 
+				 bid.setBiddingID(rs.getInt("BiddingID"));
+				 bid.setHighestBidderID(rs.getInt("HighestBidderID"));
+				 bid.setHighestPrice(rs.getDouble("HighestPrice"));
+				 bid.setEndTime(rs.getString("EndTime"));
+				 
+		 
+				
 		 
 		 
-				 auctions.add(auction);
+				 bids.add(bid);
 			 }
 		 	} catch (SQLException e) {
 		 		System.out.println(e.getMessage());
 		 		}
 		 
-		 return auctions;
+		 return bids;
 	}
 	public void create(Bid bid) {
 
@@ -47,8 +55,10 @@ public class BidDAO {
 			
 			pstmt.setInt(1, bid.getHighestBidderID());
 			pstmt.setDouble(2, bid.getHighestPrice());
-			pstmt.setDate(3, bid.getEndTime());
+			pstmt.setString(3, bid.getEndTime());
+			System.out.println(Timestamp.valueOf(bid.getEndTime()));
 			pstmt.executeUpdate();
+						
 		 } catch (SQLException e) {
 			 System.out.println(e.getMessage());
 		 	}
@@ -70,7 +80,10 @@ public class BidDAO {
 					bid.setBiddingID(BiddingID);
 					bid.setHighestPrice(rs.getDouble("HighestPrice"));
 					bid.setHighestBidderID(rs.getInt("HighestBidderID"));
-					bid.setEndTime(rs.getDate("EndTime"));;
+					bid.setEndTime(rs.getString("EndTime"));
+					
+					
+					
 				}
 			}
 		 	} catch (SQLException e) {
@@ -87,7 +100,7 @@ public class BidDAO {
 			// Set the corresponding parameters
 			pstmt.setInt(1, bid.getHighestBidderID());
 			pstmt.setDouble(2, bid.getHighestPrice());
-			pstmt.setDate(3, bid.getEndTime());
+			pstmt.setString(3, bid.getEndTime());
 			pstmt.setInt(4, BiddingID);
 			
 			// Update the bid record
@@ -110,5 +123,12 @@ public class BidDAO {
 			 System.out.println(e.getMessage());
 		 	}
 	}
+	
+	   private String formatTimestamp(Timestamp timestamp) {
+	        // Format the timestamp as a string with a specific format
+	        // Example format: "yyyy-MM-dd HH:mm:ss"
+	       
+	        return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timestamp);
+	    }
 	
 }
