@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class UserDao {
 	// Inserting a new user
@@ -30,26 +31,26 @@ public class UserDao {
 
 	// Retrieving a user by username
 	public static User getUser(String username, String password) {
-		try (Connection connection = SQLiteConnection.connect();
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM Users WHERE username = ? AND password = ?")) {
-			preparedStatement.setString(1, username);
 
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				if (resultSet.next()) {
-					User user = new User();
-					user.setId(resultSet.getInt("id"));
-					user.setUsername(resultSet.getString("username"));
-					user.setFirstName(resultSet.getString("firstName"));
-					user.setLastName(resultSet.getString("lastName"));
-					user.setStreetAddress(resultSet.getString("streetAddress"));
-					user.setStreetNumber(resultSet.getString("streetNumber"));
-					user.setPostalCode(resultSet.getString("postalCode"));
-					user.setCity(resultSet.getString("city"));
-					user.setCountry(resultSet.getString("country"));
+		String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
 
-					return user;
-				}
+		try (Connection conn = SQLiteConnection.connect();
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql)) {
+
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setFirstName(rs.getString("firstName"));
+				user.setLastName(rs.getString("lastName"));
+				user.setStreetAddress(rs.getString("streetAddress"));
+				user.setStreetNumber(rs.getString("streetNumber"));
+				user.setPostalCode(rs.getString("postalCode"));
+				user.setCity(rs.getString("city"));
+				user.setCountry(rs.getString("country"));
+
+				return user;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,7 +58,6 @@ public class UserDao {
 
 		return null;
 	}
-
 
 	// Checking if a user with the given username exists
 	public static boolean isUserInDatabase(String username) {
