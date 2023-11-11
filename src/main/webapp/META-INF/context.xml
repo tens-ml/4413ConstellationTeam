@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context privileged="true" reloadable="true">
+<<<<<<< HEAD
 	<WatchedResource>WEB-INF/web.xml</WatchedResource>
 	<Manager pathname="" />
 	<Resource name="jdbc/EECS"
@@ -8,4 +9,21 @@
 		url="jdbc:sqlite:C:/sqlite/constellation.db" />
 	<ResourceLink global="jdbc/EECS" name="jdbc/EECS"
 		type="javax.sql.DataSource" />
+=======
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <Manager pathname="" />
+    <Resource name="jdbc/EECS"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              type="javax.sql.DataSource" driverClassName="org.sqlite.JDBC"
+              url="jdbc:sqlite:/C:/Users/dwuma/SQLStudioDatabases/ConstellationAuctionHouse"/>
+    <ResourceLink global="jdbc/EECS" name="jdbc/EECS"
+                  type="javax.sql.DataSource" />
+    
+    <Resource name="jdbc/AuctionBidsDB"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              type="javax.sql.DataSource" driverClassName="org.sqlite.JDBC"
+              url="jdbc:sqlite:/C:/Users/dwuma/SQLStudioDatabases/AuctionBidsDB"/>
+    <ResourceLink global="jdbc/AuctionBidsDB" name="jdbc/AuctionBidsDB"
+                  type="javax.sql.DataSource" />
+>>>>>>> branch 'main' of https://github.com/tens-ml/4413ConstellationTeam.git
 </Context>
