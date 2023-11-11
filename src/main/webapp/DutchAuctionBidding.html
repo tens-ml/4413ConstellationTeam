@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Dutch Auction Bidding Page</title>
+ <link rel="stylesheet" href="styles.css">
+ <script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<header>
+ <h1>Constellation Auction House</h1>
+</header>
+
+<div class="Item Description">
+	<h3>Item Description</h3>
+	<p id="Description"> Description: </p>
+	<p id="Shipping_Price">Shipping price: $ </p>
+</div>
+<div class="Bid Details">
+	<p id="HighestPrice">Current Price: $ </p>
+</div>
+<div class="Forward Auction Textbox">
+	<form id="BidForm">
+		<input type="submit" value="Buy Now">
+	</form>
+</div>
+<footer>
+ <p>© 2023 Constellation Auction House</p>
+</footer>
+
+<!-- Script Populates the Forward auction field with info about a bid
+description, Shipping Price, Highest price, and Highest bidder 
+<script>
+$(document).ready(function(){
+ 	$.ajax({
+ 		url: "http://localhost:8080/StudentInformationSystem/api/students",
+ 		type: 'GET',
+ 		success: function(result){
+ 			document.getElementById('Description').innerText = result.itemDescription;
+ 			document.getElementById('Shipping_Price').innerText = result.ShippingPrice;
+			document.getElementById('HighestPrice').innerText = result.HighestPrice;
+			document.getElementById('HighestBidder').innerText = result.name; 		
+ 		},
+ 		error: function(error){
+ 			console.log(error);
+ 		}
+ 	});
+});
+</script>
+-->
+
+<script>
+    // Function to make the AJAX request
+    function fetchData() {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Configure it: GET-request to /your-servlet-endpoint
+        xhr.open('GET', 'http://localhost:8080/constellation-backend/DutchAuctionBiddingServlet', true);
+
+        // Setup a function to handle the response
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                try {
+                    // If the request was successful, update the content of the <p> element
+                    var responseData = JSON.parse(xhr.responseText);
+                  
+                    document.getElementById('Description').innerText += responseData.itemDescription;
+                    document.getElementById('Shipping_Price').innerText += responseData.ShippingPrice;
+                    document.getElementById('HighestPrice').innerText += responseData.HighestPrice;
+                    
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            } else {
+                // If there was an error with the request, log the error
+                console.error('Error fetching data:', xhr.statusText);
+            }
+        };
+
+        // Setup a function to handle network errors
+        xhr.onerror = function() {
+            console.error('Network error occurred.');
+        };
+
+        // Send the request
+        xhr.send();
+    }
+
+    // Call the fetchData function when the page loads
+    window.onload = fetchData;
+</script>
+
+
+
+
+<!--
+<script>
+	$("#BidForm").submit(function(e){
+ 		e.preventDefault();
+ 		var newBid = $("#NewBid").val();
+ 		$.ajax({
+ 			url: "http://localhost:8080/StudentInformationSystem/api/students/" + newBid,
+ 			type: 'PUT',
+ 			success: function(result){
+ 				$("#BidConfirmationMessage").text("Bid submitted successfully!");
+ 			},
+ 			error: function(error){
+ 				console.log(error);
+ 			}
+ 		});
+	});
+</script>
+-->
+
+</body>

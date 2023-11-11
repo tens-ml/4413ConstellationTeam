@@ -19,5 +19,23 @@
     <url-pattern>/*</url-pattern> 
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>ForwardAuctionBidding</servlet-name>
+    <jsp-file>/ForwardAuctionBidding.html</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForwardAuctionBidding</servlet-name>
+    <url-pattern>/ForwardAuctionBidding</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DutchAuctionBidding</servlet-name>
+    <jsp-file>/DutchAuctionBidding.html</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DutchAuctionBidding</servlet-name>
+    <url-pattern>/DutchAuctionBidding</url-pattern>
+  </servlet-mapping>
+  
 
 </web-app>
