@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constellation Auction House - Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+        }
+
+        #left-section {
+            flex: 1;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: left;
+        }
+
+        #right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: black;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #signup-btn {
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Constellation Auction House Signup</h1>
+    </header>
+
+    <!-- Main Content: Left and Right Sections -->
+    <main>
+        <!-- Left Section: Signup Fields -->
+        <div id="left-section">
+            <h2>Personal Information</h2>
+            <form action="your_signup_backend_endpoint" method="post">
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="streetAddress">Street Address:</label>
+                    <input type="text" id="streetAddress" name="streetAddress" required>
+                </div>
+                <div class="form-group">
+                    <label for="streetNumber">Street Number:</label>
+                    <input type="text" id="streetNumber" name="streetNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="postalCode">Postal Code:</label>
+                    <input type="text" id="postalCode" name="postalCode" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <input type="text" id="country" name="country" required>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right Section: Username, Password, and Button -->
+        <div id="right-section">
+            <h2>Signup</h2>
+            <form action="your_signup_backend_endpoint" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button id="signup-btn" type="submit">Signup</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
