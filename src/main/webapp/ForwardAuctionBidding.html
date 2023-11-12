@@ -4,55 +4,112 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Forward Auction Bidding Page</title>
- <link rel="stylesheet" href="styles.css">
- <script
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+body {
+ font-family: Arial, sans-serif;
+ line-height: 1.6;
+ margin: 0;
+ padding: 0;
+ background-color: #f4f4f4;
+}
+header {
+ background: rgb(0, 128, 0);
+ color: #ffffff;
+ padding: 1em 0;
+ text-align: center;
+}
+footer {
+ background: #f4f4f4;
+ color: rgb(64, 0, 64);
+ text-align: center;
+ padding: 1em 0;
+ position: absolute;
+ bottom: 0;
+ width: 100%;
+}
+.ItemDescription {
+ width: 50%;
+ padding: 30px;
+ border-radius: 4px;
+ box-sizing: border-box;
+ text-align: left;
+ margin-bottom: 1em;
+ border-radius: 4px;
+ border: 1px solid #ccc;	
+}
+.BidDetails {
+ width: 50%;
+ padding: 30px;
+ border-radius: 4px;
+ box-sizing: border-box;
+ text-align: left;
+ margin-bottom: 1em;
+ border-radius: 4px;
+ border: 1px solid #ccc;	
+}
+
+.ForwardAuctionTextbox {
+ 
+ position: fixed;
+ top: 10pc;
+ right: 0;
+ width: 50%;
+ padding: 0px;
+ border-radius: 4px;
+ box-sizing: border-box;
+ text-align: left;
+ margin-bottom: 1em;
+ border-radius: 4px;
+ border: 1px solid #ccc;	
+ 
+}
+#BidButton, #NewBid {
+    /* Add styles for both elements as needed */
+}
+
+
+
+input[type="submit"] {
+ cursor: pointer;
+ width: 50%;
+ background-color: rgb(0, 128, 0);
+ color: #ffffff;
+ text-align: center;
+ border: none;
+ padding: 10px 20px;
+ border-radius: 4px;
+}
+input[type="submit"]:hover {
+ background-color: rgb(0, 128, 0);
+}
+
+    </style>
 </head>
 <body>
 <header>
  <h1>Constellation Auction House</h1>
 </header>
 
-<div class="Item Description">
+<div class="ItemDescription">
 	<h3>Item Description</h3>
 	<p id="Description"> Description: </p>
 	<p id="Shipping_Price">Shipping price: $ </p>
 </div>
-<div class="Bid Details">
+<div class="BidDetails">
 	<p id="HighestPrice">Current Price: $ </p>
 	<p id="HighestBidder">Highest Bidder: </p>	
 </div>
-<div class="Forward Auction Textbox">
+<div class="ForwardAuctionTextbox">
 	<form id="BidForm">
 		<label for="BidTextBox">Enter Bid:</label>
 		<input type="number" id="NewBid" name="BidTextBox" required>
-		<input type="submit" value="Bid">
+		<input type="submit"id="BidButton" value="Bid">
 	</form>
 </div>
 <footer>
  <p>© 2023 Constellation Auction House</p>
 </footer>
 
-<!-- Script Populates the Forward auction field with info about a bid
-description, Shipping Price, Highest price, and Highest bidder 
-<script>
-$(document).ready(function(){
- 	$.ajax({
- 		url: "http://localhost:8080/StudentInformationSystem/api/students",
- 		type: 'GET',
- 		success: function(result){
- 			document.getElementById('Description').innerText = result.itemDescription;
- 			document.getElementById('Shipping_Price').innerText = result.ShippingPrice;
-			document.getElementById('HighestPrice').innerText = result.HighestPrice;
-			document.getElementById('HighestBidder').innerText = result.name; 		
- 		},
- 		error: function(error){
- 			console.log(error);
- 		}
- 	});
-});
-</script>
--->
 
 <script>
     // Function to make the AJAX request
@@ -99,24 +156,7 @@ $(document).ready(function(){
 
 
 
-<!--
-<script>
-	$("#BidForm").submit(function(e){
- 		e.preventDefault();
- 		var newBid = $("#NewBid").val();
- 		$.ajax({
- 			url: "http://localhost:8080/StudentInformationSystem/api/students/" + newBid,
- 			type: 'PUT',
- 			success: function(result){
- 				$("#BidConfirmationMessage").text("Bid submitted successfully!");
- 			},
- 			error: function(error){
- 				console.log(error);
- 			}
- 		});
-	});
-</script>
--->
+
 
 </body>
 

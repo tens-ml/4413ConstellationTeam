@@ -4,9 +4,7 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Dutch Auction Bidding Page</title>
- <link rel="stylesheet" href="styles.css">
- <script
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
 <header>
@@ -21,7 +19,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="Bid Details">
 	<p id="HighestPrice">Current Price: $ </p>
 </div>
-<div class="Forward Auction Textbox">
+<div class="Dutch Auction Textbox">
 	<form id="BidForm">
 		<input type="submit" value="Buy Now">
 	</form>
@@ -30,26 +28,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <p>© 2023 Constellation Auction House</p>
 </footer>
 
-<!-- Script Populates the Forward auction field with info about a bid
-description, Shipping Price, Highest price, and Highest bidder 
-<script>
-$(document).ready(function(){
- 	$.ajax({
- 		url: "http://localhost:8080/StudentInformationSystem/api/students",
- 		type: 'GET',
- 		success: function(result){
- 			document.getElementById('Description').innerText = result.itemDescription;
- 			document.getElementById('Shipping_Price').innerText = result.ShippingPrice;
-			document.getElementById('HighestPrice').innerText = result.HighestPrice;
-			document.getElementById('HighestBidder').innerText = result.name; 		
- 		},
- 		error: function(error){
- 			console.log(error);
- 		}
- 	});
-});
-</script>
--->
+
 
 <script>
     // Function to make the AJAX request
@@ -94,26 +73,6 @@ $(document).ready(function(){
 </script>
 
 
-
-
-<!--
-<script>
-	$("#BidForm").submit(function(e){
- 		e.preventDefault();
- 		var newBid = $("#NewBid").val();
- 		$.ajax({
- 			url: "http://localhost:8080/StudentInformationSystem/api/students/" + newBid,
- 			type: 'PUT',
- 			success: function(result){
- 				$("#BidConfirmationMessage").text("Bid submitted successfully!");
- 			},
- 			error: function(error){
- 				console.log(error);
- 			}
- 		});
-	});
-</script>
--->
 
 </body>
 </html>
