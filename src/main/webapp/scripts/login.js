@@ -28,6 +28,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
     document.querySelector('#redirect-to-signup').addEventListener('click', e => {
         e.preventDefault();
-        window.location.href = '/constellation_backend/SignUp.html';
+        window.location.href = '/constellation_backend/signup';
     });
 });
