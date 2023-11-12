@@ -1,4 +1,4 @@
-package com.constellation.backend.AuctionService;
+package com.constellation.backend.auctionService;
 
 import java.sql.Connection;
 
@@ -9,8 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.constellation.backend.AuctionService.Database.AuctionBidsDatabaseConnection;
-
+import com.constellation.backend.db.SQLiteConnection;
 
 public class BidDAO {
 	
@@ -18,9 +17,9 @@ public class BidDAO {
 		 String sql = "SELECT BiddingID, HighestBidderID, HighestPrice, EndTime FROM bids";
 		 List<Bid> auctions = new ArrayList<>();
 
-		 try ( Connection conn = AuctionBidsDatabaseConnection.connect();
-				 Statement stmt = conn.createStatement();
-				 ResultSet rs = stmt.executeQuery(sql) ){
+		 try (Connection conn = SQLiteConnection.connect();
+			  Statement stmt = conn.createStatement();
+			  ResultSet rs = stmt.executeQuery(sql) ){
 
 			 while (rs.next()) {
 				 Bid auction = new Bid();
@@ -42,7 +41,7 @@ public class BidDAO {
 
 		String sql = "INSERT INTO bids(HighestBidderID, HighestPrice, EndTime) VALUES(?,?,?)";
 
-		try (Connection conn = AuctionBidsDatabaseConnection.connect();
+		try (Connection conn = SQLiteConnection.connect();
 		PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			
 			pstmt.setInt(1, bid.getHighestBidderID());
@@ -57,7 +56,7 @@ public class BidDAO {
 		// Use prepared statements
 		String sql = "SELECT HighestBidderID, HighestPrice, EndTime FROM bids WHERE BiddingID = ?";
 		Bid bid = null;
-		try (Connection conn = AuctionBidsDatabaseConnection.connect();
+		try (Connection conn = SQLiteConnection.connect();
 		 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// Set the corresponding parameter
 			pstmt.setInt(1, BiddingID);
@@ -82,7 +81,7 @@ public class BidDAO {
 		//use prepared statments
 		String sql = "UPDATE bids SET HighestBidderID = ?, HighestPrice = ?, EndTime = ? WHERE BiddingID = ?";
 
-		try (Connection conn = AuctionBidsDatabaseConnection.connect();
+		try (Connection conn = SQLiteConnection.connect();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// Set the corresponding parameters
 			pstmt.setInt(1, bid.getHighestBidderID());
@@ -100,7 +99,7 @@ public class BidDAO {
 	public void delete(int BiddingID) {
 		 String sql = "DELETE FROM bids WHERE BiddingID = ?";
 
-		 try (Connection conn = AuctionBidsDatabaseConnection.connect();
+		 try (Connection conn = SQLiteConnection.connect();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// Set the corresponding parameter
 			pstmt.setInt(1, BiddingID);
