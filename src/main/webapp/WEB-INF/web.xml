@@ -38,11 +38,11 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>LoginPage</servlet-name>
+    <servlet-name>SignupPage</servlet-name>
     <jsp-file>/SignUp.html</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoginPage</servlet-name>
+    <servlet-name>SignupPage</servlet-name>
     <url-pattern>/signup</url-pattern>
   </servlet-mapping>
 
