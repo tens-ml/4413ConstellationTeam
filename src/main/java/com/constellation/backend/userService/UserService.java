@@ -5,58 +5,37 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.constellation.backend.exceptions.SignupFailedException;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/UserService")
 public class UserService {
-	UserDao userDao = new UserDao();
-
 	/**
-	 * Authenticates the user based on the username and password provided and
-	 * returns the user with valid id and parameters
+	 * Authenticates the user based on the username and password provided
 	 * 
-	 * @param username
-	 * @param password
-	 * @return
-	 * @throws UsernamePasswordMismatchException
+	 * @param username Login username
+	 * @param password Login password
+	 * @return user if login success, null otherwise
 	 */
-	@GET
-	@Path("/login")
-	@Produces(MediaType.APPLICATION_JSON)
-	public User authenticateUser(String username, String password) throws UsernamePasswordMismatchException {
-		password = UserService.encrypt(password); // encrypt the password using SHA-512 hash encryption
-		User user = UserDao.getUser(username, password); // get the user
-		if (!UserDao.isUserInDatabase(username) && user != null) { // if the user does not exist or if the password is
-																	// not matched
-			throw new UsernamePasswordMismatchException("Username and password do not match."); // sends authentication
-																								// missmatch
-		}
-		return user; // returns the user
+	public User authenticateUser(String username, String password) {
+		password = encrypt(password);
+		return UserDao.getUser(username, password);
 	}
 
 	/**
-	 * Creates a user based on the user and password, if the user already exists,
-	 * sends an exception
+	 * Create a user if the username doesn't already exist in db
 	 * 
-	 * @param user
-	 * @param password
-	 * @return
-	 * @throws UserAlreadyExistsException
+	 * @param user User to create
+	 * @param password Password of user
+	 * @return User if created successfully (one doesn't already exist), null otherwise
 	 */
-	@POST
-	@Path("/signup")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public User createUser(User user, String password) throws UserAlreadyExistsException {
+	public User createUser(User user, String password) {
 		password = UserService.encrypt(password); // encrypt the password using SHA-512 hash encryption
 		if (UserDao.isUserInDatabase(user.getUsername())) { // if the user already exists throw an exception declaring
-			throw new UserAlreadyExistsException("User with username " + user.getUsername() + " already exists.");
+			return null;
 		} else {
 			UserDao.insertUser(user, password); // add the user so that its id can be auto incremented
 		}
@@ -75,6 +54,7 @@ public class UserService {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+
 		return "ERROR";
 	}
 

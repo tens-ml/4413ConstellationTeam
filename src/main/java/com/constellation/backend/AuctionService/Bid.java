@@ -1,4 +1,4 @@
-package com.constellation.backend.AuctionService;
+package com.constellation.backend.auctionService;
 
 
 import java.sql.Timestamp;
