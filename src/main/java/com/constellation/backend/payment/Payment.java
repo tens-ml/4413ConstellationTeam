@@ -10,6 +10,19 @@ public class Payment {
 	private String userName;
 	
 
+	public Payment(long cardNo, String name, int expMo, int expYe, int ccv, String userName) {
+		super();
+		this.cardNo = cardNo;
+		this.name = name;
+		this.expMo = expMo;
+		this.expYe = expYe;
+		this.ccv = ccv;
+		this.userName = userName;
+	}
+	public Payment() {
+		
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Constellation Auction House - Login</title>
+        <link rel="stylesheet" type="text/css" href="styles/global.css">
+        <style>
+            .login-form {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                color: black;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Constellation Auction House Login</h1>
+        </header>
+        <!-- Main Content: Login Form -->
+        <main>
+            <div class="login-form">
+                <form>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button class="btn" id="login-btn" type="submit">Login</button>
+                    <button class="btn" type="button" id="redirect-to-signup" style="margin-top: 8px;">Sign up</button>
+                </form>
+            </div>
+        </main>
+        <script src="scripts/login.js"></script>
+    </body>
+</html>

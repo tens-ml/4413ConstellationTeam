@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context privileged="true" reloadable="true">
+
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
     <Manager pathname="" />
-    <Resource name="jdbc/EECS"
+    <Resource name="jdbc/constellationDB"
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
               type="javax.sql.DataSource" driverClassName="org.sqlite.JDBC"
-              url="jdbc:sqlite:/Users/alish/Downloads/payments.db"/>
-    <ResourceLink global="jdbc/EECS" name="jdbc/EECS"
+              url="jdbc:sqlite:/Users/alish/Downloads/db.db"/>
+	<ResourceLink global="jdbc/constellationDB" name="jdbc/constellationDB"
                   type="javax.sql.DataSource" />
 </Context>

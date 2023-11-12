@@ -1,0 +1,18 @@
+-- Drop the table if it exists
+DROP TABLE IF EXISTS constellation.Users;
+
+-- Create the Users table
+CREATE TABLE constellation.Users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    firstName TEXT NOT NULL,
+    lastName TEXT NOT NULL,
+    streetAddress TEXT NOT NULL,
+    streetNumber TEXT NOT NULL,
+    postalCode TEXT NOT NULL,
+    city TEXT NOT NULL,
+    country TEXT NOT NULL,
+    password TEXT NOT NULL
+);
+
+SELECT * FROM Users;
