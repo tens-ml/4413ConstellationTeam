@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Dutch Auction Bidding Page</title>
+ <title>Auction Ended</title>
  <link rel="stylesheet" href="styles.css">
  <script
 src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -14,42 +14,31 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </header>
 
 <div class="Item Description">
-	<h3>Item Description</h3>
-	<p id="Description"> Description: </p>
+	<h5>Bidding Ended!!!</h5>
+	<p id="Description"> Item Description: </p>
 	<p id="Shipping_Price">Shipping price: $ </p>
+	<p>Expedited Shipment</p>
 </div>
-<div class="Bid Details">
-	<p id="HighestPrice">Current Price: $ </p>
+<div class="Expedited">
+	<p id="Expedited_Shipping_Price">ADD: $</p>
+	<input id="Expedited_Shipping_Radio" type="radio">
 </div>
+
+<div class="Order Details">
+	<p id="Winning_Price">Winning Price: $</p>
+	<p id="Highest_Bidder">Highest Bidder: </p>
+</div>
+
 <div class="Forward Auction Textbox">
 	<form id="BidForm">
-		<input type="submit" value="Buy Now">
+		<input type="submit" value="Pay Now">
 	</form>
 </div>
 <footer>
  <p>© 2023 Constellation Auction House</p>
 </footer>
 
-<!-- Script Populates the Forward auction field with info about a bid
-description, Shipping Price, Highest price, and Highest bidder 
-<script>
-$(document).ready(function(){
- 	$.ajax({
- 		url: "http://localhost:8080/StudentInformationSystem/api/students",
- 		type: 'GET',
- 		success: function(result){
- 			document.getElementById('Description').innerText = result.itemDescription;
- 			document.getElementById('Shipping_Price').innerText = result.ShippingPrice;
-			document.getElementById('HighestPrice').innerText = result.HighestPrice;
-			document.getElementById('HighestBidder').innerText = result.name; 		
- 		},
- 		error: function(error){
- 			console.log(error);
- 		}
- 	});
-});
-</script>
--->
+
 
 <script>
     // Function to make the AJAX request
@@ -58,7 +47,7 @@ $(document).ready(function(){
         var xhr = new XMLHttpRequest();
 
         // Configure it: GET-request to /your-servlet-endpoint
-        xhr.open('GET', 'http://localhost:8080/constellation-backend/DutchAuctionBiddingServlet', true);
+        xhr.open('GET', 'http://localhost:8080/constellation-backend/AuctionEndedServlet', true);
 
         // Setup a function to handle the response
         xhr.onload = function() {
@@ -69,8 +58,10 @@ $(document).ready(function(){
                   
                     document.getElementById('Description').innerText += responseData.itemDescription;
                     document.getElementById('Shipping_Price').innerText += responseData.ShippingPrice;
-                    document.getElementById('HighestPrice').innerText += responseData.HighestPrice;
-                    
+                    document.getElementById('Expedited_Shipping_Price').innerText += responseData.Expedited_Shipping_Price;
+					document.getElementById('Highest_Bidder').innerText += responseData.Highest_Bidder;
+					document.getElementById('Winning_Price').innerText += responseData.Highest_Price;
+
                 } catch (error) {
                     console.error('Error parsing JSON:', error);
                 }

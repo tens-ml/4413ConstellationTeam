@@ -1,7 +1,9 @@
 package com.constellation.backend.auctionService;
 
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
+
 
 public class Bid {
 	
@@ -9,20 +11,20 @@ public class Bid {
 	private int  BiddingID;
 	private double HighestPrice;
 	private int HighestBidderID;
-	private Date EndTime;
+	private String EndTime;
 	
 	public Bid() {
 		this.BiddingID = 0;
 		this.HighestBidderID = 0;
-		this.EndTime = null;
+		this.EndTime = formatTimestamp( Timestamp.from(Instant.now()) );
 		this.HighestPrice = 0;
 	}
 	
-	public Bid(int BiddingID, double HighestPrice, int HighestBidderID, Date EndTime) {
+	public Bid(int BiddingID, double HighestPrice, int HighestBidderID) {
 		this.BiddingID = BiddingID;
 		this.HighestPrice = HighestPrice;
 		this.HighestBidderID = HighestBidderID;
-		this.EndTime = EndTime;
+		this.EndTime = formatTimestamp( Timestamp.from(Instant.now()) );
 	}
 	
 	public int getBiddingID() {
@@ -49,14 +51,20 @@ public class Bid {
 		HighestBidderID = highestBidderID;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return EndTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		EndTime = endTime;
 	}
 
+	private String formatTimestamp(Timestamp timestamp) {
+	        // Format the timestamp as a string with a specific format
+	        // Example format: "yyyy-MM-dd HH:mm:ss"
+	       
+	        return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timestamp);
+	}
 	
 
 }

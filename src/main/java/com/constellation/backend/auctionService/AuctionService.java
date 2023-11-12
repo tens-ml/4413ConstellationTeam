@@ -46,7 +46,7 @@ public class AuctionService {
 	@DELETE
 	@Path("/{BiddingID}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void deletBid(@PathParam("/{BiddingID") int BiddingID) {
+	public void deletBid(@PathParam("BiddingID") int BiddingID) {
 		bidDAO.delete(BiddingID);
 	}
 	
