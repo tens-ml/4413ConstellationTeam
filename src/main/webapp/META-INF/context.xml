@@ -3,18 +3,13 @@
 
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
     <Manager pathname="" />
-    <Resource name="jdbc/EECS"
+
+    <Resource name="jdbc/constellationDB"
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
               type="javax.sql.DataSource" driverClassName="org.sqlite.JDBC"
-              url="jdbc:sqlite:/C:/Users/dwuma/SQLStudioDatabases/ConstellationAuctionHouse"/>
-    <ResourceLink global="jdbc/EECS" name="jdbc/EECS"
+              url="jdbc:sqlite:/C:/Users/k899e/IdeaProjects/4413ConstellationTeam/database.sqlite" />
+
+    <!-- PLEASE ONLY CHANGE THE PATH ABOVE -->
+    <ResourceLink global="jdbc/constellationDB" name="jdbc/constellationDB"
                   type="javax.sql.DataSource" />
-    
-    <Resource name="jdbc/AuctionBidsDB"
-              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
-              type="javax.sql.DataSource" driverClassName="org.sqlite.JDBC"
-              url="jdbc:sqlite:/C:/Users/dwuma/SQLStudioDatabases/AuctionBidsDB"/>
-    <ResourceLink global="jdbc/AuctionBidsDB" name="jdbc/AuctionBidsDB"
-                  type="javax.sql.DataSource" />
->>>>>>> branch 'main' of https://github.com/tens-ml/4413ConstellationTeam.git
 </Context>

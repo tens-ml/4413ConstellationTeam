@@ -31,14 +31,14 @@ public class UserDao {
 
 	// Retrieving a user by username
 	public static User getUser(String username, String password) {
-
-		String sql = "SELECT * FROM Users WHERE username = ? AND password = ?";
+		String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
 
 		try (Connection conn = SQLiteConnection.connect();
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(sql)) {
-
-			while (rs.next()) {
+				PreparedStatement stmt = conn.prepareStatement(sql);) {
+			stmt.setString(1, username);
+			stmt.setString(2, password);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
 				User user = new User();
 				user.setId(rs.getInt("id"));
 				user.setUsername(rs.getString("username"));
@@ -49,7 +49,7 @@ public class UserDao {
 				user.setPostalCode(rs.getString("postalCode"));
 				user.setCity(rs.getString("city"));
 				user.setCountry(rs.getString("country"));
-
+				System.out.println(user.getUsername());
 				return user;
 			}
 		} catch (SQLException e) {
