@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             password: password
         };
 
-        fetch('/constellation_backend/v1/user/signup', {
+        fetch('/constellation-backend/v1/user/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,5 +44,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function redirectToLogin() {
-    window.location.href = '/constellation_backend';
+    window.location.href = '/constellation-backend';
 }

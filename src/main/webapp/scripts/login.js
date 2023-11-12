@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             password: password
         };
 
-        fetch('/constellation_backend/v1/user/login', {
+        fetch('/constellation-backend/v1/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             .then(response => {
                 if (response.ok) {
                     alert("Login success!");
-                    window.location.href = '/constellation_backend/home';
+                    window.location.href = '/constellation-backend/home';
                 } else {
                     response.text().then(text => alert(text));
                 }
@@ -28,6 +28,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
     document.querySelector('#redirect-to-signup').addEventListener('click', e => {
         e.preventDefault();
-        window.location.href = '/constellation_backend/signup';
+        window.location.href = '/constellation-backend/signup';
     });
 });
