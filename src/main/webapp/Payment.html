@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Payment Page</title>
+        <link rel="stylesheet" type="text/css" href="styles/global.css">
+        <style>
+            .payment-form {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                color: black;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Payment Information</h1>
+        </header>
+<body>
+	<section id="id1"></section>
+    <script>
+      //this code is for illustrating basic java script concepts
+      var greeting="Constellation Logo Will Go Here"
+
+      //a constant, points to an element with the id="id1"; note that when this code is executed
+      //the element should be already created
+      const welcome = document.querySelector('#id1');
+
+      //this simply inserts the text in the element wit the id id1
+      //welcome.textContent = greeting;//this is to show how you concatenate operate on variables
+     </script>
+	<fieldset>
+		<legend id="lg"> To Be Changed on Load </legend>
+		 <main>
+		<div class="payment-form">
+		<form id="myform" action="PaymentServlet" method="POST"
+			onsubmit="return validate()">
+				<div class="form-group">
+					<label for="cno">Username:</label>
+					<input name="usern" id="un" type="text" required>
+				</div>
+				<div class="form-group">
+					<label for="cno">Card Number:</label>
+					<input name="cardno" id="cno" type="text" required>
+				</div>
+				<div class="form-group">
+					<label for="cna">Name of Cardholder:</label>
+					<input name="cardna" id="cna" type="text" required>
+				</div>
+				<div class="form-group">
+					<label for="exm">Expiry Month:</label>
+					<input name="exmo" id="exm" type="text" required>
+				</div>
+				<div class="form-group">
+					<label for="exy">Expiry Year:</label>
+					<input name="exye" id="exy" type="text" required>
+				</div>
+				<div class="form-group">
+					<label for="ccv">CCV:</label>
+					<input name="ccv" id="ccv" type="text" required>
+				</div>
+					<button class="btn" type="submit" id="submit" name="submit"
+							value="true">Add Card</button>		
+		</form>
+		</div>
+	</fieldset>
+	<section id="err" class="error"></section>
+	 </main>
+	<script src="scripts/payment.js"></script>	
+	
+</body>
+</html>

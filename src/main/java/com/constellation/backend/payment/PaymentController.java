@@ -1,4 +1,5 @@
 package com.constellation.backend.payment;
+import com.constellation.backend.exceptions.PaymentException;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -17,7 +18,16 @@ public class PaymentController {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void addCard(Payment payment) {
+	public void addCard(Payment payment) throws PaymentException {
+		if (payment.getCardNo() > 9999999999999999L || payment.getCardNo() < 100000000000000L)
+			throw new PaymentException("Card Number has to be 15 or 16 digits");
+		if (payment.getExpMo() > 12 || payment.getExpMo() < 1)
+			throw new PaymentException("Expiry Month has to be between 1 and 12");
+		if (payment.getExpYe() > 2099 || payment.getExpYe() < 2023)
+			throw new PaymentException("Expiry Year has to be between 2023 and 2099");
+		if (payment.getCcv() > 9999 || payment.getCcv() < 100)
+			throw new PaymentException("CCV has to be 3 or 4 digits");
+		if (payment.getExpMo() > 12 || payment.getExpMo() < 1)
 		paymentDAO.addCard(payment);
 	}
 	
@@ -32,14 +42,23 @@ public class PaymentController {
 	@Path("/{userName}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void updateStudent(@PathParam("userName") String userName, Payment payment) {
+	public void updatePayment(@PathParam("userName") String userName, Payment payment) throws PaymentException {
+		if (payment.getCardNo() > 9999999999999999L || payment.getCardNo() < 100000000000000L)
+			throw new PaymentException("Card Number has to be 15 or 16 digits");
+		if (payment.getExpMo() > 12 || payment.getExpMo() < 1)
+			throw new PaymentException("Expiry Month has to be between 1 and 12");
+		if (payment.getExpYe() > 2099 || payment.getExpYe() < 2023)
+			throw new PaymentException("Expiry Year has to be between 2023 and 2099");
+		if (payment.getCcv() > 9999 || payment.getCcv() < 100)
+			throw new PaymentException("CCV has to be 3 or 4 digits");
+		if (payment.getExpMo() > 12 || payment.getExpMo() < 1)
 		paymentDAO.update(userName, payment);
 	}
 	
 	@DELETE
 	@Path("/{userName}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void deleteStudent(@PathParam("userName") String userName) {
+	public void deletePayment(@PathParam("userName") String userName) {
 		paymentDAO.delete(userName);
 	}
 
