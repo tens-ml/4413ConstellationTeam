@@ -36,6 +36,15 @@
     <servlet-name>DutchAuctionBidding</servlet-name>
     <url-pattern>/DutchAuctionBidding</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>AuctionEnded</servlet-name>
+    <jsp-file>/AuctionEnded.html</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuctionEnded</servlet-name>
+    <url-pattern>/AuctionEnded</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>SignupPage</servlet-name>

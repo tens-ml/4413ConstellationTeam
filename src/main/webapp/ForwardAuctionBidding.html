@@ -4,29 +4,9 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Forward Auction Bidding Page</title>
+ <link rel="stylesheet" type="text/css" href="styles/global.css">
   <style>
-body {
- font-family: Arial, sans-serif;
- line-height: 1.6;
- margin: 0;
- padding: 0;
- background-color: #f4f4f4;
-}
-header {
- background: rgb(0, 128, 0);
- color: #ffffff;
- padding: 1em 0;
- text-align: center;
-}
-footer {
- background: #f4f4f4;
- color: rgb(64, 0, 64);
- text-align: center;
- padding: 1em 0;
- position: absolute;
- bottom: 0;
- width: 100%;
-}
+
 .ItemDescription {
  width: 50%;
  padding: 30px;
@@ -35,9 +15,10 @@ footer {
  text-align: left;
  margin-bottom: 1em;
  border-radius: 4px;
- border: 1px solid #ccc;	
+ 	
 }
 .BidDetails {
+ 
  width: 50%;
  padding: 30px;
  border-radius: 4px;
@@ -45,43 +26,46 @@ footer {
  text-align: left;
  margin-bottom: 1em;
  border-radius: 4px;
- border: 1px solid #ccc;	
+ 	
 }
 
 .ForwardAuctionTextbox {
  
  position: fixed;
- top: 10pc;
- right: 0;
+ top: 13pc;
+ left: 70%;
  width: 50%;
  padding: 0px;
  border-radius: 4px;
  box-sizing: border-box;
- text-align: left;
+
  margin-bottom: 1em;
  border-radius: 4px;
- border: 1px solid #ccc;	
+ 
  
 }
-#BidButton, #NewBid {
-    /* Add styles for both elements as needed */
+
+footer {
+	position: fixed;
+ 	bottom: 0pc;
+ 	left: 50%;
+	transform: translateX(-50%);
+ 	 
+}
+
+.btn {
+
+    border: none;
+    cursor: pointer;
+    background-color: #20232a;
+    color: white;
+    border-radius: 4px;
+    width: 32%;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 
-
-input[type="submit"] {
- cursor: pointer;
- width: 50%;
- background-color: rgb(0, 128, 0);
- color: #ffffff;
- text-align: center;
- border: none;
- padding: 10px 20px;
- border-radius: 4px;
-}
-input[type="submit"]:hover {
- background-color: rgb(0, 128, 0);
-}
 
     </style>
 </head>
@@ -103,10 +87,10 @@ input[type="submit"]:hover {
 	<form id="BidForm">
 		<label for="BidTextBox">Enter Bid:</label>
 		<input type="number" id="NewBid" name="BidTextBox" required>
-		<input type="submit"id="BidButton" value="Bid">
+		<input type="submit" class="btn" id="BidButton" value="Bid">
 	</form>
 </div>
-<footer>
+<footer id="footerID">
  <p>© 2023 Constellation Auction House</p>
 </footer>
 

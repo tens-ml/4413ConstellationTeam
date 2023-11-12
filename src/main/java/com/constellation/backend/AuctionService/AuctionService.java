@@ -1,4 +1,4 @@
-package com.constellation.backend.auctionService;
+package com.constellation.backend.AuctionService;
 import java.util.List;
 
 
