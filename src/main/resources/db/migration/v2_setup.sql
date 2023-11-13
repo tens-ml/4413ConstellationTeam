@@ -28,9 +28,7 @@ CREATE TABLE bids (
 );
 
 CREATE TABLE payments (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    paymentTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    userId INTEGER NOT NULL,
+    userId INTEGER PRIMARY KEY,
     cardNumber BIGINT NOT NULL,
     name TEXT NOT NULL,
     expMonth INTEGER NOT NULL,
@@ -65,12 +63,6 @@ VALUES
     (1, 1, 23.00),
     (2, 2, 43.00);
 
---Payment Items (for a bid)
-INSERT INTO payments (bidId, cardNumber, name, expMonth, expYear, ccv)
-VALUES
-    (1, 1234567890123456, 'John Doe', 12, 2023, 123),
-    (2, 2345678901234567, 'Jane Smith', 6, 2024, 456);
-
 --Users (user: john, pass: test)
 INSERT INTO users (username, password, firstName, lastName, streetAddress, streetNumber, postalCode, city, country)
 VALUES
@@ -78,3 +70,9 @@ VALUES
      'John', 'Doe', '123 Maple Street', '12', '12345', 'Springfield', 'USA'),
     ('janesmith12', 'securepassword', 'Jane', 'Smith', '456 Oak Avenue', '34', '67890', 'Greenville', 'USA'),
     ('alicejones', 'mypassword', 'Alice', 'Jones', '789 Pine Road', '56', '10112', 'Fairview', 'USA');
+
+--Payment Items (for a bid)
+INSERT INTO payments (userId, cardNumber, name, expMonth, expYear, ccv)
+VALUES
+    ((SELECT id from users WHERE username ='john'), 1234567890123456, 'John Doe', 12, 2023, 123),
+    ((SELECT id from users WHERE username ='janesmith12'), 2345678901234567, 'Jane Smith', 6, 2024, 456);
