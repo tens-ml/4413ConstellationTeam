@@ -1,33 +1,123 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
- <link rel="stylesheet" href="styles/global.css">
-<title>Receipt Page</title>
-</head>
-<body>
+<html lang="en">
+   <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Receipt Page</title>
+        <link rel="stylesheet" type="text/css" href="styles/global.css">
+        <style>
+            .payment-form {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                color: black;
+            }
+            .form-group input {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+            .OrderDetails {
+			 	width: 100%;
+			 	padding: 30px;
+			 	border-radius: 4px;
+			 	box-sizing: border-box;
+			 	text-align: left;
+			 	margin-bottom: 1em;
+			 	border-radius: 4px;	
+			}
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Receipt</h1>
+        </header>
 <table style="border-collapse: collapse; width: 100%; height: 47px;" border="1">
   <tbody>
     <tr style="height: 47px;">
       <td style="width: 50%; height: 47px;">
         <p><span style="text-decoration: underline;">Receipt:</span></p>
-        <p>First Name: XXX</p>
-        <p>Last Name: YYY</p>
-        <p>Street: ZZZ</p>
-        <p>Number: KKK</p>
-        <p>Province: WWW</p>
-        <p>Country: CCC</p>
-        <p>Postal Code: DDD</p>
-        <p>Total Paid: $666</p>
-        <p>Item ID: AAA</p>
+        <p id="fName">First Name: </p>
+		<p id="lName">Last Name: </p>
+		<p id="str">Street: </p>
+		<p id="no">Number: </p>
+		<p id="prov">Province: </p>
+		<p id="country">Country: </p>
+		<p id="postCode">Postal Code: </p>
+		<p id="netPaid">Total Cost: </p>
+		<p id="itemId">Item ID: </p>
       </td>
       <td style="width: 50%; height: 47px; vertical-align: top;">
       <p><span style="text-decoration: underline;">Shipping Details:</span></p>
-      <p>The item will be shipped in XXX days.</p>
+      <p id="shipETA">The item will be shipped in</p>
       </td>
     </tr>
   </tbody>
 </table>
-<p><button type="button">Back to Main Page</button></p>
+<button class="btn" type="button" id="redirect-to-home" style="margin-top: 8px;">Back to Main Page</button>
+<script>
+    // Function to make the AJAX request
+    function fetchData() {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Configure it: GET-request to /your-servlet-endpoint
+        xhr.open('GET', 'http://localhost:8080/constellation-backend/PaymentServlet?type=receipt', true);
+
+        // Setup a function to handle the response
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                try {
+                    // If the request was successful, update the content of the <p> element
+                    var responseData = JSON.parse(xhr.responseText);
+                  
+                    document.getElementById('fName').innerText += responseData.fName;
+                    document.getElementById('lName').innerText += responseData.lName;
+                    document.getElementById('str').innerText += responseData.str;
+					document.getElementById('no').innerText += responseData.no;
+					document.getElementById('prov').innerText += responseData.prov;
+					document.getElementById('country').innerText += responseData.country;
+					document.getElementById('postCode').innerText += responseData.postCode;
+					document.getElementById('netPaid').innerText += responseData.netPaid;
+					document.getElementById('itemId').innerText += responseData.itemId;
+					document.getElementById('shipETA').innerText += responseData.shipETA;
+
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            } else {
+                // If there was an error with the request, log the error
+                console.error('Error fetching data:', xhr.statusText);
+            }
+        };
+
+        // Setup a function to handle network errors
+        xhr.onerror = function() {
+            console.error('Network error occurred.');
+        };
+
+        // Send the request
+        xhr.send();
+    }
+
+    // Call the fetchData function when the page loads
+    window.onload = fetchData;
+ 
+</script>
+<script>
+		document.querySelector('#redirect-to-home').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.href = '/constellation-backend/home';
+    });
+</script>
+
 </body>
 </html>

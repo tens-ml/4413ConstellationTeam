@@ -38,7 +38,6 @@ function validate() {
 	if (userName.value===""){
 	    ok=false;
 		errorMessage = " Username should not be empty; ";
-	
 	}
 	
 	if (cardNa.value===""){
