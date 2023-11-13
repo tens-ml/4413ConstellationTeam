@@ -61,9 +61,9 @@ function loadPage() {
         .then(data => {
             // Now you can access properties of the parsed JSON data
             document.getElementById('itemID').innerText = data.itemID;
-            document.getElementById('Description').innerText += data.itemDescription;
-            document.getElementById('Shipping_Price').innerText += data.shippingPrice;
-            document.getElementById('HighestPrice').innerText += data.highestPrice;
+            document.getElementById('Description').innerText ="Description: "+ data.itemDescription;
+            document.getElementById('Shipping_Price').innerText ="Shipping Price: "+ data.shippingPrice;
+            document.getElementById('HighestPrice').innerText ="Current Price: "+ data.highestPrice;
 
         })
         .catch(error => console.error('Error:', error));
