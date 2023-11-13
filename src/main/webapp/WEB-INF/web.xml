@@ -43,7 +43,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>AuctionEnded</servlet-name>
-    <url-pattern>/AuctionEnded   </url-pattern>
+    <url-pattern>/AuctionEnded</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -61,10 +61,39 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Payment</servlet-name>
-    <url-pattern>/Payment</url-pattern>
+    <url-pattern>/payment</url-pattern>
+  </servlet-mapping>
+
+      <servlet>
+    <servlet-name>Receipt</servlet-name>
+    <jsp-file>/Receipt.html</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Receipt</servlet-name>
+    <url-pattern>/receipt</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <jsp-file>/Login.html</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Catalog</servlet-name>
+    <jsp-file>/Catalog.html</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Catalog</servlet-name>
+    <url-pattern>/catalog</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file>Login.html</welcome-file>
+    <welcome-file>MainPage.html</welcome-file>
   </welcome-file-list>
 </web-app>
+

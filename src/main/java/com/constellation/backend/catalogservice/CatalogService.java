@@ -11,17 +11,18 @@ public class CatalogService implements ICatalogService {
     @Override
     public CatalogItem createItem(CatalogItem newItem) {
         String sql = "INSERT INTO catalog"
-                + "(itemName, itemDescription, isDutch, daysToShip, initialPrice, auctionEnd)"
-                + " VALUES (?, ?, ?, ?, ?, ?)";
+                + "(sellerId, itemName, itemDescription, isDutch, daysToShip, initialPrice, auctionEnd)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = SQLiteConnection.connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setString(1, newItem.getItemName());
-            preparedStatement.setString(2, newItem.getItemDescription());
-            preparedStatement.setBoolean(3, newItem.isDutch());
-            preparedStatement.setInt(4, newItem.getDaysToShip());
-            preparedStatement.setInt(5, newItem.getInitialPrice());
-            preparedStatement.setTimestamp(6, newItem.getAuctionEnd());
+            preparedStatement.setInt(1, newItem.getSellerId());
+            preparedStatement.setString(2, newItem.getItemName());
+            preparedStatement.setString(3, newItem.getItemDescription());
+            preparedStatement.setBoolean(4, newItem.isDutch());
+            preparedStatement.setInt(5, newItem.getdaysToShip());
+            preparedStatement.setInt(6, newItem.getInitialPrice());
+            preparedStatement.setTimestamp(7, newItem.getAuctionEnd());
             preparedStatement.executeUpdate();
             return newItem;
         } catch (SQLException e) {
@@ -32,24 +33,50 @@ public class CatalogService implements ICatalogService {
 
 
     @Override
-    public List<CatalogItem> getItems() {
-        String sql = "SELECT * FROM catalog";
+    public List<CatalogItem> getItems(String filter) {
+        // Start with an SQL query that joins the catalog, user, and bids tables
+        String sql = "SELECT c.*, u.username as sellerName, MAX(b.price) as highestBid " +
+                "FROM catalog c " +
+                "JOIN users u ON c.sellerId = u.id " +
+                "LEFT JOIN bids b ON c.id = b.itemId ";
+
+        // Check if a filter is provided
+        boolean filterProvided = filter != null && !filter.trim().isEmpty();
+
+        // Modify the SQL query to include a WHERE clause if a filter is provided
+        if (filterProvided) {
+            sql += "WHERE c.itemName LIKE ? OR c.itemDescription LIKE ? ";
+        }
+
+        // Group by catalog item to aggregate bids correctly
+        sql += "GROUP BY c.id";
+
         List<CatalogItem> items = new ArrayList<>();
 
         try (Connection conn = SQLiteConnection.connect();
-             Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the filter parameters
+            if (filterProvided) {
+                String filterPattern = "%" + filter + "%";
+                pstmt.setString(1, filterPattern);
+                pstmt.setString(2, filterPattern);
+            }
+
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 CatalogItem catalogItem = rsToItem(rs);
                 items.add(catalogItem);
             }
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
         return items;
     }
+
 
     @Override
     public CatalogItem getItem(int itemId) {
@@ -79,7 +106,7 @@ public class CatalogService implements ICatalogService {
             pstmt.setString(1, updatedItem.getItemName());
             pstmt.setString(2, updatedItem.getItemDescription());
             pstmt.setBoolean(3, updatedItem.isDutch());
-            pstmt.setInt(4, updatedItem.getDaysToShip());
+            pstmt.setInt(4, updatedItem.getdaysToShip());
             pstmt.setInt(5, updatedItem.getInitialPrice());
             pstmt.setTimestamp(6, updatedItem.getAuctionEnd());
             pstmt.setInt(7, updatedItem.getId());
@@ -103,12 +130,15 @@ public class CatalogService implements ICatalogService {
     private CatalogItem rsToItem(ResultSet rs) throws SQLException {
         CatalogItem item = new CatalogItem();
         item.setId(rs.getInt("id"));
+        item.setSellerName(rs.getString("sellerName"));
         item.setItemName(rs.getString("itemName"));
         item.setItemDescription(rs.getString("itemDescription"));
         item.setDutch(rs.getBoolean("isDutch"));
-        item.setDaysToShip(rs.getInt("daysToShip"));
+        item.setdaysToShip(rs.getInt("daysToShip"));
         item.setInitialPrice(rs.getInt("initialPrice"));
+        item.setHighestBid(rs.getInt("highestBid"));
         item.setAuctionEnd(rs.getTimestamp("auctionEnd"));
+        item.setAvailable(rs.getBoolean("available"));
         return item;
     }
 }

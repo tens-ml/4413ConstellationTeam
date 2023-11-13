@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class PaymentDAO {
 	public void addCard(Payment payment) {
 		//we use prepared statements, Q: why?
-		String sql = "INSERT INTO payments(cardNo, name, expMo, expYe, ccv, userName) VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO payments(cardNumber, name, expMonth, expYear, ccv, userId) VALUES(?,?,?,?,?,?)";
 		try (Connection conn = SQLiteConnection.connect();
 		PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setLong(1, payment.getCardNo());
@@ -18,29 +18,29 @@ public class PaymentDAO {
 			pstmt.setInt(3, payment.getExpMo());
 			pstmt.setInt(4, payment.getExpYe());
 			pstmt.setInt(5, payment.getCcv());
-			pstmt.setString(6, payment.getUserName());
+			pstmt.setInt(6, payment.getUserId());
 		pstmt.executeUpdate();
 		} catch (SQLException e) {
 		System.out.println(e.getMessage());
 		}
 		}
 	
-	public void delete(String userName) {
-		String sql = "DELETE FROM payments WHERE userName = ?";
+	public void delete(int userId) {
+		String sql = "DELETE FROM payments WHERE userId = ?";
 		try (Connection conn = SQLiteConnection.connect();
 		PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			//Set the corresponding parameter
-			pstmt.setString(1, userName);
-			//Delete the student record
+			pstmt.setInt(1, userId);
+			//Delete the payment record
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 		System.out.println(e.getMessage());
 		}
 		}
 	
-	public void update(String userName, Payment payment) {
+	public void update(int userId, Payment payment) {
 		//use prepared statments
-		String sql = "UPDATE payments SET cardNo = ?, name = ?, expMo = ?, expYe = ?, ccv = ? WHERE userName =?";
+		String sql = "UPDATE payments SET cardNumber = ?, name = ?, expMonth = ?, expYear = ?, ccv = ? WHERE userId =?";
 		try (Connection conn = SQLiteConnection.connect();
 		PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			//Set the corresponding parameters
@@ -49,29 +49,29 @@ public class PaymentDAO {
 			pstmt.setInt(3, payment.getExpMo());
 			pstmt.setInt(4, payment.getExpYe());
 			pstmt.setInt(5, payment.getCcv());
-			pstmt.setString(6, userName);
-			//Update the student record
+			pstmt.setInt(6, userId);
+			//Update the payment record
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 		System.out.println(e.getMessage());
 		}
 		}
 	
-	public Payment read(String userName) {
+	public Payment read(int userId) {
 		// Use prepared statements
-		String sql = "SELECT cardNo, name, expMo, expYe, ccv FROM payments WHERE userName = ?";
+		String sql = "SELECT cardNo, name, expMo, expYe, ccv FROM payments WHERE userId = ?";
 		Payment payment = null;
 		try (Connection conn = SQLiteConnection.connect();
 		PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// Set the corresponding parameter
-			pstmt.setString(1, userName);
+			pstmt.setInt(1, userId);
 			//Execute the query and get the result set
 			try (ResultSet rs = pstmt.executeQuery()) {
 				//Check if a result was returned
 				if (rs.next()) {
 					payment = new Payment();
-				//Set the properties of the student object
-					payment.setUserName(userName);
+				//Set the properties of the payment object
+					payment.setUserId(userId);
 					payment.setCardNo(rs.getLong("cardNo"));
 					payment.setName(rs.getString("name"));
 					payment.setExpMo(rs.getInt("expMo"));
