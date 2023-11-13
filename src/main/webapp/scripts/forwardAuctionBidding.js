@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadPage() {
-    fetch('/constellation-backend/v1/user/forward_auction_bidding/1', {
+    fetch('/constellation-backend/v1/user/auction_bidding/1', {
+		
         method: 'GET'
     })
         .then(response => {

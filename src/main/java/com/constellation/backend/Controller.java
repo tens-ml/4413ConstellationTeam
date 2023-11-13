@@ -7,6 +7,7 @@ import com.constellation.backend.catalogservice.CatalogService;
 import com.constellation.backend.exceptions.LoginFailedException;
 import com.constellation.backend.exceptions.NewBidException;
 import com.constellation.backend.exceptions.SignupFailedException;
+import com.constellation.backend.exceptions.WrongUserException;
 import com.constellation.backend.requests.BidRequest;
 import com.constellation.backend.requests.LoginRequest;
 import com.constellation.backend.requests.SignupRequest;
@@ -52,11 +53,13 @@ public class Controller {
         } else return Response.ok().build();
     }
     
+
+    
     //Forward Auction bidding it gets a item id reads its descrption and populates the fields in html
     @GET
-    @Path("/user/forward_auction_bidding/{itemID}")
+    @Path("/user/auction_bidding/{itemID}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response loadForwardBidding(@PathParam("itemID") int itemID) {
+    public Response loadBiddingInfo(@PathParam("itemID") int itemID) {
     	CatalogService catalogService = new CatalogService();
     	CatalogItem item = catalogService.getItem(itemID);
     	AuctionService auctionService = new AuctionService();
@@ -105,6 +108,8 @@ public class Controller {
     		}
     		else if (newbid.getNewBid() > item.getInitialPrice()) { //there is no bid for item
     			//create bid with new price
+    			
+    			System.out.println("In here now");
     			Bid bid = new Bid();
     			bid.setItemId(item.getId());
     			bid.setPrice(newbid.getNewBid());
@@ -121,63 +126,34 @@ public class Controller {
     	return Response.ok().build();
     }
     
-    @GET
-    @Path("/user/dutch_auction_bidding/{itemID}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response loadDutchBidding(@PathParam("itemID") int itemID) {
-    	CatalogService catalogService = new CatalogService();
-    	CatalogItem item = catalogService.getItem(itemID);
-    	AuctionService auctionService = new AuctionService();
-    	
-    	Bid test_bid = auctionService.getBidByItemId(itemID);
-    	if (test_bid == null) {
-    		//create bid
-    		test_bid = new Bid();
-    		test_bid.setItemId(itemID);
-    		test_bid.setPrice(item.getInitialPrice());
-    	}
-    	BidRequest bidRequest = new BidRequest();
-    	bidRequest.setItemID(itemID);
-    	bidRequest.setItemDescription(item.getItemDescription());
-    	bidRequest.setShippingPrice(14);//set to item id shipping price
-    	bidRequest.setHighestPrice(test_bid.getPrice());
-    	bidRequest.setHighestBidder(test_bid.getUserId());
-    	
-
-    	// Log the serialized JSON
-    	String json = null;
-		try {
-			json = new ObjectMapper().writeValueAsString(bidRequest);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	System.out.println("Serialized JSON: " + json);
-
-    	return Response.ok(bidRequest).build();
-    	
-    }
+    
     
     @PUT
-    @Path("/user/dutch_auction_bidding/pay")
+    @Path("/user/auction_ended/pay")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response DutchAuctionPayNow(BidRequest newbid) throws NewBidException {
-//    	<@798245186567667733> when the user clicks on payment button can u 
-//    	set 2 attributes in the session named price and itemId, 
-//    	i need to access them for the receipt page?
+    public Response AuctionEndedPayNow(BidRequest newbid) throws NewBidException, WrongUserException {
+
     	AuctionService auctionService = new AuctionService();
     	Bid bid = auctionService.getBidByItemId(newbid.getItemID());
-    	bid.setUserId(0);//set to user id in session
-    	auctionService.updateBid(bid);
     	HttpSession session = request.getSession() ;
-    	session.setAttribute("price", bid.getPrice());
-    	session.setAttribute("itemId", bid.getItemId());
+    	session.setAttribute("userId", 0);
+    	if (bid.getUserId() == (Integer) session.getAttribute("userId")  ) {
+    		auctionService.updateBid(bid);
+
+    		//price with shipping
+    		session.setAttribute("price", newbid.getHighestPrice());
+    		session.setAttribute("itemId", bid.getItemId());
     	
-    	System.out.println("price: "+session.getAttribute("price"));
-    	System.out.println("itemId: "+session.getAttribute("itemId"));
+    		System.out.println("price: "+session.getAttribute("price"));
+    		System.out.println("itemId: "+session.getAttribute("itemId"));
+    	}
+    	else {
+    		throw new WrongUserException();
+    	}
     	
     	return Response.ok().build();
     }
+    
     
 }

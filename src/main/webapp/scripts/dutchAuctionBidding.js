@@ -4,34 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById('BidForm').addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent default form submission
-        // Create the request body as per BidRequest class structure
-        const requestBody = {
-            itemID: document.getElementById('itemID').innerText,
- 			newBid : 0,
-            itemDescription : " ",
-			highestPrice : 0,
-			shippingPrice: 0,
-			expeditedShippingPrice : 0,
-			highestBidder : 0
-        };
-
-        fetch('/constellation-backend/v1/user/dutch_auction_bidding/pay', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestBody)
-        })
-            .then(response => {
-                if (response.ok) {
-					loadPage();
-                    window.location.href = '/constellation-backend/Payment'
-                } else {
-                    response.text().then(text => alert(text));
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    });    
+        
+        //go to auction ended page
+        window.location.href = '/constellation-backend/AuctionEnded'
+  });    
     
     
  
@@ -44,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadPage() {
-    fetch('/constellation-backend/v1/user/dutch_auction_bidding/1', {
+    fetch('/constellation-backend/v1/user/auction_bidding/1', {
         method: 'GET'
     })
         .then(response => {
