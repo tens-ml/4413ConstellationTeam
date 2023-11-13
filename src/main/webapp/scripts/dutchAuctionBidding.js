@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => {
                 if (response.ok) {
 					loadPage();
-                    alert("Bid Created");
+                    window.location.href = '/constellation-backend/Payment'
                 } else {
                     response.text().then(text => alert(text));
                 }
