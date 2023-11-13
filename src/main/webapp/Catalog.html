@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top: 15px;">
                             <label for="auctionType">Auction Type:</label>
                             <select id="auctionType" name="auctionType" required>
                                 <option value="dutch">Dutch</option>
@@ -58,18 +58,18 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="shipTime">Ship Time (days):</label>
-                            <input type="number" id="shipTime" name="shipTime" min="0" required>
+                            <label for="daysToShip">Ship Time (days):</label>
+                            <input type="number" id="daysToShip" name="daysToShip" min="0" required>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="form-row" style="margin-bottom: 16px;">
                         <div class="form-group">
                             <label for="initialPrice">Initial Price ($):</label>
                             <input type="number" id="initialPrice" name="initialPrice" step="0.01" min="0" required>
                         </div>
                         <div class="form-group">
-                            <label for="endTime">Auction End Time:</label>
-                            <input type="datetime-local" id="endTime" name="endTime" required>
+                            <label for="auctionEnd">Auction End Time:</label>
+                            <input type="datetime-local" id="auctionEnd" name="auctionEnd" required>
                         </div>
                     </div>
                     <button class="btn" type="submit">Sell it</button>

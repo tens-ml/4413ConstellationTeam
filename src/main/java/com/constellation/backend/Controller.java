@@ -17,6 +17,11 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Path("/")
@@ -65,9 +70,30 @@ public class Controller {
     @Path("/catalog")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCatalogItems(SellItemRequest sellItemRequest) {
+    public Response createCatalogItem(SellItemRequest sellItemRequest) {
         CatalogItem newItem = new CatalogItem();
-//        System.out.println(catalogItem.getItemName());
+        newItem.setItemName(sellItemRequest.getItemName());
+        newItem.setItemDescription(sellItemRequest.getItemDescription());
+        newItem.setDutch(sellItemRequest.getAuctionType().equals("dutch"));
+        newItem.setdaysToShip(sellItemRequest.getdaysToShip());
+        newItem.setInitialPrice(sellItemRequest.getInitialPrice());
+
+        Timestamp auctionEnd = convertToSqlTimestamp(sellItemRequest.getAuctionEnd());
+        newItem.setAuctionEnd(auctionEnd);
+
+        int sellerId = ((User) request.getSession(true).getAttribute("user")).getId();
+        newItem.setSellerId(sellerId);
+        catalogService.createItem(newItem);
+
         return Response.ok().build();
     }
+
+    private Timestamp convertToSqlTimestamp(String localDateTimeString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeString, formatter);
+
+        // Assuming the local date-time is in system's default timezone
+        return Timestamp.valueOf(localDateTime.atZone(ZoneId.systemDefault()).toLocalDateTime());
+    }
+
 }

@@ -44,5 +44,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function redirectToLogin() {
-    window.location.href = '/constellation-backend';
+    window.location.href = '/constellation-backend/login';
 }

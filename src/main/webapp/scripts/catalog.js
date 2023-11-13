@@ -59,8 +59,12 @@ const loadItems = (searchFilter = '') => {
                 DOMRow.insertCell(5).textContent = item.isDutch ? "Dutch" : "Forward";
                 DOMRow.insertCell(6).textContent = item.daysToShip;
                 DOMRow.insertCell(7).textContent = item.initialPrice;
-                DOMRow.insertCell(8).textContent = item.highestBid;
-                DOMRow.insertCell(9).textContent = item.auctionEnd;
+                DOMRow.insertCell(8).textContent = (item.highestBid <= item.initialPrice) ? item.initialPrice : item.highestBid
+
+                const date = new Date(item.auctionEnd);
+                DOMRow.insertCell(9).textContent = date.toLocaleString();
+
+                console.log(item.available);
                 DOMRow.insertCell(10).textContent = item.available ? 'Yes' : 'No';
             });
         })
@@ -75,18 +79,18 @@ const submitItem = () => {
     const itemName = document.getElementById('itemName').value;
     const itemDescription = document.getElementById('itemDescription').value;
     const auctionType = document.getElementById('auctionType').value;
-    const shipTime = document.getElementById('shipTime').value;
+    const daysToShip = document.getElementById('daysToShip').value;
     const initialPrice = document.getElementById('initialPrice').value;
-    const endTime = document.getElementById('endTime').value;
+    const auctionEnd = document.getElementById('auctionEnd').value;
 
     // Create an object with the form data
     const itemData = {
         itemName,
         itemDescription,
         auctionType,
-        shipTime: parseInt(shipTime),
+        daysToShip: parseInt(daysToShip),
         initialPrice: parseFloat(initialPrice),
-        endTime
+        auctionEnd
     };
 
     // Send the data to the server
@@ -102,11 +106,8 @@ const submitItem = () => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            alert("Item added for sale!");
             window.location.reload();
-            return response.json();
-        })
-        .then(data => {
-            console.log('Item successfully added:', data);
         })
         .catch(error => {
             console.error('Error adding item:', error);

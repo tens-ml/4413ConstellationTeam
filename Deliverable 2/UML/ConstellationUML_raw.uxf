@@ -34,7 +34,7 @@
 - BiddingID: int
 - HighestPrice: double
 - HighestBidderID: int
-- EndTime: String
+- auctionEnd: String
 
 --
 + Bid()
@@ -45,8 +45,8 @@
 + setHighestPrice(highestPrice: double): void
 + getHighestBidderID(): int
 + setHighestBidderID(highestBidderID: int): void
-+ getEndTime(): String
-+ setEndTime(endTime: String): void
++ getauctionEnd(): String
++ setauctionEnd(auctionEnd: String): void
 - formatTimestamp(timestamp: Timestamp): String
 </panel_attributes>
     <additional_attributes/>
