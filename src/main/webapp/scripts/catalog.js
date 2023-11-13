@@ -23,6 +23,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
         event.preventDefault();
         submitItem();
     });
+
+    document.getElementById('bid-button').addEventListener('click', function(e) {
+        // Find the selected radio button
+        const selectedRadio = document.querySelector('input[name="itemSelection"]:checked');
+
+        if (selectedRadio) {
+            const selectedItemID = selectedRadio.value;
+            const itemIsDutch = selectedRadio.getAttribute("data-is-dutch");
+            const itemIsAvailable = selectedRadio.getAttribute("data-is-available");
+
+            console.log("printing itemIsAvailable: " + itemIsAvailable);
+            console.log("printing itemIsDutch: " + itemIsDutch);
+            console.log("printing selectedItemID: " + selectedItemID);
+
+            if (!itemIsAvailable) {
+                window.location.href = `/constellation-backend/auction-end?itemID=${selectedItemID}`;
+            } else if (itemIsDutch) {
+                window.location.href = `/constellation-backend/forward-auction?itemID=${selectedItemID}`;
+            } else {
+                window.location.href = `/constellation-backend/dutch-auction?itemID=${selectedItemID}`;
+            }
+
+        } else {
+            alert("Please select an item first.");
+        }
+    });
 });
 const getQueryParam = (param) => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -46,7 +72,8 @@ const loadItems = (searchFilter = '') => {
                 radioInput.type = "radio";
                 radioInput.name = "itemSelection"; // All radios have the same name to allow only one selection
                 radioInput.value = item.id; // You can set value to item's ID or other identifier
-
+                radioInput.setAttribute("data-is-dutch", item.isDutch); // Set data attribute to store auction type
+                radioInput.setAttribute("data-is-available", item.available);
                 // Create a cell for the radio button and append it
                 const radioCell = DOMRow.insertCell(0);
                 radioCell.classList.add("radio-cell");
