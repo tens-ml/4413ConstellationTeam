@@ -59,7 +59,7 @@
 		<p id="lName">Last Name: </p>
 		<p id="str">Street: </p>
 		<p id="no">Number: </p>
-		<p id="prov">Province: </p>
+		<p id="city">City: </p>
 		<p id="country">Country: </p>
 		<p id="postCode">Postal Code: </p>
 		<p id="netPrice">Total Cost: </p>
@@ -68,10 +68,6 @@
 		<div class="payment-form">
 		<form id="myform" action="PaymentServlet" method="POST"
 			onsubmit="return validate()">
-				<div class="form-group">
-					<label for="cno">Username:</label>
-					<input name="usern" id="un" type="text" required>
-				</div>
 				<div class="form-group">
 					<label for="cno">Card Number:</label>
 					<input name="cardno" id="cno" type="text" required>
@@ -120,7 +116,7 @@
                     document.getElementById('lName').innerText += responseData.lName;
                     document.getElementById('str').innerText += responseData.str;
 					document.getElementById('no').innerText += responseData.no;
-					document.getElementById('prov').innerText += responseData.prov;
+					document.getElementById('city').innerText += responseData.city;
 					document.getElementById('country').innerText += responseData.country;
 					document.getElementById('postCode').innerText += responseData.postCode;
 					document.getElementById('netPrice').innerText += responseData.netPrice;
