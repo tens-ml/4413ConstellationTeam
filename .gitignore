@@ -27,3 +27,5 @@ Thumbs.db
 # JetBrains IDEs
 .idea/
 *.iml
+
+*.sqlite
