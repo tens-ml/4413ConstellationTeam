@@ -121,13 +121,7 @@ public class Controller {
         return Timestamp.valueOf(localDateTime.atZone(ZoneId.systemDefault()).toLocalDateTime());
     }
     
-<<<<<<< HEAD
 
-    
-    //Forward Auction bidding it gets a item id reads its descrption and populates the fields in html
-=======
-  //Forward Auction bidding it gets a item id reads its descrption and populates the fields in html
->>>>>>> branch 'main' of https://github.com/tens-ml/4413ConstellationTeam.git
     @GET
     @Path("/user/auction_bidding/{itemID}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -198,9 +192,7 @@ public class Controller {
     	return Response.ok().build();
     }
     
-<<<<<<< HEAD
-    
-=======
+
     @GET
     @Path("/user/dutch_auction_bidding/{itemID}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -230,7 +222,7 @@ public class Controller {
     	return Response.ok(bidRequest).build();
     	
     }
->>>>>>> branch 'main' of https://github.com/tens-ml/4413ConstellationTeam.git
+
     
     @PUT
     @Path("/user/auction_ended/pay")
@@ -258,13 +250,7 @@ public class Controller {
     	
     	return Response.ok().build();
     }
-<<<<<<< HEAD
-    
-    
-=======
 
-
->>>>>>> branch 'main' of https://github.com/tens-ml/4413ConstellationTeam.git
 }
 
 

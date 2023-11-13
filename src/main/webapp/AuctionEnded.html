@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -191,50 +190,7 @@ footer {
 </footer>
 
 
-
-<script>
-    // Function to make the AJAX request
-    function fetchData() {
-        // Create a new XMLHttpRequest object
-        var xhr = new XMLHttpRequest();
-
-        // Configure it: GET-request to /your-servlet-endpoint
-        xhr.open('GET', 'http://localhost:8080/constellation-backend/AuctionEndedServlet', true);
-
-        // Setup a function to handle the response
-        xhr.onload = function() {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                try {
-                    // If the request was successful, update the content of the <p> element
-                    var responseData = JSON.parse(xhr.responseText);
-                  
-                    document.getElementById('Description').innerText += responseData.itemDescription;
-                    document.getElementById('Shipping_Price').innerText += responseData.ShippingPrice;
-                    document.getElementById('Expedited_Shipping_Price').innerText += responseData.Expedited_Shipping_Price;
-					document.getElementById('Highest_Bidder').innerText += responseData.Highest_Bidder;
-					document.getElementById('Winning_Price').innerText += responseData.Highest_Price;
-
-                } catch (error) {
-                    console.error('Error parsing JSON:', error);
-                }
-            } else {
-                // If there was an error with the request, log the error
-                console.error('Error fetching data:', xhr.statusText);
-            }
-        };
-
-        // Setup a function to handle network errors
-        xhr.onerror = function() {
-            console.error('Network error occurred.');
-        };
-
-        // Send the request
-        xhr.send();
-    }
-
-    // Call the fetchData function when the page loads
-    window.onload = fetchData;
-</script>
+<script src="scripts/auctionEnded.js"></script>
 
 
 
@@ -242,5 +198,5 @@ footer {
 
 
 </body>
->>>>>>> branch 'main' of https://github.com/tens-ml/4413ConstellationTeam.git
+
 </html>
