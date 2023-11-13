@@ -3,20 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPage();
  
     document.getElementById('BidForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent default form submission
+        e.preventDefault();
         // Create the request body as per BidRequest class structure
         const requestBody = {
-            itemID: document.getElementById('itemID').innerText,
- 			newBid : document.getElementById('NewBid').value,
-            itemDescription : " ",
-			highestPrice : 0,
-			shippingPrice: 0,
-			expeditedShippingPrice : 0,
-			highestBidder : 0
+            itemId: parseInt(document.getElementById('itemID').innerText),
+            price: parseFloat(document.getElementById('NewBid').value),
         };
 
-        fetch('/constellation-backend/v1/user/forward_auction_bidding', {
-            method: 'PUT',
+        fetch('/constellation-backend/v1/bids', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -31,22 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             })
             .catch(error => console.error('Error:', error));
-    });    
-//    document.querySelector('#redirect-to-login').addEventListener('click', e => {
-//        e.preventDefault();
-//        redirectToLogin();
-//    });
+    });
 });
 
 function loadPage() {
-    fetch('/constellation-backend/v1/user/auction_bidding/1', {
-		
-        method: 'GET'
-    })
+    fetch('/constellation-backend/v1/bids/1')
         .then(response => {
             if (response.ok) {
-                
-                return response.json(); // Parse the response as JSON
+                return response.json();
             } else {
                 return response.text().then(text => {
                     alert(text);
@@ -55,12 +42,15 @@ function loadPage() {
             }
         })
         .then(data => {
-            // Now you can access properties of the parsed JSON data
             document.getElementById('itemID').innerText = data.itemID;
-            document.getElementById('Description').innerText ="Description: "+data.itemDescription;
-            document.getElementById('Shipping_Price').innerText ="Shipping Price: "+ data.shippingPrice;
-            document.getElementById('HighestPrice').innerText ="Current Price: "+data.highestPrice;
-            document.getElementById('HighestBidder').innerText ="Higest Bidder: "+ data.highestBidder;
+            document.getElementById('description').innerText = data.itemDescription;
+            document.getElementById('shippingPrice').innerText = "$ " + data.shippingPrice;
+            document.getElementById('highestPrice').innerText = "$ " + data.highestPrice;
+            document.getElementById('highestBidder').innerText = data.highestBidder;
+
+            const minBid = data.highestPrice + 0.01;
+            document.getElementById('NewBid').value = minBid;
+            document.getElementById('NewBid').min = minBid;
         })
         .catch(error => console.error('Error:', error));
 }

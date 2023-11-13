@@ -10,18 +10,21 @@ public class CatalogItem {
     private String itemDescription;
     private boolean isDutch;
     private int daysToShip;
-    private int initialPrice;
+    private double initialPrice;
     private Timestamp auctionEnd;
     private boolean available;
     private double highestBid;
+    private double shippingPrice;
+    private double expeditePrice;
+
     //Constructors
     public CatalogItem() {
         // Default constructor
     }
 
     public CatalogItem(int id, String sellerName, String itemName, String itemDescription,
-                       boolean isDutch, int daysToShip, int initialPrice,
-                       Timestamp auctionEnd, boolean available, double highestBid, int sellerId) {
+                       boolean isDutch, int daysToShip, double initialPrice,
+                       Timestamp auctionEnd, boolean available, double highestBid, int sellerId, double shippingPrice, double expeditePrice) {
         this.id = id;
         this.sellerName = sellerName;
         this.itemName = itemName;
@@ -33,8 +36,16 @@ public class CatalogItem {
         this.available = available;
         this.highestBid = highestBid;
         this.sellerId = sellerId;
+        this.shippingPrice = shippingPrice;
+        this.expeditePrice = expeditePrice;
     }
     // Getters and Setters
+    public double getExpeditePrice() {
+        return expeditePrice;
+    }
+    public void setExpeditePrice(double expeditePrice) {
+        this.expeditePrice = expeditePrice;
+    }
     public int getSellerId() { return sellerId; }
     public void setSellerId(int sellerId) { this.sellerId = sellerId; }
     public int getId() {
@@ -77,11 +88,11 @@ public class CatalogItem {
         this.daysToShip = daysToShip;
     }
 
-    public int getInitialPrice() {
+    public double getInitialPrice() {
         return initialPrice;
     }
 
-    public void setInitialPrice(int initialPrice) {
+    public void setInitialPrice(double initialPrice) {
         this.initialPrice = initialPrice;
     }
 
@@ -100,4 +111,11 @@ public class CatalogItem {
     public String getSellerName() { return this.sellerName; }
     public void setHighestBid(double highestBid) { this.highestBid = highestBid; }
     public double getHighestBid() { return this.highestBid; }
+
+    public double getShippingPrice() {
+        return this.shippingPrice;
+    }
+    public void setShippingPrice(double shippingPrice) {
+        this.shippingPrice = shippingPrice;
+    }
 }

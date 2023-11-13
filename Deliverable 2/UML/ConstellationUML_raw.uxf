@@ -245,7 +245,7 @@ bg=orange</panel_attributes>
       <w>546</w>
       <h>402</h>
     </coordinates>
-    <panel_attributes>com.constellation.backend.AuctionService
+    <panel_attributes>com.constellation.backend.auctionservice
 --
 bg=orange</panel_attributes>
     <additional_attributes/>

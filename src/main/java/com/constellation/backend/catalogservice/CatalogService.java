@@ -21,7 +21,7 @@ public class CatalogService implements ICatalogService {
             preparedStatement.setString(3, newItem.getItemDescription());
             preparedStatement.setBoolean(4, newItem.isDutch());
             preparedStatement.setInt(5, newItem.getdaysToShip());
-            preparedStatement.setInt(6, newItem.getInitialPrice());
+            preparedStatement.setDouble(6, newItem.getInitialPrice());
             preparedStatement.setTimestamp(7, newItem.getAuctionEnd());
             preparedStatement.executeUpdate();
             return newItem;
@@ -66,7 +66,7 @@ public class CatalogService implements ICatalogService {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                CatalogItem catalogItem = rsToItem(rs);
+                CatalogItem catalogItem = rsToItem(rs, true);
                 items.add(catalogItem);
             }
             rs.close();
@@ -80,6 +80,7 @@ public class CatalogService implements ICatalogService {
 
     @Override
     public CatalogItem getItem(int itemId) {
+        System.out.println("getitem");
         String sql = "SELECT * FROM catalog WHERE id = ?";
 
         try (Connection conn = SQLiteConnection.connect();
@@ -88,7 +89,7 @@ public class CatalogService implements ICatalogService {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                return rsToItem(rs);
+                return rsToItem(rs, false);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -107,7 +108,7 @@ public class CatalogService implements ICatalogService {
             pstmt.setString(2, updatedItem.getItemDescription());
             pstmt.setBoolean(3, updatedItem.isDutch());
             pstmt.setInt(4, updatedItem.getdaysToShip());
-            pstmt.setInt(5, updatedItem.getInitialPrice());
+            pstmt.setDouble(5, updatedItem.getInitialPrice());
             pstmt.setTimestamp(6, updatedItem.getAuctionEnd());
             pstmt.setInt(7, updatedItem.getId());
 
@@ -127,18 +128,21 @@ public class CatalogService implements ICatalogService {
         return false;
     }
 
-    private CatalogItem rsToItem(ResultSet rs) throws SQLException {
+    private CatalogItem rsToItem(ResultSet rs, boolean enriched) throws SQLException {
         CatalogItem item = new CatalogItem();
         item.setId(rs.getInt("id"));
-        item.setSellerName(rs.getString("sellerName"));
         item.setItemName(rs.getString("itemName"));
         item.setItemDescription(rs.getString("itemDescription"));
         item.setDutch(rs.getBoolean("isDutch"));
         item.setdaysToShip(rs.getInt("daysToShip"));
-        item.setInitialPrice(rs.getInt("initialPrice"));
-        item.setHighestBid(rs.getInt("highestBid"));
+        item.setInitialPrice(rs.getDouble("initialPrice"));
         item.setAuctionEnd(rs.getTimestamp("auctionEnd"));
         item.setAvailable(rs.getBoolean("available"));
+
+        if (enriched) {
+            item.setSellerName(rs.getString("sellerName"));
+            item.setHighestBid(rs.getDouble("highestBid"));
+        }
         return item;
     }
 }

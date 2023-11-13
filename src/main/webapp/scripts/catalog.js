@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.log("printing selectedItemID: " + selectedItemID);
 
             if (!itemIsAvailable) {
-                window.location.href = `/constellation-backend/auction-end?itemID=${selectedItemID}`;
+                window.location.href = `/constellation-backend/auctionEnded?itemID=${selectedItemID}`;
             } else if (itemIsDutch) {
-                window.location.href = `/constellation-backend/forward-auction?itemID=${selectedItemID}`;
+                window.location.href = `/constellation-backend/forwardAuction?itemID=${selectedItemID}`;
             } else {
-                window.location.href = `/constellation-backend/dutch-auction?itemID=${selectedItemID}`;
+                window.location.href = `/constellation-backend/dutchAuction?itemID=${selectedItemID}`;
             }
 
         } else {

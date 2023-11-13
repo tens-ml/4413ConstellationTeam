@@ -11,6 +11,8 @@ CREATE TABLE catalog (
     itemDescription TEXT NOT NULL DEFAULT 'No description given',
     isDutch BOOLEAN NOT NULL DEFAULT FALSE,
     daysToShip INTEGER NOT NULL,
+    shippingPrice DECIMAL(20,2) NOT NULL DEFAULT 1.00,
+    expeditePrice DECIMAL(20,2) NOT NULL DEFAULT 2.00,
     initialPrice DECIMAL(20,2) NOT NULL,
     auctionEnd TIMESTAMP NOT NULL,
     available BOOLEAN DEFAULT TRUE
@@ -60,8 +62,8 @@ VALUES
 --Auction bids (on items by users)
 INSERT INTO bids (itemId, userId, price)
 VALUES
-    (1, 1, 23.00),
-    (2, 2, 43.00);
+    (1, 1, 76.00),
+    (2, 2, 220.50);
 
 --Users (user: john, pass: test)
 INSERT INTO users (username, password, firstName, lastName, streetAddress, streetNumber, postalCode, city, country)
