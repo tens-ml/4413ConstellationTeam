@@ -1,0 +1,60 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 4px;
+}
+
+tfoot th, tfoot td {
+    border: none;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding-top: 32px;
+    justify-content: start;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#sell-item-form {
+    width: 30%;
+    margin-top: 32px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 40px 40px 40px;
+    text-align: center;
+}
+
+#search-form {
+    display: flex;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+#search-form > * {
+    margin: 0 12px;
+}
+
+#search-form > .btn {
+    width: unset;
+}
+
+.radio-cell {
+    text-align: center;
+}
