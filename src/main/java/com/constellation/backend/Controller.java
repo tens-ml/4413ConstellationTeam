@@ -79,7 +79,7 @@ public class Controller {
         newItem.setItemName(sellItemRequest.getItemName());
         newItem.setItemDescription(sellItemRequest.getItemDescription());
         newItem.setDutch(sellItemRequest.getAuctionType().equals("dutch"));
-        newItem.setdaysToShip(sellItemRequest.getdaysToShip());
+        newItem.setdaysToShip(sellItemRequest.getDaysToShip());
         newItem.setInitialPrice(sellItemRequest.getInitialPrice());
 
         Timestamp auctionEnd = convertToSqlTimestamp(sellItemRequest.getAuctionEnd());

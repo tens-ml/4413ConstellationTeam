@@ -88,10 +88,12 @@ const loadItems = (searchFilter = '') => {
                 DOMRow.insertCell(7).textContent = item.initialPrice;
                 DOMRow.insertCell(8).textContent = (item.highestBid <= item.initialPrice) ? item.initialPrice : item.highestBid
 
-                const date = new Date(item.auctionEnd);
-                DOMRow.insertCell(9).textContent = date.toLocaleString();
+                const auctionEndTime = new Date(item.auctionEnd);
+                const now = new Date();
+                const timeLeftInMinutes = Math.round((auctionEndTime - now) / (1000 * 60)) ;
+                const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
-                console.log(item.available);
+                DOMRow.insertCell(9).textContent = (item.isDutch) ? "N/a" : timeLeftInMinutes + " minutes";
                 DOMRow.insertCell(10).textContent = item.available ? 'Yes' : 'No';
             });
         })

@@ -4,14 +4,14 @@ public class SellItemRequest {
     private String itemDescription;
     private String auctionType;
     private int daysToShip;
-    private int initialPrice;
+    private double initialPrice;
     private String auctionEnd;
 
     public SellItemRequest() {
         // Default constructor
     }
 
-    public SellItemRequest(String itemName, String itemDescription, String auctionType, int daysToShip, int initialPrice, String auctionEnd) {
+    public SellItemRequest(String itemName, String itemDescription, String auctionType, int daysToShip, double initialPrice, String auctionEnd) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.auctionType = auctionType;
@@ -32,11 +32,11 @@ public class SellItemRequest {
         this.auctionType = auctionType;
     }
 
-    public void setdaysToShip(int daysToShip) {
+    public void setDaysToShip(int daysToShip) {
         this.daysToShip = daysToShip;
     }
 
-    public void setInitialPrice(int initialPrice) {
+    public void setInitialPrice(double initialPrice) {
         this.initialPrice = initialPrice;
     }
 
@@ -56,11 +56,11 @@ public class SellItemRequest {
         return auctionType;
     }
 
-    public int getdaysToShip() {
+    public int getDaysToShip() {
         return daysToShip;
     }
 
-    public int getInitialPrice() {
+    public double getInitialPrice() {
         return initialPrice;
     }
 
