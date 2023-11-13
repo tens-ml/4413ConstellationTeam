@@ -19,13 +19,13 @@ public class PaymentServlet extends HttpServlet {
 	private static final String TYPE="type";
 	
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PaymentServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+  /**
+   * @see HttpServlet#HttpServlet()
+   */
+  public PaymentServlet() {
+    super();
+    // TODO Auto-generated constructor stub
+  }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,14 +37,56 @@ public class PaymentServlet extends HttpServlet {
 		
 		if (request.getParameter(TYPE)!=null) {
 			if (request.getParameter(TYPE).equals("info")) {//if the client asks for info
-				             								//construct a msg...
-				String msg="Please add your payment information";
+				       								//construct a msg...
+//				String msg="Please add your payment information";
+//
+//				out.append(msg);
+				
+				String fName = "John";
+			    String lName = "Doe";
+			    String str = "Keele";
+			    String no = "1";
+			    String prov = "ON";
+			    String country = "CA";
+			    String postCode = "M2N";
+			    String netPrice = "66.6";
+	
+			    out.append("{\"fName\":\" " + fName + "\",");
+			    out.append("\"lName\":\" " + lName + "\",");
+			    out.append("\"str\":\" " + str + "\",");
+			    out.append("\"no\":\" " + no + "\",");
+			    out.append("\"prov\":\" " + prov + "\",");
+			    out.append("\"country\":\" " + country + "\",");
+			    out.append("\"postCode\":\" " + postCode + "\",");
+			    out.append("\"netPrice\":\" " + netPrice + "\"}");	
+		    
+			}else if (request.getParameter(TYPE).equals("receipt")) {
+				
+				String fName = "John";
+			    String lName = "Doe";
+			    String str = "Keele";
+			    String no = "1";
+			    String prov = "ON";
+			    String country = "CA";
+			    String postCode = "M2N";
+			    String netPaid = "66.6";
+			    String itemId = "aaaa";
+			    String shipETA = "5";
 
-				out.append(msg);
+			    out.append("{\"fName\":\" " + fName + "\",");
+			    out.append("\"lName\":\" " + lName + "\",");
+			    out.append("\"str\":\" " + str + "\",");
+			    out.append("\"no\":\" " + no + "\",");
+			    out.append("\"prov\":\" " + prov + "\",");
+			    out.append("\"country\":\" " + country + "\",");
+			    out.append("\"postCode\":\" " + postCode + "\",");
+			    out.append("\"netPaid\":\" " + netPaid + "\",");	
+			    out.append("\"itemId\":\" " + itemId + "\",");	
+			    out.append("\"shipETA\":\" " + shipETA + " days.\"}");	
 			}
 			
 		}else {
-	    response.sendRedirect("Receipt.html");
+	  response.sendRedirect("Receipt.html");
 		}
 	}
 
