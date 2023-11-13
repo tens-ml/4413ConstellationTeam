@@ -6,57 +6,81 @@ import java.time.Instant;
 
 
 public class Bid {
-	
+
+//	CREATE TABLE bids (
+//    id INTEGER PRIMARY KEY AUTOINCREMENT,
+//    bidTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+//    itemId INTEGER NOT NULL,
+//    userId INTEGER NOT NULL,
+//    price DECIMAL(20,2) NOT NULL,
+//
+//    FOREIGN KEY (userId) REFERENCES Users(id),
+//    FOREIGN KEY (itemId) REFERENCES Catalog(id)
+//);
 	//the highest price, the highest bidder, and the end time of the auction
-	private int  BiddingID;
-	private double HighestPrice;
-	private int HighestBidderID;
-	private String EndTime;
+	private int  id;
+	private String bidTime;
+	private int itemId;
+	private int userId;
+	private int price;
+	
+	
 	
 	public Bid() {
-		this.BiddingID = 0;
-		this.HighestBidderID = 0;
-		this.EndTime = formatTimestamp( Timestamp.from(Instant.now()) );
-		this.HighestPrice = 0;
+		this.id = 0;
+		this.bidTime = formatTimestamp( Timestamp.from(Instant.now()) );
+		this.itemId = 0;
+		this.userId = 0;
+		this.price = 0;
 	}
 	
-	public Bid(int BiddingID, double HighestPrice, int HighestBidderID) {
-		this.BiddingID = BiddingID;
-		this.HighestPrice = HighestPrice;
-		this.HighestBidderID = HighestBidderID;
-		this.EndTime = formatTimestamp( Timestamp.from(Instant.now()) );
-	}
-	
-	public int getBiddingID() {
-		return BiddingID;
+	public Bid(int id, int itemId, int userId, int price) {
+		super();
+		this.id = id;
+		this.bidTime = formatTimestamp( Timestamp.from(Instant.now()) );
+		this.itemId = itemId;
+		this.userId = userId;
+		this.price = price;
 	}
 
-	public void setBiddingID(int biddingID) {
-		BiddingID = biddingID;
+	public int getId() {
+		return id;
 	}
 
-	public double getHighestPrice() {
-		return HighestPrice;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setHighestPrice(double highestPrice) {
-		HighestPrice = highestPrice;
+	public String getBidTime() {
+		return bidTime;
 	}
 
-	public int getHighestBidderID() {
-		return HighestBidderID;
+	public void setBidTime(String bidTime) {
+		this.bidTime = bidTime;
 	}
 
-	public void setHighestBidderID(int highestBidderID) {
-		HighestBidderID = highestBidderID;
+	public int getItemId() {
+		return itemId;
 	}
 
-	public String getEndTime() {
-		return EndTime;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 
-	public void setEndTime(String endTime) {
-		EndTime = endTime;
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	private String formatTimestamp(Timestamp timestamp) {

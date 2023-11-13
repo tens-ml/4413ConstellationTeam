@@ -16,7 +16,7 @@ import com.constellation.backend.db.SQLiteConnection;
 public class BidDAO {
 	
 	public List<Bid> readAll() {
-		 String sql = "SELECT BiddingID, HighestBidderID, HighestPrice, EndTime FROM bids";
+		 String sql = "SELECT id, bidTime, itemId, userId, price FROM bids";
 		 List<Bid> bids = new ArrayList<>();
 
 		 try (Connection conn = SQLiteConnection.connect();
@@ -26,17 +26,14 @@ public class BidDAO {
 			 while (rs.next()) {
 				 Bid bid = new Bid();
 				 
-				 System.out.println("Bid regular 1 Endtime:"+bid.getEndTime());
+				 System.out.println("Bid regular 1 bidTime:"+bid.getBidTime());
 				 
-				 bid.setBiddingID(rs.getInt("BiddingID"));
-				 bid.setHighestBidderID(rs.getInt("HighestBidderID"));
-				 bid.setHighestPrice(rs.getDouble("HighestPrice"));
-				 bid.setEndTime(rs.getString("EndTime"));
-				 
-		 
-				
-		 
-		 
+				 bid.setId(rs.getInt("Id"));
+				 bid.setBidTime(rs.getString("bidTime"));
+				 bid.setItemId(rs.getInt("itemId"));
+				 bid.setUserId(rs.getInt("userId"));
+				 bid.setPrice(rs.getInt("price"));
+	 		 		 
 				 bids.add(bid);
 			 }
 		 	} catch (SQLException e) {
@@ -47,42 +44,46 @@ public class BidDAO {
 	}
 	public void create(Bid bid) {
 
-		String sql = "INSERT INTO bids(HighestBidderID, HighestPrice, EndTime) VALUES(?,?,?)";
+		String sql = "INSERT INTO bids(bidTime, itemId, userID, price) VALUES(?,?,?,?)";
 
 		try (Connection conn = SQLiteConnection.connect();
 		PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			
-			pstmt.setInt(1, bid.getHighestBidderID());
-			pstmt.setDouble(2, bid.getHighestPrice());
-			pstmt.setString(3, bid.getEndTime());
-			System.out.println(Timestamp.valueOf(bid.getEndTime()));
+			pstmt.setString(1, bid.getBidTime());
+			pstmt.setInt(2, bid.getItemId());
+			pstmt.setInt(3, bid.getUserId());
+			pstmt.setInt(4, bid.getPrice());
+			
+			System.out.println(Timestamp.valueOf(bid.getBidTime()));
+			
 			pstmt.executeUpdate();
 						
 		 } catch (SQLException e) {
 			 System.out.println(e.getMessage());
 		 	}
 	}
-	public Bid read(int BiddingID) {
+
+	public Bid readById(int id) {
 		// Use prepared statements
-		String sql = "SELECT HighestBidderID, HighestPrice, EndTime FROM bids WHERE BiddingID = ?";
+	
+		String sql = "SELECT id, bidTime, itemId, userId, price FROM bids WHERE id = ?";
 		Bid bid = null;
 		try (Connection conn = SQLiteConnection.connect();
 		 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// Set the corresponding parameter
-			pstmt.setInt(1, BiddingID);
+			pstmt.setInt(1, id);
 			// Execute the query and get the result set
 			try (ResultSet rs = pstmt.executeQuery()) {
 				// Check if a result was returned
 				if (rs.next()) {
 					bid = new Bid();
 					// Set the properties of the bid object
-					bid.setBiddingID(BiddingID);
-					bid.setHighestPrice(rs.getDouble("HighestPrice"));
-					bid.setHighestBidderID(rs.getInt("HighestBidderID"));
-					bid.setEndTime(rs.getString("EndTime"));
-					
-					
-					
+					bid.setId(id);
+					bid.setBidTime(rs.getString("bidTime"));
+					bid.setItemId(rs.getInt("itemId"));
+					bid.setUserId(rs.getInt("userId"));
+					bid.setPrice(rs.getInt("price"));
+								
 				}
 			}
 		 	} catch (SQLException e) {
@@ -90,17 +91,56 @@ public class BidDAO {
 		 	}
 		return bid;
 	}
-	public void update(int BiddingID, Bid bid) {
+
+	public Bid readByItemId(int itemId) {
+		
+		String sql = "SELECT id, bidTime, itemId, userId, price FROM bids WHERE itemId = ?";
+		Bid bid = null;
+		try (Connection conn = SQLiteConnection.connect();
+		 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			// Set the corresponding parameter
+			pstmt.setInt(1, itemId);
+			// Execute the query and get the result set
+			try (ResultSet rs = pstmt.executeQuery()) {
+				// Check if a result was returned
+				if (rs.next()) {
+					bid = new Bid();
+					// Set the properties of the bid object
+					bid.setId(rs.getInt("id"));
+					bid.setBidTime(rs.getString("bidTime"));
+					bid.setItemId(rs.getInt("itemId"));
+					bid.setUserId(rs.getInt("userId"));
+					bid.setPrice(rs.getInt("price"));
+							
+				}
+			}
+		 	} catch (SQLException e) {
+		 		System.out.println(e.getMessage());
+		 	}
+		return bid;
+	}
+//	CREATE TABLE bids (
+//  id INTEGER PRIMARY KEY AUTOINCREMENT,
+//  bidTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+//  itemId INTEGER NOT NULL,
+//  userId INTEGER NOT NULL,
+//  price DECIMAL(20,2) NOT NULL,
+//
+//  FOREIGN KEY (userId) REFERENCES Users(id),
+//  FOREIGN KEY (itemId) REFERENCES Catalog(id)
+//);
+	public void update(int Id, Bid bid) {
 		//use prepared statments
-		String sql = "UPDATE bids SET HighestBidderID = ?, HighestPrice = ?, EndTime = ? WHERE BiddingID = ?";
+		String sql = "UPDATE bids SET bidTime = ?, itemId = ?, userId = ?, price = ? WHERE id = ?";
 
 		try (Connection conn = SQLiteConnection.connect();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// Set the corresponding parameters
-			pstmt.setInt(1, bid.getHighestBidderID());
-			pstmt.setDouble(2, bid.getHighestPrice());
-			pstmt.setString(3, bid.getEndTime());
-			pstmt.setInt(4, BiddingID);
+			pstmt.setString(1, bid.getBidTime());
+			pstmt.setInt(2, bid.getItemId());
+			pstmt.setInt(3, bid.getUserId());
+			pstmt.setInt(4, bid.getPrice());
+			pstmt.setInt(5, Id);
 			
 			// Update the bid record
 			pstmt.executeUpdate();
@@ -109,13 +149,13 @@ public class BidDAO {
 		 	}
 	}
 		 
-	public void delete(int BiddingID) {
-		 String sql = "DELETE FROM bids WHERE BiddingID = ?";
+	public void delete(int id) {
+		 String sql = "DELETE FROM bids WHERE id = ?";
 
 		 try (Connection conn = SQLiteConnection.connect();
 			PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			// Set the corresponding parameter
-			pstmt.setInt(1, BiddingID);
+			pstmt.setInt(1, id);
 			// Delete the bid record
 			pstmt.executeUpdate();
 		 } catch (SQLException e) {
@@ -123,11 +163,11 @@ public class BidDAO {
 		 	}
 	}
 	
-	   private String formatTimestamp(Timestamp timestamp) {
+	private String formatTimestamp(Timestamp timestamp) {
 	        // Format the timestamp as a string with a specific format
 	        // Example format: "yyyy-MM-dd HH:mm:ss"
 	       
 	        return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timestamp);
-	    }
+	}
 	
 }

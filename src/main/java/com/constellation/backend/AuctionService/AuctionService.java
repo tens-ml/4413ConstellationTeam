@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
+//remove servlet calls later
+
 @Path("/AuctionService")
 public class AuctionService {
 	private BidDAO bidDAO = new BidDAO();
@@ -28,17 +30,17 @@ public class AuctionService {
 	@GET
 	@Path("/{BiddingID}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Bid getAllBids(@PathParam("BiddingID") int BiddingID) {
-		return bidDAO.read(BiddingID);
+	public Bid getBidById(@PathParam("BiddingID") int id) {
+		return bidDAO.readById(id);
+	}
+	
+	public Bid getBidByItemId(int itemId) {
+		return bidDAO.readByItemId(itemId);
 	}
 	
 	// update a bid
-	@PUT
-	@Path("/{BiddingID}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateBid(@PathParam("BiddingID") int BiddingID, Bid bid) {
-		bidDAO.update(BiddingID, bid);
+	public void updateBid(Bid bid) {
+		bidDAO.update(bid.getId(), bid);
 	}
 	
 	
