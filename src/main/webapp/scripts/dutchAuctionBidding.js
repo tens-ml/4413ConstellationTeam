@@ -49,7 +49,7 @@ function loadPage() {
     })
         .then(response => {
             if (response.ok) {
-                alert("load succesful");
+                
                 return response.json(); // Parse the response as JSON
             } else {
                 return response.text().then(text => {

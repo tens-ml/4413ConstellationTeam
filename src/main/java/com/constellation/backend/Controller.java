@@ -16,12 +16,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Request;
 import jakarta.ws.rs.core.Response;
 
 @Path("/")
 public class Controller {
+    @Context
+    private HttpServletRequest request;
     private final UserService userService = new UserService();
 
     @POST
@@ -164,7 +170,13 @@ public class Controller {
     	Bid bid = auctionService.getBidByItemId(newbid.getItemID());
     	bid.setUserId(0);//set to user id in session
     	auctionService.updateBid(bid);
-
+    	HttpSession session = request.getSession() ;
+    	session.setAttribute("price", bid.getPrice());
+    	session.setAttribute("itemId", bid.getItemId());
+    	
+    	System.out.println("price: "+session.getAttribute("price"));
+    	System.out.println("itemId: "+session.getAttribute("itemId"));
+    	
     	return Response.ok().build();
     }
     

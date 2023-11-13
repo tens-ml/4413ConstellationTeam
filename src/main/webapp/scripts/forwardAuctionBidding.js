@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => {
                 if (response.ok) {
 					loadPage();
-                    alert("Bid Created");
+                    
                 } else {
                     response.text().then(text => alert(text));
                 }
