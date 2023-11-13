@@ -7,7 +7,7 @@
     <Resource name="jdbc/constellationDB"
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
               type="javax.sql.DataSource" driverClassName="org.sqlite.JDBC"
-              url="jdbc:sqlite:/Users/alish/Downloads/db.db"/>
+              url="jdbc:sqlite:/C:/Users/k899e/IdeaProjects/4413ConstellationTeam/database.sqlite"/>
               
                           
 
