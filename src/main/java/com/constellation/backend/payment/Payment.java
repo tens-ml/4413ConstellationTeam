@@ -7,27 +7,28 @@ public class Payment {
 	private int expMo;
 	private int expYe;
 	private int ccv;
-	private String userName;
+	private int userId;
 	
 
-	public Payment(long cardNo, String name, int expMo, int expYe, int ccv, String userName) {
+	public Payment(long cardNo, String name, int expMo, int expYe, int ccv, int userId) {
 		super();
 		this.cardNo = cardNo;
 		this.name = name;
 		this.expMo = expMo;
 		this.expYe = expYe;
 		this.ccv = ccv;
-		this.userName = userName;
+		this.userId = userId;
 	}
 	public Payment() {
 		
 	}
 	
-	public String getUserName() {
-		return userName;
+	
+	public int getUserId() {
+		return userId;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public long getCardNo() {
 		return cardNo;

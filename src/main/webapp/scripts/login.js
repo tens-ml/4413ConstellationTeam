@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             .then(response => {
                 if (response.ok) {
                     alert("Login success!");
-                    window.location.href = '/constellation-backend/home';
+                    window.location.href = '/constellation-backend/catalog';
                 } else {
                     response.text().then(text => alert(text));
                 }

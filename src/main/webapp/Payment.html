@@ -25,13 +25,21 @@
                 padding: 8px;
                 box-sizing: border-box;
             }
+            .OrderDetails {
+			 	width: 100%;
+			 	padding: 30px;
+			 	border-radius: 4px;
+			 	box-sizing: border-box;
+			 	text-align: left;
+			 	margin-bottom: 1em;
+			 	border-radius: 4px;	
+			}
         </style>
     </head>
     <body>
         <header>
             <h1>Payment Information</h1>
         </header>
-<body>
 	<section id="id1"></section>
     <script>
       //this code is for illustrating basic java script concepts
@@ -45,15 +53,21 @@
       //welcome.textContent = greeting;//this is to show how you concatenate operate on variables
      </script>
 	<fieldset>
-		<legend id="lg"> To Be Changed on Load </legend>
-		 <main>
+		<!--legend id="lg"> To Be Changed on Load </legend-->
+		<div class="OrderDetails">
+		<p id="fName">First Name: </p>
+		<p id="lName">Last Name: </p>
+		<p id="str">Street: </p>
+		<p id="no">Number: </p>
+		<p id="city">City: </p>
+		<p id="country">Country: </p>
+		<p id="postCode">Postal Code: </p>
+		<p id="netPrice">Total Cost: </p>
+	</div>
+		 <!--main-->
 		<div class="payment-form">
 		<form id="myform" action="PaymentServlet" method="POST"
 			onsubmit="return validate()">
-				<div class="form-group">
-					<label for="cno">Username:</label>
-					<input name="usern" id="un" type="text" required>
-				</div>
 				<div class="form-group">
 					<label for="cno">Card Number:</label>
 					<input name="cardno" id="cno" type="text" required>
@@ -80,8 +94,53 @@
 		</div>
 	</fieldset>
 	<section id="err" class="error"></section>
-	 </main>
+	 <!--/main-->
 	<script src="scripts/payment.js"></script>	
-	
+	<script>
+    // Function to make the AJAX request
+    function fetchData() {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Configure it: GET-request to /your-servlet-endpoint
+        xhr.open('GET', 'http://localhost:8080/constellation-backend/PaymentServlet?type=info', true);
+
+        // Setup a function to handle the response
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                try {
+                    // If the request was successful, update the content of the <p> element
+                    var responseData = JSON.parse(xhr.responseText);
+                  
+                    document.getElementById('fName').innerText += responseData.fName;
+                    document.getElementById('lName').innerText += responseData.lName;
+                    document.getElementById('str').innerText += responseData.str;
+					document.getElementById('no').innerText += responseData.no;
+					document.getElementById('city').innerText += responseData.city;
+					document.getElementById('country').innerText += responseData.country;
+					document.getElementById('postCode').innerText += responseData.postCode;
+					document.getElementById('netPrice').innerText += responseData.netPrice;
+
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            } else {
+                // If there was an error with the request, log the error
+                console.error('Error fetching data:', xhr.statusText);
+            }
+        };
+
+        // Setup a function to handle network errors
+        xhr.onerror = function() {
+            console.error('Network error occurred.');
+        };
+
+        // Send the request
+        xhr.send();
+    }
+
+    // Call the fetchData function when the page loads
+    window.onload = fetchData;
+</script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,4 +98,149 @@ footer {
 
 <script src="scripts/auctionEnded.js"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Auction Ended</title>
+ <link rel="stylesheet" type="text/css" href="styles/global.css">
+ <style>
+	 
+footer {
+	position: fixed;
+ 	bottom: 0pc;
+ 	left: 50%;
+	transform: translateX(-50%);
+ 	 
+}
+.btn {
+ 	position: fixed;
+ 	top: 13pc;
+	left: 65%;
+ 	border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: #20232a;
+    color: white;
+    border-radius: 4px;
+    width: 32%;
+    font-weight: bold;
+    font-size: 16px;
+}
+.ItemDescription {
+ 	width: 100%;
+ 	padding: 30px;
+ 	border-radius: 4px;
+ 	box-sizing: border-box;
+ 	text-align: left;
+ 	margin-bottom: 1em;
+ 	border-radius: 4px;
+}
+.Expedited {
+ 	width: 100%;
+ 	padding: 30px;
+ 	border-radius: 4px;
+ 	box-sizing: border-box;
+ 	text-align: left;
+ 	margin-bottom: 1em;
+ 	border-radius: 4px;	
+}
+.OrderDetails {
+ 	width: 100%;
+ 	padding: 30px;
+ 	border-radius: 4px;
+ 	box-sizing: border-box;
+ 	text-align: left;
+ 	margin-bottom: 1em;
+ 	border-radius: 4px;	
+}
+ </style>
+</head>
+<body>
+<header>
+ <h1>Constellation Auction House</h1>
+</header>
+
+<div class="ItemDescription">
+	<h1>Bidding Ended!!!</h1>
+	<p id="Description"> Item Description: </p>
+	<p id="Shipping_Price">Shipping price: $ </p>
+
+</div>
+<div class="Expedited">
+ 	<p>Expedited Shipment</p>
+    <p id="Expedited_Shipping_Price">Expedited Shipping Price: $</p>
+    <label for="Expedited_Shipping_Radio">Expedited Shipping</label>
+    <input id="Expedited_Shipping_Radio" name="ExpeditedShipping" value="Add" type="radio">
+</div>
+
+<div class="OrderDetails">
+	<p id="Winning_Price">Winning Price: $</p>
+	<p id="Highest_Bidder">Highest Bidder: </p>
+</div>
+
+<div class="DutchAuctionPayNow">
+	<form id="BidForm">
+		<input type="submit" class="btn" value="Pay Now">
+	</form>
+</div>
+<footer>
+ <p>© 2023 Constellation Auction House</p>
+</footer>
+
+
+
+<script>
+    // Function to make the AJAX request
+    function fetchData() {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        // Configure it: GET-request to /your-servlet-endpoint
+        xhr.open('GET', 'http://localhost:8080/constellation-backend/AuctionEndedServlet', true);
+
+        // Setup a function to handle the response
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                try {
+                    // If the request was successful, update the content of the <p> element
+                    var responseData = JSON.parse(xhr.responseText);
+                  
+                    document.getElementById('Description').innerText += responseData.itemDescription;
+                    document.getElementById('Shipping_Price').innerText += responseData.ShippingPrice;
+                    document.getElementById('Expedited_Shipping_Price').innerText += responseData.Expedited_Shipping_Price;
+					document.getElementById('Highest_Bidder').innerText += responseData.Highest_Bidder;
+					document.getElementById('Winning_Price').innerText += responseData.Highest_Price;
+
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                }
+            } else {
+                // If there was an error with the request, log the error
+                console.error('Error fetching data:', xhr.statusText);
+            }
+        };
+
+        // Setup a function to handle network errors
+        xhr.onerror = function() {
+            console.error('Network error occurred.');
+        };
+
+        // Send the request
+        xhr.send();
+    }
+
+    // Call the fetchData function when the page loads
+    window.onload = fetchData;
+</script>
+
+
+
+
+
+
+</body>
+>>>>>>> branch 'main' of https://github.com/tens-ml/4413ConstellationTeam.git
 </html>
