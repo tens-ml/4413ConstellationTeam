@@ -25,7 +25,6 @@ function validate() {
 	//find and assign the places in the document were the elements with the ids err, cn and fn are
 	//note that the ids are referenced with "#" tags with "tagname", classes with "."
 	const err = document.querySelector('#err');
-	const userName = document.querySelector('#un');
 	const cardNo = document.querySelector('#cno');
 	const cardNa = document.querySelector('#cna');
 	const expM = document.querySelector('#exm');
@@ -35,24 +34,17 @@ function validate() {
 	//test if the student name is empty; the value of an element is retrieved with el.value
 	// ==== is used to test if two variables are identical
 	
-	if (userName.value===""){
-	    ok=false;
-		errorMessage = " Username should not be empty; ";
-	
-	}
-	
 	if (cardNa.value===""){
 	    ok=false;
 		errorMessage = " Cardholder name should not be empty; ";
-	
 	}
 	
 	if (isNaN(cardNo.value) || cardNo.value < 100000000000000 || cardNo.value > 9999999999999999) {
 		ok = false;
-		errorMessage+=" Card number should be a 15 or 16 digit integer;";
+		errorMessage+=" Card number should be 15 or 16 digits;";
 	}
 	
-	if (isNaN(expM.value) || expM.value < 0 || expM.value > 12) {
+	if (isNaN(expM.value) || expM.value < 1 || expM.value > 12) {
 		ok = false;
 		errorMessage+=" Enter a valid month;";
 	}
