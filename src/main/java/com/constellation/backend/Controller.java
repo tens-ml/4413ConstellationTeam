@@ -158,7 +158,6 @@ public class Controller {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response AuctionEndedPayNow(BidRequest newbid) throws NewBidException, WrongUserException {
-
     	Bid bid = bidService.getBidbyItemId(newbid.getItemId());
     	HttpSession session = request.getSession() ;
     	session.setAttribute("userId", 0);
