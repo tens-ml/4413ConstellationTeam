@@ -88,11 +88,12 @@ const loadItems = (searchFilter = '') => {
                 DOMRow.insertCell(7).textContent = item.initialPrice;
                 DOMRow.insertCell(8).textContent = (item.highestBid <= item.initialPrice) ? item.initialPrice : item.highestBid
 
-                const date = new Date(item.auctionEnd);
-                DOMRow.insertCell(9).textContent = date.toLocaleString();
+                const auctionEndTime = item.auctionEnd; // Ensure this is a valid Date object or string
+                const timeString = formatAuctionTime(auctionEndTime, item.isDutch);
+                DOMRow.insertCell(9).textContent = timeString;
 
-                console.log(item.available);
-                DOMRow.insertCell(10).textContent = item.available ? 'Yes' : 'No';
+                console.log(timeString);
+                DOMRow.insertCell(10).textContent = timeString !== "Auction ended" ? 'Yes' : 'No';
             });
         })
         .catch(error => {
@@ -139,4 +140,25 @@ const submitItem = () => {
         .catch(error => {
             console.error('Error adding item:', error);
         });
+
 };
+
+function formatAuctionTime(auctionEndTime, isDutch) {
+    if (isDutch) {
+        return "N/a";
+    }
+
+    const now = new Date();
+    const timeDiff = new Date(auctionEndTime) - now;
+
+    // Ensure the auction end time is in the future
+    if (timeDiff < 0) {
+        return "Auction ended";
+    }
+
+    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+    return hours + " hours " + minutes + " minutes " + seconds + " seconds";
+}
