@@ -129,7 +129,7 @@ public class Controller {
     	bidResponse.setShippingPrice(item.getShippingPrice());
     	bidResponse.setHighestPrice(highestBid.getPrice());
     	bidResponse.setHighestBidder(highestBid.getUserId());
-    	bidResponse.setExpeditedShippingPrice(14);
+    	//bidResponse.setExpeditedShippingPrice(0);
 
     	return Response.ok(bidResponse).build();
     }
