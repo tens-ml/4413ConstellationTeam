@@ -8,6 +8,8 @@ import com.constellation.backend.exceptions.NewBidException;
 import com.constellation.backend.exceptions.SignupFailedException;
 import com.constellation.backend.exceptions.WrongUserException;
 import com.constellation.backend.bidservice.BidService;
+import com.constellation.backend.payment.Payment;
+import com.constellation.backend.payment.PaymentService;
 import com.constellation.backend.requests.*;
 import com.constellation.backend.userService.User;
 import com.constellation.backend.userService.UserService;
@@ -33,6 +35,7 @@ public class Controller {
     private final UserService userService = new UserService();
     private final CatalogService catalogService = new CatalogService();
     private final BidService bidService = new BidService();
+    private final PaymentService paymentService = new PaymentService();
     @POST
     @Path("/user/login")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -177,6 +180,34 @@ public class Controller {
     	
     	return Response.ok().build();
     }
+    // Payments
+    @POST
+    @Path("/payments")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String addCard(Payment payment){
+        return paymentService.addCard(payment);
+    }
+    @GET
+    @Path("/payments/{userId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getPayment(@PathParam("userId") int userId){
+        return paymentService.getPayment(userId);
+    }
+    @PUT
+    @Path("/payments/{userId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String updatePayment(@PathParam("userId") int userId, Payment payment){
+        return paymentService.updatePayment(userId, payment);
+    }
+    @DELETE
+    @Path("/payments/{userId}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String deletePayment(@PathParam("userId") int userId) {
+        return paymentService.deletePayment(userId);
+    }
+
 }
 
 
