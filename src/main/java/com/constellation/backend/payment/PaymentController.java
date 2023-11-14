@@ -29,10 +29,12 @@ public class PaymentController {
 				throw new PaymentException("Expiry Year has to be between 2023 and 2099");
 			if (payment.getCcv() > 9999 || payment.getCcv() < 100)
 				throw new PaymentException("CCV has to be 3 or 4 digits");
-			if (payment.getName().isEmpty() || payment.getName().trim().length() == 0)
+			if (payment.getName() == null || payment.getName().isEmpty() || payment.getName().trim().length() == 0)
 				throw new PaymentException("Enter a valid cardholder name");
 			if (!UserDao.isUserInDatabase(payment.getUserId()))
 				throw new PaymentException("User does not exist");
+			if(PaymentDAO.isPaymentInDatabase(payment.getUserId()))
+				throw new PaymentException("Payment method already exists");
 			paymentDAO.addCard(payment);
 			return "Success";
 		}catch(PaymentException e){
@@ -69,10 +71,14 @@ public class PaymentController {
 				throw new PaymentException("Expiry Year has to be between 2023 and 2099");
 			if (payment.getCcv() > 9999 || payment.getCcv() < 100)
 				throw new PaymentException("CCV has to be 3 or 4 digits");
-			if (payment.getName().isEmpty() || payment.getName().trim().length() == 0)
+			if (payment.getName() == null || payment.getName().isEmpty() || payment.getName().trim().length() == 0)
 				throw new PaymentException("Enter a valid cardholder name");
 			if (!UserDao.isUserInDatabase(payment.getUserId()))
 				throw new PaymentException("User does not exist");
+			if (userId != payment.getUserId())
+				throw new PaymentException("User ID is wrong");
+			if (!PaymentDAO.isPaymentInDatabase(userId))
+				throw new PaymentException("No payment information for this user");
 			paymentDAO.update(userId, payment);
 			return "Success";
 		}catch(PaymentException e){
