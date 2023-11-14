@@ -18,7 +18,7 @@ public class PaymentController {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String addCard(Payment payment){
 		try {
 			if (payment.getCardNo() > 9999999999999999L || payment.getCardNo() < 100000000000000L)
@@ -42,7 +42,7 @@ public class PaymentController {
 	
 	@GET
 	@Path("/{userId}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String getPayment(@PathParam("userId") int userId){
 		try {
 		if (!UserDao.isUserInDatabase(userId))
@@ -58,7 +58,7 @@ public class PaymentController {
 	@PUT
 	@Path("/{userId}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String updatePayment(@PathParam("userId") int userId, Payment payment){
 		try {
 			if (payment.getCardNo() > 9999999999999999L || payment.getCardNo() < 100000000000000L)
@@ -82,7 +82,7 @@ public class PaymentController {
 	
 	@DELETE
 	@Path("/{userId}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String deletePayment(@PathParam("userId") int userId){
 		try {
 		if (!UserDao.isUserInDatabase(userId))
