@@ -60,5 +60,11 @@ public class Payment {
 	public void setCcv(int ccv) {
 		this.ccv = ccv;
 	}
+	@Override
+	public String toString() {
+		return "Payment information is [cardNo=" + cardNo + ", name=" + name + ", expMo=" + expMo + ", expYe=" + expYe + ", ccv=" + ccv
+				+ ", userId=" + userId + "]";
+	}
+	
 
 }
