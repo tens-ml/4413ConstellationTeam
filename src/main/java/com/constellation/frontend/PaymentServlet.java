@@ -38,8 +38,8 @@ public class PaymentServlet extends HttpServlet {
 		Writer out = response.getWriter();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		int netP = (int) session.getAttribute("netPrice");
-		String itId = (String) session.getAttribute("itemId");
+		double netP = (double) session.getAttribute("price");
+		int itId = (int) session.getAttribute("itemId");
 		
 		if (request.getParameter(TYPE)!=null) {
 			if (request.getParameter(TYPE).equals("info")) {
@@ -52,9 +52,7 @@ public class PaymentServlet extends HttpServlet {
 			    String city = user.getCity();
 			    String country = user.getCountry();
 			    String postCode = user.getPostalCode();
-			    String netPrice = "TO BE IMPLEMENTED";
-			    
-			    //String netPrice = "$" + String.valueOf(netP);
+			    String netPrice = "$" + String.valueOf(netP);
 	
 			    out.append("{\"fName\":\" " + fName + "\",");
 			    out.append("\"lName\":\" " + lName + "\",");
@@ -74,12 +72,9 @@ public class PaymentServlet extends HttpServlet {
 			    String city = user.getCity();
 			    String country = user.getCountry();
 			    String postCode = user.getPostalCode();
-			    String netPaid = "TO BE IMPLEMENTED";
-			    String itemId = "TO BE IMPLEMENTED";
+			    String netPaid = "$" + String.valueOf(netP);
+			    String itemId = String.valueOf(itId);
 			    String shipETA = "5";
-			    
-			    //String netPaid = "$" + String.valueOf(netP);
-			    //String itemId = itId;
 
 			    out.append("{\"fName\":\" " + fName + "\",");
 			    out.append("\"lName\":\" " + lName + "\",");
