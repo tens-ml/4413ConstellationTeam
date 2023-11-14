@@ -156,7 +156,8 @@ public class CatalogService implements ICatalogService {
         item.setInitialPrice(rs.getDouble("initialPrice"));
         item.setAuctionEnd(rs.getTimestamp("auctionEnd"));
         item.setAvailable(rs.getBoolean("available"));
-
+        item.setShippingPrice(rs.getDouble("shippingPrice"));
+        item.setExpeditePrice(rs.getDouble("expeditePrice"));
         if (enriched) {
             item.setSellerName(rs.getString("sellerName"));
             item.setHighestBid(rs.getDouble("highestBid"));
