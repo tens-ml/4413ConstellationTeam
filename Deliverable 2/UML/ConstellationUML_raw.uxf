@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.0.0">
-  <zoom_level>6</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>372</x>
-      <y>918</y>
-      <w>174</w>
-      <h>90</h>
+      <x>510</x>
+      <y>645</y>
+      <w>145</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>AuctionService
 --
@@ -24,10 +24,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
-      <y>654</y>
-      <w>246</w>
-      <h>180</h>
+      <x>250</x>
+      <y>425</y>
+      <w>205</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>Bid
 --
@@ -54,10 +54,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
-      <y>918</y>
-      <w>198</w>
-      <h>90</h>
+      <x>250</x>
+      <y>645</y>
+      <w>165</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>BidDAO
 --
@@ -72,10 +72,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>66</x>
-      <y>1086</y>
-      <w>204</w>
-      <h>240</h>
+      <x>255</x>
+      <y>785</y>
+      <w>170</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>CatalogItem
 --
@@ -108,10 +108,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>1086</y>
-      <w>210</w>
-      <h>84</h>
+      <x>480</x>
+      <y>915</y>
+      <w>175</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>CatalogService
 --
@@ -127,12 +127,13 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>336</x>
-      <y>1254</y>
-      <w>210</w>
-      <h>78</h>
+      <x>480</x>
+      <y>790</y>
+      <w>175</w>
+      <h>65</h>
     </coordinates>
-    <panel_attributes>ICatalogService
+    <panel_attributes>&lt;&lt;INTERFACE&gt;&gt;
+ICatalogService
 --
 + createItem(item: CatalogItem): CatalogItem
 + getItems(): List&lt;CatalogItem&gt;
@@ -145,10 +146,10 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>36</x>
-      <y>1044</y>
-      <w>546</w>
-      <h>324</h>
+      <x>230</x>
+      <y>750</y>
+      <w>455</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>com.constellation.backend.catalogservice
 --
@@ -158,10 +159,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>804</x>
-      <y>1872</y>
-      <w>246</w>
-      <h>60</h>
+      <x>1005</x>
+      <y>1830</y>
+      <w>205</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>SQLiteConnection
 --
@@ -172,10 +173,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>648</x>
-      <y>1812</y>
-      <w>546</w>
-      <h>156</h>
+      <x>875</x>
+      <y>1780</y>
+      <w>455</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>com.constellation.backend.db
 --
@@ -185,10 +186,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>198</x>
-      <y>1470</y>
-      <w>234</w>
-      <h>78</h>
+      <x>450</x>
+      <y>1075</y>
+      <w>195</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>LoginFailedException
 --
@@ -204,10 +205,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>198</x>
-      <y>1650</y>
-      <w>234</w>
-      <h>60</h>
+      <x>450</x>
+      <y>1200</y>
+      <w>195</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>SignupFailedException
 --
@@ -223,10 +224,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>198</x>
-      <y>1572</y>
-      <w>234</w>
-      <h>60</h>
+      <x>450</x>
+      <y>1145</y>
+      <w>195</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>PaymentException
 --
@@ -240,10 +241,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>36</x>
-      <y>630</y>
-      <w>546</w>
-      <h>402</h>
+      <x>230</x>
+      <y>405</y>
+      <w>455</w>
+      <h>335</h>
     </coordinates>
     <panel_attributes>com.constellation.backend.auctionservice
 --
@@ -251,25 +252,12 @@ bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>36</x>
-      <y>1392</y>
-      <w>546</w>
-      <h>390</h>
-    </coordinates>
-    <panel_attributes>com.constellation.backend.exceptions
---
-bg=orange</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1272</x>
-      <y>576</y>
-      <w>360</w>
-      <h>234</h>
+      <x>295</x>
+      <y>1415</y>
+      <w>300</w>
+      <h>195</h>
     </coordinates>
     <panel_attributes>Payment
 --
@@ -301,10 +289,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1272</x>
-      <y>936</y>
-      <w>360</w>
-      <h>84</h>
+      <x>295</x>
+      <y>1715</y>
+      <w>300</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>PaymentController
 --
@@ -321,10 +309,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1272</x>
-      <y>828</y>
-      <w>210</w>
-      <h>84</h>
+      <x>295</x>
+      <y>1625</y>
+      <w>175</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>PaymentDAO
 --
@@ -341,10 +329,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1242</x>
-      <y>540</y>
-      <w>498</w>
-      <h>504</h>
+      <x>270</x>
+      <y>1385</y>
+      <w>415</w>
+      <h>420</h>
     </coordinates>
     <panel_attributes>com.constellation.backend.payment
 --
@@ -354,10 +342,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1392</x>
-      <y>1098</y>
-      <w>210</w>
-      <h>120</h>
+      <x>1495</x>
+      <y>1200</y>
+      <w>175</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>LoginRequest
 --
@@ -377,10 +365,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1392</x>
-      <y>1248</y>
-      <w>210</w>
-      <h>120</h>
+      <x>1495</x>
+      <y>1310</y>
+      <w>175</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>SignupRequest
 --
@@ -398,25 +386,12 @@ bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>1236</x>
-      <y>1062</y>
-      <w>498</w>
-      <h>330</h>
-    </coordinates>
-    <panel_attributes>com.constellation.backend.requests
---
-bg=orange</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1530</x>
-      <y>1464</y>
-      <w>210</w>
-      <h>294</h>
+      <x>1610</x>
+      <y>1490</y>
+      <w>175</w>
+      <h>245</h>
     </coordinates>
     <panel_attributes>User
 --
@@ -455,10 +430,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1248</x>
-      <y>1674</y>
-      <w>240</w>
-      <h>78</h>
+      <x>1375</x>
+      <y>1665</y>
+      <w>200</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>UserDao
 --
@@ -471,10 +446,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1248</x>
-      <y>1500</y>
-      <w>240</w>
-      <h>78</h>
+      <x>1375</x>
+      <y>1520</y>
+      <w>200</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>UserService
 --
@@ -489,10 +464,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1230</x>
-      <y>1428</y>
-      <w>534</w>
-      <h>360</h>
+      <x>1360</x>
+      <y>1460</y>
+      <w>445</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>com.constellation.backend.userService
 --
@@ -502,10 +477,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1356</x>
-      <y>1572</y>
-      <w>24</w>
-      <h>114</h>
+      <x>1465</x>
+      <y>1580</y>
+      <w>20</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 1
@@ -521,10 +496,10 @@ bg=orange</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>798</y>
-      <w>246</w>
-      <h>78</h>
+      <x>1025</x>
+      <y>935</y>
+      <w>205</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>Controller
 --
@@ -539,10 +514,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>912</x>
-      <y>1722</y>
-      <w>96</w>
-      <h>162</h>
+      <x>1095</x>
+      <y>1705</y>
+      <w>80</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>lt=-()
 m2=Database Connection
@@ -552,10 +527,10 @@ m2=Database Connection
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>918</x>
-      <y>1542</y>
-      <w>342</w>
-      <h>198</h>
+      <x>1100</x>
+      <y>1555</y>
+      <w>285</w>
+      <h>165</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;310.0;550.0;10.0</additional_attributes>
@@ -563,10 +538,10 @@ m2=Database Connection
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1482</x>
-      <y>1524</y>
-      <w>60</w>
-      <h>24</h>
+      <x>1570</x>
+      <y>1540</y>
+      <w>50</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 users</panel_attributes>
@@ -575,10 +550,10 @@ users</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1482</x>
-      <y>1704</y>
-      <w>60</w>
-      <h>24</h>
+      <x>1570</x>
+      <y>1690</y>
+      <w>50</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 users</panel_attributes>
@@ -587,60 +562,66 @@ users</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>1158</y>
-      <w>264</w>
-      <h>30</h>
+      <x>1285</x>
+      <y>1250</y>
+      <w>220</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>lt=-()
-m2=Login
+m2=Login Request
 </panel_attributes>
     <additional_attributes>420.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>1302</y>
-      <w>264</w>
-      <h>30</h>
+      <x>1285</x>
+      <y>1355</y>
+      <w>220</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>lt=-()
-m2=Signup
+m2=Signup Request
 </panel_attributes>
     <additional_attributes>420.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1038</x>
-      <y>870</y>
-      <w>150</w>
-      <h>306</h>
+      <x>1200</x>
+      <y>995</y>
+      <w>100</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-provide then get data</panel_attributes>
-    <additional_attributes>180.0;490.0;10.0;10.0</additional_attributes>
+
+
+
+
+
+
+get input</panel_attributes>
+    <additional_attributes>180.0;520.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1002</x>
-      <y>870</y>
-      <w>168</w>
-      <h>450</h>
+      <x>1170</x>
+      <y>995</y>
+      <w>130</w>
+      <h>375</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-provide then get data</panel_attributes>
+get input</panel_attributes>
     <additional_attributes>240.0;730.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1134</x>
-      <y>1512</y>
-      <w>126</w>
-      <h>30</h>
+      <x>1280</x>
+      <y>1530</y>
+      <w>105</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>lt=-()
 m2=User Service
@@ -650,32 +631,22 @@ m2=User Service
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1140</x>
-      <y>1332</y>
-      <w>264</w>
-      <h>198</h>
+      <x>1115</x>
+      <y>990</y>
+      <w>180</w>
+      <h>555</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;310.0;420.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1140</x>
-      <y>1194</y>
-      <w>264</w>
-      <h>336</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;540.0;420.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;.
+get data based on input</panel_attributes>
+    <additional_attributes>340.0;1090.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>792</x>
-      <y>2166</y>
-      <w>114</w>
-      <h>30</h>
+      <x>995</x>
+      <y>2075</y>
+      <w>95</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>&lt;&lt;database&gt;&gt;
 payments
@@ -685,10 +656,10 @@ payments
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>918</x>
-      <y>2166</y>
-      <w>114</w>
-      <h>30</h>
+      <x>1100</x>
+      <y>2075</y>
+      <w>95</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>&lt;&lt;database&gt;&gt;
 users
@@ -698,10 +669,10 @@ users
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1044</x>
-      <y>2166</y>
-      <w>114</w>
-      <h>30</h>
+      <x>1205</x>
+      <y>2075</y>
+      <w>95</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>&lt;&lt;database&gt;&gt;
 catalog</panel_attributes>
@@ -710,10 +681,10 @@ catalog</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>666</x>
-      <y>2166</y>
-      <w>114</w>
-      <h>30</h>
+      <x>890</x>
+      <y>2075</y>
+      <w>95</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>&lt;&lt;database&gt;&gt;
 bids</panel_attributes>
@@ -722,10 +693,10 @@ bids</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>654</x>
-      <y>2094</y>
-      <w>546</w>
-      <h>168</h>
+      <x>880</x>
+      <y>2015</y>
+      <w>455</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>SQLite Database
 --
@@ -735,10 +706,10 @@ bg=orange</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1092</x>
-      <y>2040</y>
-      <w>54</w>
-      <h>138</h>
+      <x>1245</x>
+      <y>1970</y>
+      <w>45</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>lt=-()
 m2=data table
@@ -748,10 +719,10 @@ m2=data table
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>966</x>
-      <y>2040</y>
-      <w>54</w>
-      <h>138</h>
+      <x>1140</x>
+      <y>1970</y>
+      <w>45</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>lt=-()
 m2=data table
@@ -761,10 +732,10 @@ m2=data table
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>834</x>
-      <y>2040</y>
-      <w>54</w>
-      <h>138</h>
+      <x>1030</x>
+      <y>1970</y>
+      <w>45</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>lt=-()
 m2=data table
@@ -774,10 +745,10 @@ m2=data table
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>2040</y>
-      <w>54</w>
-      <h>138</h>
+      <x>935</x>
+      <y>1970</y>
+      <w>45</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>lt=-()
 m2=data table
@@ -787,10 +758,10 @@ m2=data table
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>1926</y>
-      <w>156</w>
-      <h>126</h>
+      <x>935</x>
+      <y>1875</y>
+      <w>130</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 query</panel_attributes>
@@ -799,10 +770,10 @@ query</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>834</x>
-      <y>1926</y>
-      <w>66</w>
-      <h>126</h>
+      <x>1030</x>
+      <y>1875</y>
+      <w>55</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 query</panel_attributes>
@@ -811,10 +782,10 @@ query</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>936</x>
-      <y>1926</y>
-      <w>54</w>
-      <h>126</h>
+      <x>1115</x>
+      <y>1875</y>
+      <w>45</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 query</panel_attributes>
@@ -823,10 +794,10 @@ query</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>1926</y>
-      <w>144</w>
-      <h>126</h>
+      <x>1135</x>
+      <y>1875</y>
+      <w>120</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 query</panel_attributes>
@@ -835,10 +806,10 @@ query</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1578</x>
-      <y>804</y>
-      <w>36</w>
-      <h>144</h>
+      <x>550</x>
+      <y>1605</y>
+      <w>30</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 users</panel_attributes>
@@ -847,10 +818,10 @@ users</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1476</x>
-      <y>804</y>
-      <w>72</w>
-      <h>66</h>
+      <x>465</x>
+      <y>1605</y>
+      <w>60</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 users</panel_attributes>
@@ -859,10 +830,10 @@ users</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1476</x>
-      <y>876</y>
-      <w>54</w>
-      <h>72</h>
+      <x>465</x>
+      <y>1665</y>
+      <w>45</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -872,46 +843,34 @@ m2= 1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1158</x>
-      <y>960</y>
-      <w>126</w>
-      <h>30</h>
+      <x>590</x>
+      <y>1710</y>
+      <w>235</w>
+      <h>25</h>
     </coordinates>
     <panel_attributes>lt=-()
 m2=Payment Service
 </panel_attributes>
-    <additional_attributes>190.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>10.0;30.0;450.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1068</x>
-      <y>834</y>
-      <w>138</w>
-      <h>144</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-provide then get data</panel_attributes>
-    <additional_attributes>150.0;220.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>912</x>
-      <y>996</y>
-      <w>372</w>
-      <h>738</h>
+      <x>590</x>
+      <y>1710</y>
+      <w>515</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;1210.0;600.0;10.0</additional_attributes>
+    <additional_attributes>1010.0;10.0;10.0;130.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>486</x>
-      <y>60</y>
-      <w>132</w>
-      <h>18</h>
+      <x>735</x>
+      <y>50</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>AuctionEnded.html</panel_attributes>
     <additional_attributes/>
@@ -919,10 +878,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>486</x>
-      <y>90</y>
-      <w>132</w>
-      <h>18</h>
+      <x>735</x>
+      <y>75</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>DutchAuctionBidding.html</panel_attributes>
     <additional_attributes/>
@@ -930,10 +889,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>486</x>
-      <y>120</y>
-      <w>132</w>
-      <h>18</h>
+      <x>735</x>
+      <y>100</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>ForwardAuctionBidding.html</panel_attributes>
     <additional_attributes/>
@@ -941,10 +900,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>486</x>
-      <y>150</y>
-      <w>132</w>
-      <h>18</h>
+      <x>735</x>
+      <y>125</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>Login.html</panel_attributes>
     <additional_attributes/>
@@ -952,10 +911,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>486</x>
-      <y>180</y>
-      <w>132</w>
-      <h>18</h>
+      <x>735</x>
+      <y>150</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>MainPage.html</panel_attributes>
     <additional_attributes/>
@@ -963,10 +922,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>486</x>
-      <y>210</y>
-      <w>132</w>
-      <h>18</h>
+      <x>735</x>
+      <y>175</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>Payment.html</panel_attributes>
     <additional_attributes/>
@@ -974,10 +933,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>486</x>
-      <y>240</y>
-      <w>132</w>
-      <h>18</h>
+      <x>735</x>
+      <y>200</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>Receipt.html</panel_attributes>
     <additional_attributes/>
@@ -985,10 +944,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>486</x>
-      <y>270</y>
-      <w>132</w>
-      <h>18</h>
+      <x>735</x>
+      <y>225</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>SignUp.html</panel_attributes>
     <additional_attributes/>
@@ -996,10 +955,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>762</x>
-      <y>150</y>
-      <w>132</w>
-      <h>18</h>
+      <x>965</x>
+      <y>125</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>login.js</panel_attributes>
     <additional_attributes/>
@@ -1007,10 +966,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>762</x>
-      <y>210</y>
-      <w>132</w>
-      <h>18</h>
+      <x>965</x>
+      <y>175</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>payment.js</panel_attributes>
     <additional_attributes/>
@@ -1018,10 +977,10 @@ provide then get data</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>762</x>
-      <y>270</y>
-      <w>132</w>
-      <h>18</h>
+      <x>965</x>
+      <y>225</y>
+      <w>110</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>signup.js</panel_attributes>
     <additional_attributes/>
@@ -1029,21 +988,21 @@ provide then get data</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1038</x>
-      <y>30</y>
-      <w>18</w>
-      <h>774</h>
+      <x>1200</x>
+      <y>20</y>
+      <w>20</w>
+      <h>820</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;1270.0;10.0;10.0</additional_attributes>
+    <additional_attributes>20.0;1620.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>888</x>
-      <y>270</y>
-      <w>168</w>
-      <h>24</h>
+      <x>1070</x>
+      <y>225</y>
+      <w>140</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 redirect</panel_attributes>
@@ -1052,10 +1011,10 @@ redirect</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>888</x>
-      <y>210</y>
-      <w>168</w>
-      <h>24</h>
+      <x>1070</x>
+      <y>175</y>
+      <w>140</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 redirect</panel_attributes>
@@ -1064,10 +1023,10 @@ redirect</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>888</x>
-      <y>150</y>
-      <w>168</w>
-      <h>24</h>
+      <x>1070</x>
+      <y>125</y>
+      <w>140</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 redirect</panel_attributes>
@@ -1076,10 +1035,10 @@ redirect</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>612</x>
-      <y>264</y>
-      <w>162</w>
-      <h>24</h>
+      <x>840</x>
+      <y>220</y>
+      <w>135</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=-
 embedded script</panel_attributes>
@@ -1088,10 +1047,10 @@ embedded script</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>612</x>
-      <y>204</y>
-      <w>162</w>
-      <h>24</h>
+      <x>840</x>
+      <y>170</y>
+      <w>135</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=-
 embedded script</panel_attributes>
@@ -1100,10 +1059,10 @@ embedded script</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>612</x>
-      <y>144</y>
-      <w>162</w>
-      <h>24</h>
+      <x>840</x>
+      <y>120</y>
+      <w>135</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>lt=-
 embedded script</panel_attributes>
@@ -1112,23 +1071,10 @@ embedded script</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>390</x>
-      <y>0</y>
-      <w>762</w>
-      <h>426</h>
-    </coordinates>
-    <panel_attributes>View
---
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>798</x>
-      <y>768</y>
-      <w>306</w>
-      <h>126</h>
+      <x>1000</x>
+      <y>910</y>
+      <w>255</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>Controller
 --
@@ -1136,12 +1082,681 @@ bg=green</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>45</y>
+      <w>135</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>965</x>
+      <y>50</y>
+      <w>110</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>auctionEnded.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1070</x>
+      <y>50</y>
+      <w>140</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>70</y>
+      <w>135</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>965</x>
+      <y>75</y>
+      <w>110</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>dutchAuctionBidding.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1070</x>
+      <y>75</y>
+      <w>140</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>95</y>
+      <w>135</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>965</x>
+      <y>100</y>
+      <w>110</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>forwardAuctionBidding.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1070</x>
+      <y>100</y>
+      <w>140</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>965</x>
+      <y>150</y>
+      <w>110</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>main.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1070</x>
+      <y>150</y>
+      <w>140</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>145</y>
+      <w>135</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>735</x>
+      <y>250</y>
+      <w>110</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>Catalog.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>245</y>
+      <w>135</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>965</x>
+      <y>250</y>
+      <w>110</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>catalog.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1070</x>
+      <y>370</y>
+      <w>140</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>965</x>
+      <y>200</y>
+      <w>110</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>receipt.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>195</y>
+      <w>135</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1070</x>
+      <y>200</y>
+      <w>140</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>650</x>
+      <y>0</y>
+      <w>635</w>
+      <h>355</h>
+    </coordinates>
+    <panel_attributes>View
+--
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>1255</y>
+      <w>195</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>WrongUserException
+--
+- serialVersionUID: long
+
+--
++ WrongUserException()
++ WrongUserException(message: String)
++ toResponse(exception: WrongUserException): Response
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>1310</y>
+      <w>195</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>NewBidException
+--
+- serialVersionUID: long
+
+--
++ NewBidException()
++ NewBidException(message: String)
++ toResponse(exception: NewBidException): Response
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>420</x>
+      <y>1050</y>
+      <w>260</w>
+      <h>325</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.exceptions
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1495</x>
+      <y>970</y>
+      <w>175</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>BidRequest
+--
+- itemId: int
+- price: double
+
+--
++ BidRequest()
++ BidRequest(itemId: int, price: double)
++ getItemId(): int
++ getPrice(): double
++ setItemId(itemId: int): void
++ setPrice(price: double): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1495</x>
+      <y>1075</y>
+      <w>175</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>SellItemRequest
+--
+- itemName: String
+- itemDescription: String
+- auctionType: String
+- daysToShip: int
+- initialPrice: int
+- auctionEnd: String
+
+--
++ SellItemRequest()
++ SellItemRequest(itemName: String, itemDescription: String, auctionType: String, daysToShip: int, initialPrice: int, auctionEnd: String)
++ getItemName(): String
++ getItemDescription(): String
++ setAuctionType(auctionType: String): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1370</x>
+      <y>950</y>
+      <w>620</w>
+      <h>485</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.requests
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1285</x>
+      <y>995</y>
+      <w>220</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Bid On Item  Request
+</panel_attributes>
+    <additional_attributes>420.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1225</x>
+      <y>975</y>
+      <w>70</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+get input</panel_attributes>
+    <additional_attributes>120.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1285</x>
+      <y>1120</y>
+      <w>220</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Sell Item Request
+</panel_attributes>
+    <additional_attributes>420.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1215</x>
+      <y>995</y>
+      <w>85</w>
+      <h>145</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+get input</panel_attributes>
+    <additional_attributes>150.0;270.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>535</y>
+      <w>105</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>190.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>680</y>
+      <w>110</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2= 1</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>365</x>
+      <y>570</y>
+      <w>30</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>690</y>
+      <w>190</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Auction Service
+</panel_attributes>
+    <additional_attributes>10.0;20.0;360.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1400</x>
+      <y>665</y>
+      <w>175</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>BidResponse
+--
+- itemID: int
+- newBid: int
+- itemDescription: String
+- highestPrice: double
+- highestBidder: int
+- shippingPrice: double
+- expeditedShippingPrice: double
+
+--
++ BidResponse()
++ BidResponse(itemID: int, newBid: int)
++ getItemID(): int
++ setItemID(itemID: int): void
++ getNewBid(): int
++ setNewBid(newBid: int): void
++ getItemDescription(): String
++ setItemDescription(itemDescription: String): void
++ getHighestPrice(): double
++ setHighestPrice(HighestPrice: double): void
++ getHighestBidder(): int
++ setHighestBidder(HighestBidder: int): void
++ getShippingPrice(): double
++ setShippingPrice(ShippingPrice: double): void
++ getExpeditedShippingPrice(): double
++ setExpeditedShippingPrice(ExpeditedShippingPrice: double): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1375</x>
+      <y>635</y>
+      <w>245</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.response
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>850</y>
+      <w>15</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>815</y>
+      <w>70</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>940</y>
+      <w>70</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>675</x>
+      <y>1195</y>
+      <w>130</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Exception
+</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>995</y>
+      <w>275</w>
+      <h>215</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+exceptions</panel_attributes>
+    <additional_attributes>10.0;410.0;530.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>940</y>
+      <w>190</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Catalog Service
+</panel_attributes>
+    <additional_attributes>10.0;20.0;360.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>835</x>
+      <y>940</y>
+      <w>200</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+get data based on input</panel_attributes>
+    <additional_attributes>10.0;20.0;380.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>700</y>
+      <w>205</w>
+      <h>245</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+get data based on input</panel_attributes>
+    <additional_attributes>10.0;10.0;390.0;470.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>980</y>
+      <w>445</w>
+      <h>735</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>870.0;1450.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>720</y>
+      <w>450</w>
+      <h>990</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>880.0;1960.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1335</x>
+      <y>840</y>
+      <w>70</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Bid Response
+</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1225</x>
+      <y>845</y>
+      <w>120</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+interact with bids</panel_attributes>
+    <additional_attributes>220.0;10.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>830</y>
+      <w>80</w>
+      <h>115</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=frontend connection
+</panel_attributes>
+    <additional_attributes>20.0;20.0;20.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>810</x>
+      <y>995</y>
+      <w>290</w>
+      <h>730</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+get data based on input</panel_attributes>
+    <additional_attributes>10.0;1440.0;560.0;10.0</additional_attributes>
+  </element>
+  <element>
     <id>UMLPackage</id>
     <coordinates>
       <x>0</x>
-      <y>462</y>
-      <w>1830</w>
-      <h>1836</h>
+      <y>370</y>
+      <w>2250</w>
+      <h>1830</h>
     </coordinates>
     <panel_attributes>com.constellation.backend (Model)
 --
