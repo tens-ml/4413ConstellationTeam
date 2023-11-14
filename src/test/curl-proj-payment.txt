@@ -4,61 +4,76 @@ Make sure the user table in database is populated with 3 users with id 1, 2 and 
 
 --------------------------
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2024, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2024, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 Success
 
-curl -X GET http://localhost:8080/constellation-backend/v1/payments/1
+curl -X GET http://localhost:8080/constellation-backend/v1/payments/3
 
-Payment information is [cardNo=1234567890123456, name=abc, expMo=1, expYe=2023, ccv=666, userId=1]
+Payment information is [cardNo=1234567890123456, name=abc, expMo=1, expYe=2023, ccv=666, userId=3]
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 123456789012345, "name" : "cba", "expMo" : 3, "expYe" : 2030, "ccv" : 6666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 123456789012345, "name" : "cba", "expMo" : 3, "expYe" : 2030, "ccv" : 6666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Success
 
-curl -X DELETE http://localhost:8080/constellation-backend/v1/payments/1
+curl -X DELETE http://localhost:8080/constellation-backend/v1/payments/3
 
 Success
 
 --------------------------
+README! first run
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2024, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
+then the test case:
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 123, "name" : "abc", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2024, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
+
+Payment method already exists
+
+README! first run
+curl -X DELETE http://localhost:8080/constellation-backend/v1/payments/3
+then the test cases:
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 123, "name" : "abc", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 Card Number has to be 15 or 16 digits
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 12345678901234567, "name" : "abc", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 12345678901234567, "name" : "abc", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 Card Number has to be 15 or 16 digits
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : " ", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : " ", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 Enter a valid cardholder name
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments 
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments 
 
 Enter a valid cardholder name
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 0, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments 
+
+Enter a valid cardholder name
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 0, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 Expiry Month has to be between 1 and 12
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 13, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 13, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 Expiry Month has to be between 1 and 12
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2022, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2022, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 Expiry Year has to be between 2023 and 2099
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2100, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2100, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 Expiry Year has to be between 2023 and 2099
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 66 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 66 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 CCV has to be 3 or 4 digits
 
-curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 66666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 66666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
 
 CCV has to be 3 or 4 digits
 
@@ -67,6 +82,9 @@ curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 123456789012345
 User does not exist
 
 --------------------------
+README! first run
+curl -X DELETE http://localhost:8080/constellation-backend/v1/payments/3
+then the test cases:
 
 curl -X GET http://localhost:8080/constellation-backend/v1/payments/4
 
@@ -77,52 +95,74 @@ curl -X GET http://localhost:8080/constellation-backend/v1/payments/3
 No payment information for this user
 
 --------------------------
+README! first run
+curl -X DELETE http://localhost:8080/constellation-backend/v1/payments/3
+then the test case:
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 123, "name" : "abc", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 123456789012345, "name" : "cba", "expMo" : 3, "expYe" : 2030, "ccv" : 6666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
+
+No payment information for this user
+
+README! first run
+curl -X POST -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2024, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments
+then the test cases:
+
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 123, "name" : "abc", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Card Number has to be 15 or 16 digits
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 12345678901234567, "name" : "abc", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 12345678901234567, "name" : "abc", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Card Number has to be 15 or 16 digits
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : " ", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : " ", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Enter a valid cardholder name
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments 
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "", "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Enter a valid cardholder name
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 0, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "expMo" : 12, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
+
+Enter a valid cardholder name
+
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 0, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Expiry Month has to be between 1 and 12
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 13, "expYe" : 2033, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 13, "expYe" : 2033, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Expiry Month has to be between 1 and 12
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2022, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2022, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Expiry Year has to be between 2023 and 2099
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2100, "ccv" : 666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2100, "ccv" : 666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 Expiry Year has to be between 2023 and 2099
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 66 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 66 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 CCV has to be 3 or 4 digits
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 66666 , "userId" : 1}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 66666 , "userId" : 3}' http://localhost:8080/constellation-backend/v1/payments/3
 
 CCV has to be 3 or 4 digits
 
-curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 666 , "userId" : 4}' http://localhost:8080/constellation-backend/v1/payments
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 1234567890123456, "name" : "abc", "expMo" : 1, "expYe" : 2023, "ccv" : 666 , "userId" : 4}' http://localhost:8080/constellation-backend/v1/payments/4
 
 User does not exist
 
+curl -X PUT -H "Content-Type: application/json" -d '{"cardNo" : 123456789012345, "name" : "cba", "expMo" : 3, "expYe" : 2030, "ccv" : 6666 , "userId" : 2}' http://localhost:8080/constellation-backend/v1/payments/3
+
+User ID is wrong
+
 --------------------------
+README! first run
+curl -X DELETE http://localhost:8080/constellation-backend/v1/payments/3
+then the test cases:
 
 curl -X DELETE http://localhost:8080/constellation-backend/v1/payments/4
 

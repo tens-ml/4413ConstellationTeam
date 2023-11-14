@@ -123,6 +123,24 @@ public class CatalogService implements ICatalogService {
         return updatedItem;
     }
 
+    /* set availability of an item to false */
+    public boolean setItemUnavailable(int itemId) {
+        String sql = "UPDATE catalog SET available = 0 WHERE id = ?";
+        try (Connection conn = SQLiteConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, itemId);
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows == 0) {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+
     @Override
     public boolean deleteItem(int itemId) {
         return false;
