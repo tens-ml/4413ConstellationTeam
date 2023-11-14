@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		const searchQuery = getQueryParam('itemID');
         e.preventDefault(); // Prevent default form submission
         
+        
+        fetch(`/constellation-backend/v1/user/dutch_pay/${searchQuery}`)
+            .then(response => {
+                if (response.ok) {
+
+                } else {
+                    response.text().then(text => alert(text));
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        
         //go to auction ended page
         window.location.href = `/constellation-backend/auctionEnded?itemID=${searchQuery}`
   });    

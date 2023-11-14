@@ -156,6 +156,17 @@ public class Controller {
         return ((User) request.getSession().getAttribute("user")).getId();
     }
     
+    @GET
+    @Path("/user/dutch_pay/{itemId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response DutchPayment(@PathParam("itemId") int itemId) {
+    	Bid bid = bidService.getBidbyItemId(itemId);
+    	bid.setUserId(getUserId());
+    	bidService.updateBid(bid);
+    	
+    	return Response.ok().build();
+    }
+    
     @PUT
     @Path("/user/auction_ended/pay")
     @Consumes(MediaType.APPLICATION_JSON)
