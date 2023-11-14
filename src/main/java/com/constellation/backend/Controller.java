@@ -132,7 +132,7 @@ public class Controller {
     	bidResponse.setShippingPrice(item.getShippingPrice());
     	bidResponse.setHighestPrice(highestBid.getPrice());
     	bidResponse.setHighestBidder(highestBid.getUserId());
-    	bidResponse.setExpeditedShippingPrice(14);
+    	//bidResponse.setExpeditedShippingPrice(0);
 
     	return Response.ok(bidResponse).build();
     }
@@ -163,8 +163,8 @@ public class Controller {
     public Response AuctionEndedPayNow(BidRequest newbid) throws NewBidException, WrongUserException {
     	Bid bid = bidService.getBidbyItemId(newbid.getItemId());
     	HttpSession session = request.getSession() ;
-    	session.setAttribute("userId", 0);
-    	if (bid.getUserId() == (Integer) session.getAttribute("userId")  ) {
+    	
+    	if (bid.getUserId() == getUserId()  ) {
     		bidService.updateBid(bid);
 
     		//price with shipping
