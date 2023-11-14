@@ -1,0 +1,429 @@
+{
+	"info": {
+		"_postman_id": "691bdc62-2663-4a2e-b1e4-bed65a21e38c",
+		"name": "Constellation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30227180"
+	},
+	"item": [
+		{
+			"name": "Failed Login 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<!DOCTYPE html>\r",
+							"<html lang=\"en\">\r",
+							"    <head>\r",
+							"        <meta charset=\"UTF-8\">\r",
+							"        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r",
+							"        <title>Constellation Auction House - Login</title>\r",
+							"        <link rel=\"stylesheet\" type=\"text/css\" href=\"styles/global.css\">\r",
+							"        <style>\r",
+							"            .login-form {\r",
+							"                background-color: #ffffff;\r",
+							"                padding: 20px;\r",
+							"                border-radius: 5px;\r",
+							"                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\r",
+							"            }\r",
+							"            .form-group {\r",
+							"                margin-bottom: 15px;\r",
+							"            }\r",
+							"            .form-group label {\r",
+							"                display: block;\r",
+							"                margin-bottom: 5px;\r",
+							"                color: black;\r",
+							"            }\r",
+							"            .form-group input {\r",
+							"                width: 100%;\r",
+							"                padding: 8px;\r",
+							"                box-sizing: border-box;\r",
+							"            }\r",
+							"        </style>\r",
+							"    </head>\r",
+							"    <body>\r",
+							"        <header>\r",
+							"            <h1>Constellation Auction House Login</h1>\r",
+							"        </header>\r",
+							"        <!-- Main Content: Login Form -->\r",
+							"        <main>\r",
+							"            <div class=\"login-form\">\r",
+							"                <form>\r",
+							"                    <div class=\"form-group\">\r",
+							"                        <label for=\"username\">Username:</label>\r",
+							"                        <input type=\"text\" id=\"username\" name=\"username\" required>\r",
+							"                    </div>\r",
+							"                    <div class=\"form-group\">\r",
+							"                        <label for=\"password\">Password:</label>\r",
+							"                        <input type=\"password\" id=\"password\" name=\"password\" required>\r",
+							"                    </div>\r",
+							"                    <button class=\"btn\" id=\"login-btn\" type=\"submit\">Login</button>\r",
+							"                    <button class=\"btn\" type=\"button\" id=\"redirect-to-signup\" style=\"margin-top: 8px;\">Sign up</button>\r",
+							"                </form>\r",
+							"            </div>\r",
+							"        </main>\r",
+							"        <script src=\"scripts/login.js\"></script>\r",
+							"    </body>\r",
+							"</html>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return { response: pm.response.text() };\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"john\",\r\n    \"password\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Failed Login 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<!DOCTYPE html>\r",
+							"<html lang=\"en\">\r",
+							"    <head>\r",
+							"        <meta charset=\"UTF-8\">\r",
+							"        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r",
+							"        <title>Constellation Auction House - Login</title>\r",
+							"        <link rel=\"stylesheet\" type=\"text/css\" href=\"styles/global.css\">\r",
+							"        <style>\r",
+							"            .login-form {\r",
+							"                background-color: #ffffff;\r",
+							"                padding: 20px;\r",
+							"                border-radius: 5px;\r",
+							"                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\r",
+							"            }\r",
+							"            .form-group {\r",
+							"                margin-bottom: 15px;\r",
+							"            }\r",
+							"            .form-group label {\r",
+							"                display: block;\r",
+							"                margin-bottom: 5px;\r",
+							"                color: black;\r",
+							"            }\r",
+							"            .form-group input {\r",
+							"                width: 100%;\r",
+							"                padding: 8px;\r",
+							"                box-sizing: border-box;\r",
+							"            }\r",
+							"        </style>\r",
+							"    </head>\r",
+							"    <body>\r",
+							"        <header>\r",
+							"            <h1>Constellation Auction House Login</h1>\r",
+							"        </header>\r",
+							"        <!-- Main Content: Login Form -->\r",
+							"        <main>\r",
+							"            <div class=\"login-form\">\r",
+							"                <form>\r",
+							"                    <div class=\"form-group\">\r",
+							"                        <label for=\"username\">Username:</label>\r",
+							"                        <input type=\"text\" id=\"username\" name=\"username\" required>\r",
+							"                    </div>\r",
+							"                    <div class=\"form-group\">\r",
+							"                        <label for=\"password\">Password:</label>\r",
+							"                        <input type=\"password\" id=\"password\" name=\"password\" required>\r",
+							"                    </div>\r",
+							"                    <button class=\"btn\" id=\"login-btn\" type=\"submit\">Login</button>\r",
+							"                    <button class=\"btn\" type=\"button\" id=\"redirect-to-signup\" style=\"margin-top: 8px;\">Sign up</button>\r",
+							"                </form>\r",
+							"            </div>\r",
+							"        </main>\r",
+							"        <script src=\"scripts/login.js\"></script>\r",
+							"    </body>\r",
+							"</html>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return { response: pm.response.text() };\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"USERNAME THAT DOESNT EXIST\",\r\n    \"password\":\"RANDOM PASSWORD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/login"
+			},
+			"response": []
+		},
+		{
+			"name": "New Missing INFO Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"Mario\",\r\n\r\n    \"streetAddress\":\"###\",\r\n    \"streetNumber\":\"#\",\r\n    \"postalCode\":\"X#X #X#\",\r\n    \"city\":\"XXXX\",\r\n    \"country\":\"XXXXXX\",\r\n    \"username\":\"mario1\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "New Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"Mario\",\r\n    \"lastName\":\"Doe\",\r\n    \"streetAddress\":\"###\",\r\n    \"streetNumber\":\"#\",\r\n    \"postalCode\":\"X#X #X#\",\r\n    \"city\":\"XXXX\",\r\n    \"country\":\"XXXXXX\",\r\n    \"username\":\"mario\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "Successful Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"john\",\r\n    \"password\":\"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "Catalog Page",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "Catalog Search 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"search-form\":\"coin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "Catalog Search 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"search-form\":\"METAL FAN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "Catalog Search 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"search-form\":\"123145 long search\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "Sell Item 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"itemName\":\"Antique Cup 1856\",\r\n    \"itemDescription\": \"A gold encrusted cup from 1856\",\r\n    \"auctionType\":\"dutch\",\r\n    \"daysToShip\":\"32\",\r\n    \"initialPrice\":\"1000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "Sell Item 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"itemName\":\"Antique Cup 1856\",\r\n    \"itemDescription\": \"A gold encrusted cup from 1856\",\r\n    \"auctionType\":\"dutch\",\r\n    \"daysToShip\":\"32\",\r\n    \"initialPrice\":\"1000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/constellation-backend/catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "Bid Info 1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/constellation-backend/forwardAuction?itemID=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"constellation-backend",
+						"forwardAuction"
+					],
+					"query": [
+						{
+							"key": "itemID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bid Info 2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/constellation-backend/forwardAuction?itemID=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"constellation-backend",
+						"forwardAuction"
+					],
+					"query": [
+						{
+							"key": "itemID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
