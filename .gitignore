@@ -28,5 +28,5 @@ Thumbs.db
 .idea/
 *.iml
 
-*.sqlite
+**/*.sqlite
 **/context.xml
