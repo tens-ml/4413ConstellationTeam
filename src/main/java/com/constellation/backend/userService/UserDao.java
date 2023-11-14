@@ -78,4 +78,23 @@ public class UserDao {
 
 		return false;
 	}
+	
+	public static boolean isUserInDatabase(int userId) {
+		try (Connection connection = SQLiteConnection.connect();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT COUNT(*) FROM Users WHERE id = ?")) {
+			preparedStatement.setInt(1, userId);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					int count = resultSet.getInt(1);
+					return count > 0; // If count is greater than 0, the user exists
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 }
