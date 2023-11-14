@@ -8,10 +8,7 @@ import com.constellation.backend.exceptions.NewBidException;
 import com.constellation.backend.exceptions.SignupFailedException;
 import com.constellation.backend.exceptions.WrongUserException;
 import com.constellation.backend.bidservice.BidService;
-import com.constellation.backend.requests.BidRequest;
-import com.constellation.backend.requests.LoginRequest;
-import com.constellation.backend.requests.SellItemRequest;
-import com.constellation.backend.requests.SignupRequest;
+import com.constellation.backend.requests.*;
 import com.constellation.backend.userService.User;
 import com.constellation.backend.userService.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -63,7 +60,16 @@ public class Controller {
             return Response.ok().build();
         }
     }
-
+    @POST
+    @Path("/user/forgotPassword")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response changePassword(ForgotPasswordRequest forgotPasswordRequest) {
+        if (!userService.changePassword(forgotPasswordRequest.getUsername(), forgotPasswordRequest.getPassword())) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } else {
+            return Response.ok().build();
+        }
+    }
     @GET
     @Path("/catalog")
     @Produces(MediaType.APPLICATION_JSON)

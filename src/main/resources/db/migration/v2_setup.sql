@@ -9,7 +9,7 @@ CREATE TABLE catalog (
     sellerId INTEGER NOT NULL,
     itemName TEXT NOT NULL,
     itemDescription TEXT NOT NULL DEFAULT 'No description given',
-    isDutch BOOLEAN NOT NULL DEFAULT FALSE,
+    isDutch BOOLEAN NOT NULL DEFAULT TRUE,
     daysToShip INTEGER NOT NULL,
     shippingPrice DECIMAL(20,2) NOT NULL DEFAULT 1.00,
     expeditePrice DECIMAL(20,2) NOT NULL DEFAULT 2.00,

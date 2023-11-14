@@ -77,7 +77,7 @@ public class CatalogItem {
     }
 
     public void setDutch(boolean isDutch) {
-        isDutch = this.isDutch;
+        this.isDutch = isDutch;
     }
 
     public int getdaysToShip() {

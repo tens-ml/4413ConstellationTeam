@@ -6,7 +6,7 @@
         <title>Constellation Auction House - Login</title>
         <link rel="stylesheet" type="text/css" href="styles/global.css">
         <style>
-            .login-form {
+            .container {
                 background-color: #ffffff;
                 padding: 20px;
                 border-radius: 5px;
@@ -33,8 +33,8 @@
         </header>
         <!-- Main Content: Login Form -->
         <main>
-            <div class="login-form">
-                <form>
+            <div class="container">
+                <form id="login-form">
                     <div class="form-group">
                         <label for="username">Username:</label>
                         <input type="text" id="username" name="username" required>
@@ -45,6 +45,19 @@
                     </div>
                     <button class="btn" id="login-btn" type="submit">Login</button>
                     <button class="btn" type="button" id="redirect-to-signup" style="margin-top: 8px;">Sign up</button>
+                </form>
+                <button class="btn" id="forgot-password-button" style="margin-top: 8px;">Forgot password</button>
+                <form id="forgot-password-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="fp-username">Username:</label>
+                        <input type="text" id="fp-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fp-password">New Password:</label>
+                        <input type="password" id="fp-password" name="new-password" required>
+                    </div>
+                    <button class="btn" type="submit">Submit</button>
+                    <button class="btn" type="button" id="forgot-password-back" style="margin-top: 8px;">Back</button>
                 </form>
             </div>
         </main>

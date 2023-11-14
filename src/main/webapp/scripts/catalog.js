@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         if (selectedRadio) {
             const selectedItemID = selectedRadio.value;
-            const itemIsDutch = selectedRadio.getAttribute("data-is-dutch");
+            console.log("selectedRadio.getAttribute(\"data-is-dutch\"):" + selectedRadio.getAttribute("data-is-dutch"));
+            const itemIsDutch = (selectedRadio.getAttribute("data-is-dutch") === "true");
             const itemIsAvailable = selectedRadio.getAttribute("data-is-available");
 
             console.log("printing itemIsAvailable: " + itemIsAvailable);
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
             if (!itemIsAvailable) {
                 window.location.href = `/constellation-backend/auctionEnded?itemID=${selectedItemID}`;
-            } else if (itemIsDutch) {
+            } else if (!itemIsDutch) {
                 window.location.href = `/constellation-backend/forwardAuction?itemID=${selectedItemID}`;
             } else {
                 window.location.href = `/constellation-backend/dutchAuction?itemID=${selectedItemID}`;
@@ -72,7 +73,7 @@ const loadItems = (searchFilter = '') => {
                 radioInput.type = "radio";
                 radioInput.name = "itemSelection"; // All radios have the same name to allow only one selection
                 radioInput.value = item.id; // You can set value to item's ID or other identifier
-                radioInput.setAttribute("data-is-dutch", item.isDutch); // Set data attribute to store auction type
+                radioInput.setAttribute("data-is-dutch", item.dutch ? "true" : "false"); // Set data attribute to store auction type
                 radioInput.setAttribute("data-is-available", item.available);
                 // Create a cell for the radio button and append it
                 const radioCell = DOMRow.insertCell(0);
@@ -83,13 +84,13 @@ const loadItems = (searchFilter = '') => {
                 DOMRow.insertCell(2).textContent = item.sellerName;
                 DOMRow.insertCell(3).textContent = item.itemName;
                 DOMRow.insertCell(4).textContent = item.itemDescription;
-                DOMRow.insertCell(5).textContent = item.isDutch ? "Dutch" : "Forward";
+                DOMRow.insertCell(5).textContent = item.dutch ? "Dutch" : "Forward";
                 DOMRow.insertCell(6).textContent = item.daysToShip;
                 DOMRow.insertCell(7).textContent = item.initialPrice;
                 DOMRow.insertCell(8).textContent = (item.highestBid <= item.initialPrice) ? item.initialPrice : item.highestBid
 
                 const auctionEndTime = item.auctionEnd; // Ensure this is a valid Date object or string
-                const timeString = formatAuctionTime(auctionEndTime, item.isDutch);
+                const timeString = formatAuctionTime(auctionEndTime, item.dutch);
                 DOMRow.insertCell(9).textContent = timeString;
 
                 console.log(timeString);

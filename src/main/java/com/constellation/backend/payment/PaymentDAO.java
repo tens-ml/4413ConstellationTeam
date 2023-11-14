@@ -59,7 +59,7 @@ public class PaymentDAO {
 	
 	public Payment read(int userId) {
 		// Use prepared statements
-		String sql = "SELECT cardNo, name, expMo, expYe, ccv FROM payments WHERE userId = ?";
+		String sql = "SELECT cardNumber, name, expMonth, expYear, ccv FROM payments WHERE userId = ?";
 		Payment payment = null;
 		try (Connection conn = SQLiteConnection.connect();
 		PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -72,10 +72,10 @@ public class PaymentDAO {
 					payment = new Payment();
 				//Set the properties of the payment object
 					payment.setUserId(userId);
-					payment.setCardNo(rs.getLong("cardNo"));
+					payment.setCardNo(rs.getLong("cardNumber"));
 					payment.setName(rs.getString("name"));
-					payment.setExpMo(rs.getInt("expMo"));
-					payment.setExpYe(rs.getInt("expYe"));
+					payment.setExpMo(rs.getInt("expMonth"));
+					payment.setExpYe(rs.getInt("expYear"));
 					payment.setCcv(rs.getInt("ccv"));
 				}
 			}
@@ -84,4 +84,23 @@ public class PaymentDAO {
 		}
 		return payment;
 		}
+	
+	public static boolean isPaymentInDatabase(int userId) {
+		try (Connection connection = SQLiteConnection.connect();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT COUNT(*) FROM payments WHERE userId = ?")) {
+			preparedStatement.setInt(1, userId);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					int count = resultSet.getInt(1);
+					return count > 0; // If count is greater than 0, the user exists
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 }
