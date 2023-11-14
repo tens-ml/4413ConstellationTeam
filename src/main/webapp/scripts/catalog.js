@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (selectedRadio) {
             const selectedItemID = selectedRadio.value;
             console.log("selectedRadio.getAttribute(\"data-is-dutch\"):" + selectedRadio.getAttribute("data-is-dutch"));
-            const itemIsDutch = (selectedRadio.getAttribute("data-is-dutch") === "true");
-            const itemIsAvailable = selectedRadio.getAttribute("data-is-available");
+            const itemIsDutch = selectedRadio.getAttribute("data-is-dutch") === "true";
+            const itemIsAvailable = selectedRadio.getAttribute("data-is-available") === "true";
 
             console.log("printing itemIsAvailable: " + itemIsAvailable);
             console.log("printing itemIsDutch: " + itemIsDutch);
@@ -68,13 +68,16 @@ const loadItems = (searchFilter = '') => {
         .then(response => response.json())
         .then(data => {
             data.forEach(item => {
+                const auctionEndTime = item.auctionEnd; // Ensure this is a valid Date object or string
+                const timeString = formatAuctionTime(auctionEndTime, item.dutch);
+
                 const DOMRow = content.insertRow();
                 const radioInput = document.createElement("input");
                 radioInput.type = "radio";
                 radioInput.name = "itemSelection"; // All radios have the same name to allow only one selection
                 radioInput.value = item.id; // You can set value to item's ID or other identifier
                 radioInput.setAttribute("data-is-dutch", item.dutch ? "true" : "false"); // Set data attribute to store auction type
-                radioInput.setAttribute("data-is-available", item.available);
+                radioInput.setAttribute("data-is-available", timeString === "Auction ended" ? "false" : "true");
                 // Create a cell for the radio button and append it
                 const radioCell = DOMRow.insertCell(0);
                 radioCell.classList.add("radio-cell");
@@ -89,12 +92,8 @@ const loadItems = (searchFilter = '') => {
                 DOMRow.insertCell(7).textContent = item.initialPrice;
                 DOMRow.insertCell(8).textContent = (item.highestBid <= item.initialPrice) ? item.initialPrice : item.highestBid
 
-                const auctionEndTime = item.auctionEnd; // Ensure this is a valid Date object or string
-                const timeString = formatAuctionTime(auctionEndTime, item.dutch);
-                DOMRow.insertCell(9).textContent = timeString;
 
-                console.log(timeString);
-                DOMRow.insertCell(10).textContent = timeString !== "Auction ended" ? 'Yes' : 'No';
+                DOMRow.insertCell(9).textContent = timeString;
             });
         })
         .catch(error => {
