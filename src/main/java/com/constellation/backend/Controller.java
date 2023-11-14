@@ -161,8 +161,8 @@ public class Controller {
 
     	Bid bid = bidService.getBidbyItemId(newbid.getItemId());
     	HttpSession session = request.getSession() ;
-    	session.setAttribute("userId", 0);
-    	if (bid.getUserId() == (Integer) session.getAttribute("userId")  ) {
+    	
+    	if (bid.getUserId() == getUserId()  ) {
     		bidService.updateBid(bid);
 
     		//price with shipping
