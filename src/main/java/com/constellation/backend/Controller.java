@@ -160,9 +160,19 @@ public class Controller {
     @Path("/user/dutch_pay/{itemId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response DutchPayment(@PathParam("itemId") int itemId) {
-    	Bid bid = bidService.getBidbyItemId(itemId);
-    	bid.setUserId(getUserId());
-    	bidService.updateBid(bid);
+    	Bid bid = bidService.getHighestBid(itemId);
+    	if (bid == null) {
+            Bid newBid = new Bid();
+            CatalogItem item = catalogService.getItem(itemId);
+            newBid.setUserId(getUserId());
+            newBid.setItemId(item.getId());
+            newBid.setPrice(item.getInitialPrice());
+            bidService.createBid(newBid);
+    	}
+    	else {
+    		bid.setUserId(getUserId());
+    		bidService.updateBid(bid);
+    	}
     	
     	return Response.ok().build();
     }
@@ -172,7 +182,7 @@ public class Controller {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response AuctionEndedPayNow(BidRequest newbid) throws NewBidException, WrongUserException {
-    	Bid bid = bidService.getBidbyItemId(newbid.getItemId());
+    	Bid bid = bidService.getHighestBid(newbid.getItemId());
     	HttpSession session = request.getSession() ;
     	
     	if (bid.getUserId() == getUserId()  ) {
