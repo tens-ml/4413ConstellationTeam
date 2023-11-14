@@ -6,10 +6,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class UserDao {
 	// Inserting a new user
+	public static boolean updatePassword(String username, String password) {
+		try (Connection connection = SQLiteConnection.connect();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("UPDATE Users SET password = ? WHERE username = ?")) {
+			preparedStatement.setString(1, password);
+			preparedStatement.setString(2, username);
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	public static void insertUser(User user, String password) {
 		try (Connection connection = SQLiteConnection.connect();
 				PreparedStatement preparedStatement = connection.prepareStatement(

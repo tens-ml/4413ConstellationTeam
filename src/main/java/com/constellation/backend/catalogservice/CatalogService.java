@@ -62,7 +62,7 @@ public class CatalogService implements ICatalogService {
                 pstmt.setString(1, filterPattern);
                 pstmt.setString(2, filterPattern);
             }
-
+            System.out.println(pstmt.toString());
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -133,7 +133,7 @@ public class CatalogService implements ICatalogService {
         item.setId(rs.getInt("id"));
         item.setItemName(rs.getString("itemName"));
         item.setItemDescription(rs.getString("itemDescription"));
-        item.setDutch(rs.getBoolean("isDutch"));
+        item.setDutch(rs.getInt("isDutch") == 1);
         item.setdaysToShip(rs.getInt("daysToShip"));
         item.setInitialPrice(rs.getDouble("initialPrice"));
         item.setAuctionEnd(rs.getTimestamp("auctionEnd"));

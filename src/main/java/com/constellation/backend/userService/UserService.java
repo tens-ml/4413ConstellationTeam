@@ -5,13 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.constellation.backend.exceptions.SignupFailedException;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-
 public class UserService {
 	/**
 	 * Authenticates the user based on the username and password provided
@@ -42,6 +35,17 @@ public class UserService {
 		return UserDao.getUser(user.getUsername(), password); // get the user with the incremented id
 	}
 
+	/**
+	 * Change the password of the user
+	 *
+	 * @param newPassword the new password
+	 * @return the user with the new password
+	 */
+	public boolean changePassword(String username, String newPassword) {
+		String password = encrypt(newPassword);
+		return UserDao.updatePassword(username, password);
+
+	}
 	/**
 	 * Encrypts input string using getSHA and toHexString
 	 * 
