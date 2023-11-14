@@ -1,3 +1,4 @@
+
 package com.constellation.backend.exceptions;
 
 import jakarta.ws.rs.core.MediaType;
@@ -25,4 +26,5 @@ public class LoginFailedException extends Exception
                 .type(MediaType.TEXT_PLAIN)
                 .build();
     }
+
 }

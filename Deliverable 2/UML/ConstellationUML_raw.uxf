@@ -34,7 +34,7 @@
 - BiddingID: int
 - HighestPrice: double
 - HighestBidderID: int
-- EndTime: String
+- auctionEnd: String
 
 --
 + Bid()
@@ -45,8 +45,8 @@
 + setHighestPrice(highestPrice: double): void
 + getHighestBidderID(): int
 + setHighestBidderID(highestBidderID: int): void
-+ getEndTime(): String
-+ setEndTime(endTime: String): void
++ getauctionEnd(): String
++ setauctionEnd(auctionEnd: String): void
 - formatTimestamp(timestamp: Timestamp): String
 </panel_attributes>
     <additional_attributes/>
@@ -246,7 +246,7 @@ bg=orange</panel_attributes>
       <w>455</w>
       <h>335</h>
     </coordinates>
-    <panel_attributes>com.constellation.backend.AuctionService
+    <panel_attributes>com.constellation.backend.auctionservice
 --
 bg=orange</panel_attributes>
     <additional_attributes/>

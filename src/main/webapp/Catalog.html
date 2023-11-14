@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Constellation Auction House - Catalog</title>
+        <link rel="stylesheet" type="text/css" href="styles/global.css">
+        <link rel="stylesheet" type="text/css" href="styles/catalog.css">
+    </head>
+    <body>
+        <header>
+            Constellation Auction House Catalog
+        </header>
+        <main>
+            <form id="search-form" style="margin: 20px;">
+                <label for="search" style="display: none;"></label>
+                <input type="text" id="search" name="search" placeholder="Search items..." style="width: 60%; padding: 8px; margin-right: 8px;">
+                <button type="submit" class="btn">Search</button>
+            </form>
+            <table>
+                <thead>
+                <tr>
+                    <td>Selected</td>
+                    <th>Item ID</th>
+                    <th>Seller Name</th>
+                    <th>Item Name</th>
+                    <th>Description</th>
+                    <th>Auction Type</th>
+                    <th>Ship Time</th>
+                    <th>Initial Price</th>
+                    <th>Current Bid</th>
+                    <th>Auction End</th>
+                    <th>Available</th>
+                </tr>
+                </thead>
+                <tbody id="content"></tbody>
+            </table>
+            <button id="bid-button" class="btn" style="width: 30%; margin-top: 8px;">Bid</button>
+            <form id="sell-item-form" class="card">
+                <h4>Sell an Item</h4>
+                <div class="form-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemName">Item Name:</label>
+                            <input type="text" id="itemName" name="itemName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDescription">Item Description:</label>
+                            <input type="text" id="itemDescription" name="itemDescription" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="auctionType">Auction Type:</label>
+                            <select id="auctionType" name="auctionType" required>
+                                <option value="dutch">Dutch</option>
+                                <option value="forward">Forward</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="daysToShip">Ship Time (days):</label>
+                            <input type="number" id="daysToShip" name="daysToShip" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-bottom: 16px;">
+                        <div class="form-group">
+                            <label for="initialPrice">Initial Price ($):</label>
+                            <input type="number" id="initialPrice" name="initialPrice" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="auctionEnd">Auction End Time:</label>
+                            <input type="datetime-local" id="auctionEnd" name="auctionEnd" required>
+                        </div>
+                    </div>
+                    <button class="btn" type="submit">Sell it</button>
+                </div>
+            </form>
+        </main>
+        <script src="scripts/catalog.js"></script>
+    </body>
+</html>

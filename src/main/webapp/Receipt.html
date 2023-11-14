@@ -49,10 +49,10 @@
 		<p id="lName">Last Name: </p>
 		<p id="str">Street: </p>
 		<p id="no">Number: </p>
-		<p id="prov">Province: </p>
+		<p id="city">City: </p>
 		<p id="country">Country: </p>
 		<p id="postCode">Postal Code: </p>
-		<p id="netPaid">Total Cost: </p>
+		<p id="netPaid">Total Paid: </p>
 		<p id="itemId">Item ID: </p>
       </td>
       <td style="width: 50%; height: 47px; vertical-align: top;">
@@ -83,7 +83,7 @@
                     document.getElementById('lName').innerText += responseData.lName;
                     document.getElementById('str').innerText += responseData.str;
 					document.getElementById('no').innerText += responseData.no;
-					document.getElementById('prov').innerText += responseData.prov;
+					document.getElementById('city').innerText += responseData.city;
 					document.getElementById('country').innerText += responseData.country;
 					document.getElementById('postCode').innerText += responseData.postCode;
 					document.getElementById('netPaid').innerText += responseData.netPaid;
@@ -115,7 +115,7 @@
 <script>
 		document.querySelector('#redirect-to-home').addEventListener('click', e => {
         e.preventDefault();
-        window.location.href = '/constellation-backend/home';
+        window.location.href = '/constellation-backend/';
     });
 </script>
 
