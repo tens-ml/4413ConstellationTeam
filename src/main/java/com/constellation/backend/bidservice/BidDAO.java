@@ -116,6 +116,33 @@ public class BidDAO {
         }
         return bid;
     }
+    public Bid readByItemId(int itemId) {
+		
+		String sql = "SELECT id, bidTime, itemId, userId, price FROM bids WHERE itemId = ?";
+		Bid bid = null;
+		try (Connection conn = SQLiteConnection.connect();
+		 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			// Set the corresponding parameter
+			pstmt.setInt(1, itemId);
+			// Execute the query and get the result set
+			try (ResultSet rs = pstmt.executeQuery()) {
+				// Check if a result was returned
+				if (rs.next()) {
+					bid = new Bid();
+					// Set the properties of the bid object
+					bid.setId(rs.getInt("id"));
+					bid.setBidTime(rs.getString("bidTime"));
+					bid.setItemId(rs.getInt("itemId"));
+					bid.setUserId(rs.getInt("userId"));
+					bid.setPrice(rs.getInt("price"));
+							
+				}
+			}
+		 	} catch (SQLException e) {
+		 		System.out.println(e.getMessage());
+		 	}
+		return bid;
+	}
     //	CREATE TABLE bids (
 //  id INTEGER PRIMARY KEY AUTOINCREMENT,
 //  bidTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -9,13 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loadPage();
         // Create the request body as per BidRequest class structure
         const requestBody = {
-            itemID: document.getElementById('itemID').innerText,
- 			newBid : 0,
-            itemDescription : " ",
-			highestPrice : final_price,
-			shippingPrice: 0,
-			expeditedShippingPrice : 0,
-			highestBidder : 0
+            itemId: document.getElementById('itemID').innerText,
+ 			price : final_price
         };
 
         fetch('/constellation-backend/v1/user/auction_ended/pay', {
@@ -28,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => {
                 if (response.ok) {
 					loadPage();
-                    window.location.href = '/constellation-backend/Payment'
+                    window.location.href = '/constellation-backend/payment'
                 } else {
                     response.text().then(text => alert(text));
                 }
@@ -47,11 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
 //        redirectToLogin();
 //    });
 });
-
+const getQueryParam = (param) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 function loadPage() {
-    fetch('/constellation-backend/v1/user/auction_bidding/1', {
-        method: 'GET'
-    })
+    const searchQuery = getQueryParam('itemID');
+    fetch(`/constellation-backend/v1/bids/${searchQuery}`)
         .then(response => {
             if (response.ok) {
                 
@@ -77,13 +74,13 @@ function loadPage() {
             document.getElementById('Shipping_Price').innerText = "Shipping Price: $" + shippingPrice;
             document.getElementById('Expedited_Shipping_Price').innerText = "Expedited Shipping Price: $" + expeditedShippingPrice;
             document.getElementById('Highest_Bidder').innerText = "Highest Bidder: " + highestBidder;
-
+			document.getElementById('Winning_Price').innerText = "Winning Price: $" + highestPrice;
             if (document.getElementById('Expedited_Shipping_Radio').checked) {
 				final_price = (highestPrice + expeditedShippingPrice);
-                document.getElementById('Winning_Price').innerText = "Winning Price: $" + (highestPrice + expeditedShippingPrice);
+                //document.getElementById('Winning_Price').innerText = "Winning Price: $" + (highestPrice + expeditedShippingPrice);
             } else {
 				final_price = (highestPrice + shippingPrice);
-                document.getElementById('Winning_Price').innerText = "Winning Price: $" + (highestPrice + shippingPrice);
+                //document.getElementById('Winning_Price').innerText = "Winning Price: $" + (highestPrice + shippingPrice);
             }
             
 

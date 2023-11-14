@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     loadPage();
     
     document.getElementById('BidForm').addEventListener('submit', function(e) {
+		const searchQuery = getQueryParam('itemID');
         e.preventDefault(); // Prevent default form submission
         
         //go to auction ended page
-        window.location.href = '/constellation-backend/AuctionEnded'
+        window.location.href = `/constellation-backend/auctionEnded?itemID=${searchQuery}`
   });    
     
     
@@ -18,11 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
 //        redirectToLogin();
 //    });
 });
-
+const getQueryParam = (param) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 function loadPage() {
-    fetch('/constellation-backend/v1/user/auction_bidding/1', {
-        method: 'GET'
-    })
+	const searchQuery = getQueryParam('itemID');
+    fetch(`/constellation-backend/v1/bids/${searchQuery}`)
         .then(response => {
             if (response.ok) {
                 

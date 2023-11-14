@@ -4,7 +4,9 @@ package com.constellation.backend;
 import com.constellation.backend.catalogservice.CatalogItem;
 import com.constellation.backend.catalogservice.CatalogService;
 import com.constellation.backend.exceptions.LoginFailedException;
+import com.constellation.backend.exceptions.NewBidException;
 import com.constellation.backend.exceptions.SignupFailedException;
+import com.constellation.backend.exceptions.WrongUserException;
 import com.constellation.backend.bidservice.BidService;
 import com.constellation.backend.requests.BidRequest;
 import com.constellation.backend.requests.LoginRequest;
@@ -121,6 +123,7 @@ public class Controller {
     	bidResponse.setShippingPrice(item.getShippingPrice());
     	bidResponse.setHighestPrice(highestBid.getPrice());
     	bidResponse.setHighestBidder(highestBid.getUserId());
+    	bidResponse.setExpeditedShippingPrice(14);
 
     	return Response.ok(bidResponse).build();
     }
@@ -142,6 +145,32 @@ public class Controller {
 
     private int getUserId() {
         return ((User) request.getSession().getAttribute("user")).getId();
+    }
+    
+    @PUT
+    @Path("/user/auction_ended/pay")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response AuctionEndedPayNow(BidRequest newbid) throws NewBidException, WrongUserException {
+
+    	Bid bid = bidService.getBidbyItemId(newbid.getItemId());
+    	HttpSession session = request.getSession() ;
+    	session.setAttribute("userId", 0);
+    	if (bid.getUserId() == (Integer) session.getAttribute("userId")  ) {
+    		bidService.updateBid(bid);
+
+    		//price with shipping
+    		session.setAttribute("price", newbid.getPrice());
+    		session.setAttribute("itemId", bid.getItemId());
+    	
+    		System.out.println("price: "+session.getAttribute("price"));
+    		System.out.println("itemId: "+session.getAttribute("itemId"));
+    	}
+    	else {
+    		throw new WrongUserException();
+    	}
+    	
+    	return Response.ok().build();
     }
 }
 

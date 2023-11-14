@@ -14,4 +14,10 @@ public class BidService {
     public void createBid(Bid bid) {
         bidDAO.create(bid);
     }
+    public void updateBid(Bid bid) {
+    	bidDAO.update(bid.getId(), bid);
+    }
+    public Bid getBidbyItemId(int itemID) {
+    	return bidDAO.readByItemId(itemID);
+    }
 }

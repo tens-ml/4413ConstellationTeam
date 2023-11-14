@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
 	//loads fields
     loadPage();
@@ -28,9 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error:', error));
     });
 });
-
+const getQueryParam = (param) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 function loadPage() {
-    fetch('/constellation-backend/v1/bids/1')
+	const searchQuery = getQueryParam('itemID');
+    fetch(`/constellation-backend/v1/bids/${searchQuery}`)
         .then(response => {
             if (response.ok) {
                 return response.json();
