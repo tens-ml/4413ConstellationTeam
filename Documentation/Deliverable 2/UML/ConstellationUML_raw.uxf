@@ -1,0 +1,1936 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>408</x>
+      <y>774</y>
+      <w>174</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>AuctionService
+--
+- bidDAO: BidDAO
+
+--
++ createBid(bid: Bid): void
++ getAllBids(): List&lt;Bid&gt;
++ getBidById(BiddingID: int): Bid
++ updateBid(BiddingID: int, bid: Bid): void
++ deleteBid(BiddingID: int): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>96</x>
+      <y>510</y>
+      <w>246</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Bid
+--
+- BiddingID: int
+- HighestPrice: double
+- HighestBidderID: int
+- auctionEnd: String
+
+--
++ Bid()
++ Bid(BiddingID: int, HighestPrice: double, HighestBidderID: int)
++ getBiddingID(): int
++ setBiddingID(biddingID: int): void
++ getHighestPrice(): double
++ setHighestPrice(highestPrice: double): void
++ getHighestBidderID(): int
++ setHighestBidderID(highestBidderID: int): void
++ getauctionEnd(): String
++ setauctionEnd(auctionEnd: String): void
+- formatTimestamp(timestamp: Timestamp): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>96</x>
+      <y>774</y>
+      <w>198</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>BidDAO
+--
++ readAll(): List&lt;Bid&gt;
++ create(bid: Bid): void
++ read(BiddingID: int): Bid
++ update(BiddingID: int, bid: Bid): void
++ delete(BiddingID: int): void
+- formatTimestamp(timestamp: Timestamp): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>102</x>
+      <y>942</y>
+      <w>204</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>CatalogItem
+--
+- id: int
+- itemName: String
+- itemDescription: String
+- isDutch: boolean
+- daysToShip: int
+- initialPrice: int
+- auctionEnd: Timestamp
+
+--
++ getId(): int
++ setId(id: int): void
++ getItemName(): String
++ setItemName(itemName: String): void
++ getItemDescription(): String
++ setItemDescription(itemDescription: String): void
++ isDutch(): boolean
++ setDutch(dutch: boolean): void
++ getDaysToShip(): int
++ setDaysToShip(daysToShip: int): void
++ getInitialPrice(): int
++ setInitialPrice(initialPrice: int): void
++ getAuctionEnd(): Timestamp
++ setAuctionEnd(auctionEnd: Timestamp): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>372</x>
+      <y>1098</y>
+      <w>210</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>CatalogService
+--
++ createItem(newItem: CatalogItem): CatalogItem
++ getItems(): List&lt;CatalogItem&gt;
++ getItem(itemId: int): CatalogItem
++ updateItem(updatedItem: CatalogItem): CatalogItem
++ deleteItem(itemId: int): boolean
+- rsToItem(rs: ResultSet): CatalogItem
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>372</x>
+      <y>948</y>
+      <w>210</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;INTERFACE&gt;&gt;
+ICatalogService
+--
++ createItem(item: CatalogItem): CatalogItem
++ getItems(): List&lt;CatalogItem&gt;
++ getItem(itemId: int): CatalogItem
++ updateItem(updatedItem: CatalogItem): CatalogItem
++ deleteItem(itemId: int): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>72</x>
+      <y>900</y>
+      <w>546</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.catalogservice
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1002</x>
+      <y>2592</y>
+      <w>246</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>SQLiteConnection
+--
++ connect(): Connection
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>846</x>
+      <y>2532</y>
+      <w>546</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.db
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>1266</y>
+      <w>234</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>LoginFailedException
+--
+- serialVersionUID: long
+
+--
++ LoginFailedException()
++ LoginFailedException(message: String)
++ toResponse(exception: LoginFailedException): Response
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>1416</y>
+      <w>234</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>SignupFailedException
+--
+- serialVersionUID: long
+
+--
++ SignupFailedException()
++ SignupFailedException(message: String)
++ toResponse(exception: SignupFailedException): Response
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>1350</y>
+      <w>234</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>PaymentException
+--
+- serialVersionUID: long
+
+--
++ PaymentException(message: String)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>72</x>
+      <y>486</y>
+      <w>546</w>
+      <h>402</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.bidservice
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>1698</y>
+      <w>360</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>Payment
+--
+- cardNo: long
+- name: String
+- expMo: int
+- expYe: int
+- ccv: int
+- userName: String
+
+--
++ Payment(cardNo: long, name: String, expMo: int, expYe: int, ccv: int, userName: String)
++ Payment()
++ getUserName(): String
++ setUserName(userName: String): void
++ getCardNo(): long
++ setCardNo(cardNo: long): void
++ getName(): String
++ setName(name: String): void
++ getExpMo(): int
++ setExpMo(expMo: int): void
++ getExpYe(): int
++ setExpYe(expYe: int): void
++ getCcv(): int
++ setCcv(ccv: int): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>2058</y>
+      <w>360</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>PaymentController
+--
+- paymentDAO: PaymentDAO
+
+--
++ addCard(payment: Payment): void throws PaymentException
++ getPayment(userName: String): Payment
++ updatePayment(userName: String, payment: Payment): void throws PaymentException
++ deletePayment(userName: String): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>1950</y>
+      <w>210</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>PaymentDAO
+--
++ addCard(payment: Payment): void
++ delete(userName: String): void
++ update(userName: String, payment: Payment): void
++ read(userName: String): Payment
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>120</x>
+      <y>1662</y>
+      <w>498</w>
+      <h>504</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.payment
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1590</x>
+      <y>1440</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>LoginRequest
+--
+- username: String
+- password: String
+
+--
++ LoginRequest()
++ LoginRequest(username: String, password: String)
++ getUsername(): String
++ setUsername(username: String): void
++ getPassword(): String
++ setPassword(password: String): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1590</x>
+      <y>1572</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>SignupRequest
+--
+- user: User
+- password: String
+
+--
++ SignupRequest()
++ SignupRequest(user: User, password: String)
++ getUser(): User
++ setUser(user: User): void
++ getPassword(): String
++ setPassword(password: String): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>2256</y>
+      <w>210</w>
+      <h>294</h>
+    </coordinates>
+    <panel_attributes>User
+--
+- username: String
+- firstName: String
+- lastName: String
+- streetAddress: String
+- streetNumber: String
+- postalCode: String
+- city: String
+- country: String
+- id: int
+
+--
++ getUsername(): String
++ setUsername(username: String): void
++ getFirstName(): String
++ setFirstName(firstName: String): void
++ getLastName(): String
++ setLastName(lastName: String): void
++ getStreetAddress(): String
++ setStreetAddress(streetAddress: String): void
++ getStreetNumber(): String
++ setStreetNumber(streetNumber: String): void
++ getPostalCode(): String
++ setPostalCode(postalCode: String): void
++ getCity(): String
++ setCity(city: String): void
++ getCountry(): String
++ setCountry(country: String): void
++ getId(): int
++ setId(id: int): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>366</x>
+      <y>2448</y>
+      <w>240</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>UserDao
+--
++ insertUser(user: User, password: String): void
++ getUser(username: String, password: String): User
++ isUserInDatabase(username: String): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>366</x>
+      <y>2268</y>
+      <w>240</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>UserService
+--
++ authenticateUser(username: String, password: String): User
++ createUser(user: User, password: String): User
+- encrypt(input: String): String
+- getSHA(input: String): byte[]
+- toHexString(hash: byte[]): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>90</x>
+      <y>2208</y>
+      <w>534</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.userService
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>474</x>
+      <y>2340</y>
+      <w>24</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+1
+
+
+
+
+
+
+1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>960</x>
+      <y>1122</y>
+      <w>324</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>Controller
+--
+- request: HttpServletRequest
+- userService: UserService
+- catalogService: CatalogService
+- bidService: BidService
+- paymentService: PaymentService
+
+--
++ login(loginRequest: LoginRequest): Response
++ signup(signupRequest: SignupRequest): Response
++ changePassword(forgotPasswordRequest: ForgotPasswordRequest): Response
++ getCatalogItems(filter: String): Response
++ createCatalogItem(sellItemRequest: SellItemRequest): Response
++ convertToSqlTimestamp(localDateTimeString: String): Timestamp
++ getBiddingInfo(itemId: int): Response
++ createBid(bidRequest: BidRequest): Response
++ getUserId(): int
++ AuctionEndedPayNow(newbid: BidRequest): Response
++ addCard(payment: Payment): String
++ getPayment(userId: int): String
++ updatePayment(userId: int, payment: Payment): String
++ deletePayment(userId: int): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>2442</y>
+      <w>96</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Database Connection
+</panel_attributes>
+    <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>2292</y>
+      <w>66</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>2472</y>
+      <w>66</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1392</x>
+      <y>1500</y>
+      <w>210</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Login Request
+</panel_attributes>
+    <additional_attributes>330.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1398</x>
+      <y>1626</y>
+      <w>204</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Signup Request
+</panel_attributes>
+    <additional_attributes>320.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>2274</y>
+      <w>114</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=User Service
+</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>2886</y>
+      <w>114</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;database&gt;&gt;
+payments
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1116</x>
+      <y>2886</y>
+      <w>114</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;database&gt;&gt;
+users
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1242</x>
+      <y>2886</y>
+      <w>114</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;database&gt;&gt;
+catalog</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>864</x>
+      <y>2886</y>
+      <w>114</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;database&gt;&gt;
+bids</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>852</x>
+      <y>2814</y>
+      <w>546</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>SQLite Database
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1290</x>
+      <y>2760</y>
+      <w>54</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=data table
+</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1164</x>
+      <y>2760</y>
+      <w>54</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=data table
+</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1032</x>
+      <y>2760</y>
+      <w>54</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=data table
+</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>918</x>
+      <y>2760</y>
+      <w>54</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=data table
+</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>918</x>
+      <y>2694</y>
+      <w>210</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;110.0;330.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1032</x>
+      <y>2694</y>
+      <w>96</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;110.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>2694</y>
+      <w>72</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>100.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>2694</y>
+      <w>192</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>300.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>456</x>
+      <y>1926</y>
+      <w>36</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>10.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>354</x>
+      <y>1926</y>
+      <w>72</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>10.0;90.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>354</x>
+      <y>1998</y>
+      <w>54</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2= 1</panel_attributes>
+    <additional_attributes>70.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>2058</y>
+      <w>210</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Payment Service
+</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>60</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>AuctionEnded.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>90</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>DutchAuctionBidding.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>120</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>ForwardAuctionBidding.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>150</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>Login.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>180</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>MainPage.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>210</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>Payment.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>240</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>Receipt.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>270</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>SignUp.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>150</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>login.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>210</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>payment.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>270</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>signup.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1236</x>
+      <y>54</y>
+      <w>24</w>
+      <h>954</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>20.0;1570.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>270</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>210</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>150</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>264</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>204</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>144</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>942</x>
+      <y>1092</y>
+      <w>360</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Controller
+--
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>54</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>60</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>auctionEnded.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>60</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>84</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>90</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>dutchAuctionBidding.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>90</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>114</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>120</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>forwardAuctionBidding.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>120</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>180</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>main.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>180</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>174</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>678</x>
+      <y>300</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>Catalog.html</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>300</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>catalog.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>954</x>
+      <y>240</y>
+      <w>132</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>receipt.js</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>234</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>240</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>576</x>
+      <y>0</y>
+      <w>762</w>
+      <h>426</h>
+    </coordinates>
+    <panel_attributes>View
+--
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>1494</y>
+      <w>234</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>WrongUserException
+--
+- serialVersionUID: long
+
+--
++ WrongUserException()
++ WrongUserException(message: String)
++ toResponse(exception: WrongUserException): Response
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>1572</y>
+      <w>234</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>NewBidException
+--
+- serialVersionUID: long
+
+--
++ NewBidException()
++ NewBidException(message: String)
++ toResponse(exception: NewBidException): Response
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>300</x>
+      <y>1236</y>
+      <w>312</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.exceptions
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1590</x>
+      <y>1164</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>BidRequest
+--
+- itemId: int
+- price: double
+
+--
++ BidRequest()
++ BidRequest(itemId: int, price: double)
++ getItemId(): int
++ getPrice(): double
++ setItemId(itemId: int): void
++ setPrice(price: double): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1548</x>
+      <y>1290</y>
+      <w>294</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>SellItemRequest
+--
+- itemName: String
+- itemDescription: String
+- auctionType: String
+- daysToShip: int
+- initialPrice: int
+- auctionEnd: String
+
+--
++ SellItemRequest()
++ SellItemRequest(itemName: String, itemDescription: String, 
+auctionType: String, daysToShip: int, initialPrice: int, auctionEnd: String)
++ getItemName(): String
++ getItemDescription(): String
++ setAuctionType(auctionType: String): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1392</x>
+      <y>1194</y>
+      <w>210</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Bid On Item  Request
+</panel_attributes>
+    <additional_attributes>330.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1392</x>
+      <y>1344</y>
+      <w>168</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Sell Item Request
+</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>336</x>
+      <y>642</y>
+      <w>126</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>190.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>816</y>
+      <w>132</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2= 1</panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>234</x>
+      <y>684</y>
+      <w>36</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>804</y>
+      <w>192</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Auction Service
+</panel_attributes>
+    <additional_attributes>10.0;20.0;300.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1584</x>
+      <y>600</y>
+      <w>258</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>BidResponse
+--
+- itemID: int
+- newBid: int
+- itemDescription: String
+- highestPrice: double
+- highestBidder: int
+- shippingPrice: double
+- expeditedShippingPrice: double
+
+--
++ BidResponse()
++ BidResponse(itemID: int, newBid: int)
++ getItemID(): int
++ setItemID(itemID: int): void
++ getNewBid(): int
++ setNewBid(newBid: int): void
++ getItemDescription(): String
++ setItemDescription(itemDescription: String): void
++ getHighestPrice(): double
++ setHighestPrice(HighestPrice: double): void
++ getHighestBidder(): int
++ setHighestBidder(HighestBidder: int): void
++ getShippingPrice(): double
++ setShippingPrice(ShippingPrice: double): void
++ getExpeditedShippingPrice(): double
++ setExpeditedShippingPrice(ExpeditedShippingPrice: double): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1452</x>
+      <y>564</y>
+      <w>396</w>
+      <h>336</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.response
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>468</x>
+      <y>1020</y>
+      <w>18</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>978</y>
+      <w>84</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>1128</y>
+      <w>84</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+users</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>606</x>
+      <y>1440</y>
+      <w>156</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Exception
+</panel_attributes>
+    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>1128</y>
+      <w>192</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Catalog Service
+</panel_attributes>
+    <additional_attributes>10.0;20.0;300.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1386</x>
+      <y>1086</y>
+      <w>216</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Forgot Password Request
+</panel_attributes>
+    <additional_attributes>340.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1236</x>
+      <y>996</y>
+      <w>96</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=frontend connection
+</panel_attributes>
+    <additional_attributes>20.0;20.0;20.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1590</x>
+      <y>1032</y>
+      <w>252</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>ForgotPasswordRequest
+--
+- username: String
+- password: String
+
+--
++ ForgotPasswordRequest()
++ ForgotPasswordRequest(username: String, password: String)
++ getUsername(): String
++ setUsername(username: String): void
++ getPassword(): String
++ setPassword(password: String): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1452</x>
+      <y>924</y>
+      <w>408</w>
+      <h>798</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend.requests
+--
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>432</y>
+      <w>1920</w>
+      <h>2550</h>
+    </coordinates>
+    <panel_attributes>com.constellation.backend (Model)
+--
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1392</x>
+      <y>744</y>
+      <w>204</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=Bid Response</panel_attributes>
+    <additional_attributes>320.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1278</x>
+      <y>1146</y>
+      <w>84</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=request form
+</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1344</x>
+      <y>744</y>
+      <w>66</w>
+      <h>426</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;690.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1344</x>
+      <y>1098</y>
+      <w>54</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;100.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1344</x>
+      <y>1152</y>
+      <w>60</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1344</x>
+      <y>1152</y>
+      <w>66</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1344</x>
+      <y>1152</y>
+      <w>66</w>
+      <h>366</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;590.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1344</x>
+      <y>1152</y>
+      <w>72</w>
+      <h>492</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;800.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>1134</y>
+      <w>108</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=backend connection
+</panel_attributes>
+    <additional_attributes>20.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>810</y>
+      <w>150</w>
+      <h>348</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>230.0;560.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1212</x>
+      <y>1002</y>
+      <w>36</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=-()
+m2=data
+</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>1134</y>
+      <w>144</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>220.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>744</x>
+      <y>1140</y>
+      <w>156</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>240.0;10.0;10.0;520.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>1140</y>
+      <w>204</w>
+      <h>936</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>320.0;10.0;10.0;1540.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>1140</y>
+      <w>204</w>
+      <h>1152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>320.0;10.0;10.0;1900.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>828</y>
+      <w>192</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=database
+</panel_attributes>
+    <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>1152</y>
+      <w>192</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=database
+</panel_attributes>
+    <additional_attributes>290.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>2106</y>
+      <w>210</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=database
+</panel_attributes>
+    <additional_attributes>320.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>2316</y>
+      <w>126</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=database
+</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>708</x>
+      <y>2322</y>
+      <w>414</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;670.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>2112</y>
+      <w>432</w>
+      <h>348</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;700.0;560.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>1158</y>
+      <w>378</w>
+      <h>1302</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;610.0;2150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>834</y>
+      <w>378</w>
+      <h>1626</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;610.0;2690.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1104</x>
+      <y>2646</y>
+      <w>42</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=query
+</panel_attributes>
+    <additional_attributes>20.0;80.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>300</y>
+      <w>168</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+redirect</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>294</y>
+      <w>162</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-
+embedded script</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1200</x>
+      <y>420</y>
+      <w>84</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=)-
+m1=data acquisition
+</panel_attributes>
+    <additional_attributes>20.0;100.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1206</x>
+      <y>480</y>
+      <w>24</w>
+      <h>534</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;870.0</additional_attributes>
+  </element>
+</diagram>
