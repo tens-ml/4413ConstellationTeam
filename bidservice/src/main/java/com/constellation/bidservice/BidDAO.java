@@ -1,4 +1,4 @@
-package com.constellation.backend.bidservice;
+package com.constellation.bidservice;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.constellation.backend.db.SQLiteConnection;
+import com.constellation.db.SQLiteConnection;
 
 public class BidDAO {
 

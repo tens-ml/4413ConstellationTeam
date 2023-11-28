@@ -1,4 +1,4 @@
-package com.constellation.backend.bidservice;
+package com.constellation.bidservice;
 
 public class BidService {
     private final BidDAO bidDAO = new BidDAO();

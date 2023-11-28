@@ -1,4 +1,4 @@
-package com.constellation.backend.bidservice;
+package com.constellation.bidservice;
 
 
 import java.sql.Timestamp;
