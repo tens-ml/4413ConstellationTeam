@@ -13,7 +13,7 @@ export default function Home() {
 
   const { user } = useSession();
   if (user) router.push("/catalog");
-
+  console.log(user);
   return (
     <Shell>
       <Paper width="600px" className="mt-32">
