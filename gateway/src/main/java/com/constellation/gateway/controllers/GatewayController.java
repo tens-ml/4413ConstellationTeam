@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GatewayController {
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String gateway() {
-        return "Hello from Gateway";
+        return "world";
     }
 }
