@@ -11,6 +11,7 @@ const credentialProvider = CredentialsProvider({
   },
 
   async authorize(credentials, req) {
+    console.log("fetching: ", `${process.env.GATEWAY_URL}/users/login`);
     const res = await fetch(`${process.env.GATEWAY_URL}/users/login`, {
       method: "POST",
       body: JSON.stringify(credentials),
@@ -18,6 +19,7 @@ const credentialProvider = CredentialsProvider({
     });
 
     if (res.ok) {
+      console.log("fetch was okay");
       return { name: "danny" };
     }
 
