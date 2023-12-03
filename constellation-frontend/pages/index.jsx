@@ -11,11 +11,9 @@ export default function Home({ data }) {
     router.push("/forgot-password");
   };
 
-  const session = useSession();
+  const { data: session, status } = useSession();
   const user = session?.user;
-  console.log("session:", session);
-  //if (user) router.push("/catalog");
-  if (user) console.log("authed");
+  if (status === "authenticated") router.push("/catalog");
   return (
     <Shell>
       <Paper width="600px" className="mt-32">
