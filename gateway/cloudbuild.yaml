@@ -1,4 +1,5 @@
 steps:
+<<<<<<< HEAD
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/cons-406304/gateway:$COMMIT_SHA', 'gateway']
@@ -13,3 +14,17 @@ options:
   logging: CLOUD_LOGGING_ONLY
 images:
   - gcr.io/cons-406304/gateway:$COMMIT_SHA
+=======
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/cons-406304/gateway', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/cons-406304/gateway']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'api-gateway', '--image', 'gcr.io/cons-406304/gateway', '--region', 'us-central1']
+images:
+- gcr.io/cons-406304/gateway
+>>>>>>> 0fd62e0e204462a21f92ca800d9910f0df23a7d2
