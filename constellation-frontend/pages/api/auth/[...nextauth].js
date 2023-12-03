@@ -38,20 +38,6 @@ export const authOptions = {
     }),
     credentialProvider,
   ],
-  session: { jwt: true },
-  callbacks: {
-    async jwt({ token, account }) {
-      // Persist the OAuth access_token and or the user id to the token right after signin
-      if (account) {
-        token.accessToken = account.access_token;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      session.accessToken = token.accessToken;
-      return session;
-    },
-  },
 };
 
 export default NextAuth(authOptions);
