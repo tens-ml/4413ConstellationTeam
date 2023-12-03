@@ -23,7 +23,7 @@ const UserPanel = ({ user = {}, className }) => {
           {user.email}
         </h1>
       </div>
-      <Button className="mt-8" onClick={() => signOut()}>
+      <Button className="mt-8" onClick={() => signOut({ callbackUrl: "/" })}>
         Logout
       </Button>
     </Paper>

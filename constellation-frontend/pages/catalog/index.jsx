@@ -5,9 +5,9 @@ import Paper from "@/components/Paper";
 import Shell from "@/components/Shell";
 import Title from "@/components/Title";
 import UserPanel from "@/components/UserPanel";
-import { getSession } from "next-auth/react";
+import useSearch from "@/lib/useSearch";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 const mockRows = [
   { id: 1, name: "Product 1", price: 100, active: true, type: "dutch" },
@@ -15,7 +15,7 @@ const mockRows = [
   { id: 3, name: "Product 3", price: 300, active: true, type: "dutch" },
 ];
 
-export default function Catalog({ user, mockData = [] }) {
+export default function Catalog({ mockData = [] }) {
   const router = useRouter();
   const headers = ["ID", "Name", "Price"];
   const rows = mockRows
@@ -24,13 +24,14 @@ export default function Catalog({ user, mockData = [] }) {
 
   const data = { headers, rows };
 
-  const [filter, setFilter] = useState("");
-  const handleSearch = () => {
-    router.push({ to: "/catalog", query: { filter } });
-  };
-  useEffect(() => {
-    setFilter(router.query.filter || "");
-  }, [router.query.filter]);
+  const { filter, setFilter, handleSearch } = useSearch();
+
+  const { data: session, status } = useSession();
+  const user = session?.user;
+
+  if (status === "unauthenticated") {
+    router.push("/");
+  }
 
   return (
     <Shell>
@@ -82,22 +83,4 @@ export default function Catalog({ user, mockData = [] }) {
       </div>
     </Shell>
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  const user = session?.user;
-  console.log("session at catalog has : " + JSON.stringify(session));
-  if (!user) {
-    // return {
-    //   redirect: {
-    //     destination: "/",
-    //     permanent: false,
-    //   },
-    // };
-  }
-
-  return {
-    props: { user, mockRows },
-  };
 }
