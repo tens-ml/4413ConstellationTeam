@@ -1,5 +1,4 @@
 steps:
-<<<<<<< HEAD
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/cons-406304/gateway:$COMMIT_SHA', 'gateway']
