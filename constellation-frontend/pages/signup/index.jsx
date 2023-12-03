@@ -13,6 +13,7 @@ const Signup = () => {
         </p>
         <form>
           <Input className="mt-12" placeholder="Username" required />
+          <Input className="mt-12" placeholder="Password" required />
           <Input placeholder="Email" required />
           <Button className="mt-12 w-full">Create Account</Button>
         </form>
