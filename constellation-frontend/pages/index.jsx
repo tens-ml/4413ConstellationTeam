@@ -11,7 +11,9 @@ export default function Home({ data }) {
     router.push("/forgot-password");
   };
 
-  const { user } = useSession();
+  const session = useSession();
+  const user = session?.user;
+  console.log("session:", session);
   //if (user) router.push("/catalog");
   if (user) console.log("authed");
   return (

@@ -11,11 +11,14 @@ const credentialProvider = CredentialsProvider({
   },
 
   async authorize(credentials, req) {
-    const res = await fetch(`${process.env.GATEWAY_URL}/users/login`, {
-      method: "POST",
-      body: JSON.stringify(credentials),
-      headers: { "Content-Type": "application/json" },
-    });
+    // const res = await fetch(`${process.env.GATEWAY_URL}/users/login`, {
+    //   method: "POST",
+    //   body: JSON.stringify(credentials),
+    //   headers: { "Content-Type": "application/json" },
+    // });
+    let res = {
+      ok: true,
+    };
     if (res.ok) {
       console.log("resok");
       return {
