@@ -16,15 +16,15 @@ const credentialProvider = CredentialsProvider({
       body: JSON.stringify(credentials),
       headers: { "Content-Type": "application/json" },
     });
-
     if (res.ok) {
+      console.log("resok");
       return {
         name: "danny",
         email: "danny@dan.com",
         image: "https://www.jea.com/cdn/images/avatar/avatar-alt.svg",
       };
     }
-
+    console.log("didnt get okay");
     return null;
   },
 });
