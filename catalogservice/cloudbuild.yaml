@@ -1,0 +1,15 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/cons-406304/catalog-service:$COMMIT_SHA', 'catalogservice']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/cons-406304/catalog-service:$COMMIT_SHA']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'catalog-service', '--image', 'gcr.io/cons-406304/catalog-service:$COMMIT_SHA', '--region', 'us-central1', '--allow-unauthenticated']
+options:
+  logging: CLOUD_LOGGING_ONLY
+images:
+  - gcr.io/cons-406304/catalog-service:$COMMIT_SHA
