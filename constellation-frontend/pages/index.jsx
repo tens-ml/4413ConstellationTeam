@@ -23,9 +23,14 @@ export default function Home({ data }) {
           <div className="grow flex flex-col justify-center space-y-2">
             <Button onClick={() => router.push("/signup")}>Sign up</Button>
             <Button
-              onClick={() => signIn(undefined, { callbackUrl: "/catalog" })}
+              onClick={() => signIn("github", { callbackUrl: "/catalog" })}
             >
-              Login
+              Login with Github
+            </Button>
+            <Button
+              onClick={() => signIn("Credentials", { callbackUrl: "/catalog" })}
+            >
+              Login with Credentials
             </Button>
             <a
               className="cursor-pointer text-right"
