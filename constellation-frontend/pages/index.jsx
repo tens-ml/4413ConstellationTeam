@@ -44,7 +44,8 @@ export default function Home({ data }) {
 export async function getServerSideProps(context) {
   const req = await getServerSession(context.req, context.res, authOptions);
   if (req) {
-    console.log(req);
+    console.log("request:");
+    console.log(JSON.stringify(req));
     // return {
     //   redirect: {
     //     destination: "/catalog",
