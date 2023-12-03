@@ -12,8 +12,8 @@ export default function Home({ data }) {
   };
 
   const { user } = useSession();
-  if (user) router.push("/catalog");
-
+  //if (user) router.push("/catalog");
+  if (user) console.log("authed");
   return (
     <Shell>
       <Paper width="600px" className="mt-32">

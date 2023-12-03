@@ -30,7 +30,8 @@ export default function Catalog({ mockData = [] }) {
   const user = session?.user;
 
   if (status === "unauthenticated") {
-    router.push("/");
+    console.log("unauthed");
+    //router.push("/");
   }
 
   return (
