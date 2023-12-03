@@ -87,14 +87,14 @@ export default function Catalog({ user, mockData = [] }) {
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   const user = session?.user;
-
+  console.log("session at catalog has : " + JSON.stringify(session));
   if (!user) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
+    // return {
+    //   redirect: {
+    //     destination: "/",
+    //     permanent: false,
+    //   },
+    // };
   }
 
   return {
