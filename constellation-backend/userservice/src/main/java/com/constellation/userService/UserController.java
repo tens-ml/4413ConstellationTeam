@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class UserService {
+public class UserController {
 	/**
 	 * Authenticates the user based on the username and password provided
 	 * 
@@ -26,7 +26,7 @@ public class UserService {
 	 * @return User if created successfully (one doesn't already exist), null otherwise
 	 */
 	public User createUser(User user, String password) {
-		password = UserService.encrypt(password); // encrypt the password using SHA-512 hash encryption
+		password = UserController.encrypt(password); // encrypt the password using SHA-512 hash encryption
 		if (UserDao.isUserInDatabase(user.getUsername())) { // if the user already exists throw an exception declaring
 			return null;
 		} else {
