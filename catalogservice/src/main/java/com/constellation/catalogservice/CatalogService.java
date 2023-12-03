@@ -1,6 +1,6 @@
-package com.constellation.backend.catalogservice;
+package com.constellation.catalogservice;
 
-import com.constellation.backend.db.SQLiteConnection;
+import com.constellation.db.SQLiteConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

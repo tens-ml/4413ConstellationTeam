@@ -1,4 +1,4 @@
-package com.constellation.backend.catalogservice;
+package com.constellation.catalogservice;
 
 import java.util.List;
 
