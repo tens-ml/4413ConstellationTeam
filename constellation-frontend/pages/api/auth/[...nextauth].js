@@ -11,17 +11,14 @@ const credentialProvider = CredentialsProvider({
   },
 
   async authorize(credentials, req) {
-    // const res = await fetch("/your/endpoint", {
-    //   method: "POST",
-    //   body: JSON.stringify(credentials),
-    //   headers: { "Content-Type": "application/json" },
-    // });
-    const res = await Promise.resolve({ ok: true });
-    const user = { name: "John" };
-    // const user = await res.json();
+    const res = await fetch(`${process.env.GATEWAY_URL}/users/login`, {
+      method: "POST",
+      body: JSON.stringify(credentials),
+      headers: { "Content-Type": "application/json" },
+    });
 
-    if (res.ok && user) {
-      return user;
+    if (res.ok) {
+      return { name: "danny" };
     }
 
     return null;
@@ -37,6 +34,20 @@ export const authOptions = {
     }),
     credentialProvider,
   ],
+  session: { jwt: true },
+  callbacks: {
+    async jwt({ token, account }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.accessToken = token.accessToken;
+      return session;
+    },
+  },
 };
 
 export default NextAuth(authOptions);
