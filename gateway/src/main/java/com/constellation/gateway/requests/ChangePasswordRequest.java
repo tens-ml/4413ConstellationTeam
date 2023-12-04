@@ -1,4 +1,4 @@
-package com.constellation.userservice.requests;
+package com.constellation.gateway.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

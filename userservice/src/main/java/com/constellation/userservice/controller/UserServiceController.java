@@ -7,6 +7,7 @@ import com.constellation.userservice.requests.LoginRequest;
 import com.constellation.userservice.requests.SignupRequest;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.core.RepositoryCreationException;
 import org.springframework.http.HttpStatus;
@@ -38,12 +39,12 @@ public class UserServiceController {
         }
     }
 
-    @PutMapping("/")
-    public ResponseEntity<User> update(@RequestBody ChangePasswordRequest changePasswordRequest) {
+    @PutMapping("/{username}")
+    public ResponseEntity<User> update(@PathVariable String username, @RequestBody ChangePasswordRequest changePasswordRequest) {
         String encryptedNewPassword = encrypt(changePasswordRequest.getNewPassword());
 
         // Right now we just use update for "forgot-password" functionality
-        Optional<User> userOpt = userRepository.findByUsername(changePasswordRequest.getUsername());
+        Optional<User> userOpt = userRepository.findByUsername(username);
         if (userOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldnt find user");
         }
@@ -51,6 +52,7 @@ public class UserServiceController {
         User user = userOpt.get();
         user.setPassword(encryptedNewPassword);
         User updatedUser = userRepository.save(user);
+        updatedUser.setPassword(null);
         return ResponseEntity.ok().body(updatedUser);
     }
 

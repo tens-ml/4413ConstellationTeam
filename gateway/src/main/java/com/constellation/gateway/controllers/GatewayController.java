@@ -1,5 +1,6 @@
 package com.constellation.gateway.controllers;
 
+import com.constellation.gateway.requests.ChangePasswordRequest;
 import com.constellation.gateway.requests.LoginRequest;
 import com.constellation.gateway.requests.SignupRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,10 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class GatewayController {
     private final RestTemplate restTemplate = new RestTemplate();
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/users/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> gateway(@RequestBody LoginRequest loginRequest) {
         try {
@@ -35,15 +35,25 @@ public class GatewayController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> signup(@RequestBody SignupRequest signupRequest) {
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(System.getenv("USERSERVICE_URL") + "/", signupRequest, String.class);
-            System.out.println("noerrs");
             return ResponseEntity.ok(response.getBody());
         } catch (Exception e) {
-            System.out.println("errs");
             throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists with this username");
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping(value = "/users/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> updateUser(@PathVariable String username, @RequestBody ChangePasswordRequest changePasswordRequest) {
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(System.getenv("USERSERVICE_URL") + "/" + username, HttpMethod.PUT, new HttpEntity<>(changePasswordRequest), String.class);
+            return ResponseEntity.ok(response.getBody());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find user");
         }
     }
 }
