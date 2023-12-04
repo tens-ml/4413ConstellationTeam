@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import Input from "@/components/Input";
 import Paper from "@/components/Paper";
 import Shell from "@/components/Shell";
 import { useRouter } from "next/router";
@@ -7,27 +8,13 @@ const ForgotPassword = () => {
   const router = useRouter();
   return (
     <Shell>
-      <Paper width="400px" className="mt-32 flex flex-col">
+      <Paper width="400px" className="mt-12 flex flex-col">
         <p className="text-center font-semibold mt-2 font-sans text-3xl text-gray-800">
           Forgot Password
         </p>
         <form>
-          <input
-            className="mt-12 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-            placeholder="Username"
-            required
-          />
-          <input
-            className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-            placeholder="New Password"
-            required
-          />
-          <input
-            className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-transparent"
-            placeholder="Reset Code (given on signup)"
-            required
-            type="number"
-          />
+          <Input className="mt-14" placeholder="Username" required />
+          <Input placeholder="New Password" required />
           <Button className="mt-12 w-full">Reset Password</Button>
         </form>
 

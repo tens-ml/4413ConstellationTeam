@@ -17,7 +17,7 @@ export default function Home({ data }) {
 
   return (
     <Shell>
-      <Paper width="600px" className="mt-32">
+      <Paper width="600px" className="mt-12">
         <img src="/logo.jpg" width={240} height={240} alt="Logo" />
         <div className="grow flex flex-col ml-8">
           <Title className="text-center mt-8">Welcome</Title>

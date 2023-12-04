@@ -1,6 +1,7 @@
 package com.constellation.gateway.controllers;
 
 import com.constellation.gateway.requests.LoginRequest;
+import com.constellation.gateway.requests.SignupRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -9,10 +10,7 @@ import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,11 +21,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class GatewayController {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @PostMapping(value = "/users/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> gateway(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<String> gateway(@RequestBody LoginRequest loginRequest) {
         try {
             ResponseEntity<String> response = restTemplate.postForEntity(System.getenv("USERSERVICE_URL") + "/login", loginRequest, String.class);
             return ResponseEntity.ok(response.getBody());
@@ -36,9 +35,15 @@ public class GatewayController {
         }
     }
 
-    @PostMapping("/")
-    public String postGateway() {
-        System.out.println("pgwy");;
-        return "post";
+    @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> signup(@RequestBody SignupRequest signupRequest) {
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(System.getenv("USERSERVICE_URL") + "/", signupRequest, String.class);
+            System.out.println("noerrs");
+            return ResponseEntity.ok(response.getBody());
+        } catch (Exception e) {
+            System.out.println("errs");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists with this username");
+        }
     }
 }

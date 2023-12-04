@@ -18,13 +18,14 @@ const credentialProvider = CredentialsProvider({
 
     if (res.ok) {
       const data = await res.json();
+      console.log("resok");
       return {
         name: data.username,
         email: data.username + "@something.com",
         image: "https://www.jea.com/cdn/images/avatar/avatar-alt.svg",
       };
     }
-    return null;
+    return null; //a
   },
 });
 

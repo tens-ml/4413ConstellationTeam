@@ -30,7 +30,7 @@ public class User {
     public static User fromSignupRequest(SignupRequest signupRequest, String password) {
         User user = new User();
         user.setUsername(signupRequest.getUsername());
-        user.setPassword(signupRequest.getPassword());
+        user.setPassword(password);
         user.setFirstName(signupRequest.getFirstName());
         user.setLastName(signupRequest.getLastName());
         user.setStreetAddress(signupRequest.getStreetAddress());

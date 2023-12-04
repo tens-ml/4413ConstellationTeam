@@ -31,6 +31,7 @@ public class UserServiceController {
         User user = User.fromSignupRequest(signupRequest, encryptedPassword);
         try {
             User createdUser = userRepository.save(user);
+            createdUser.setPassword(null);
             return ResponseEntity.ok().body(createdUser);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
