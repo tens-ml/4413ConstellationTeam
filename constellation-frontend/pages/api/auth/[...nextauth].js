@@ -18,8 +18,9 @@ const credentialProvider = CredentialsProvider({
 
     if (res.ok) {
       const data = await res.json();
-      console.log("resok");
+      console.log(data);
       return {
+        id: data.id,
         name: data.username,
         email: data.username + "@something.com",
         image: "https://www.jea.com/cdn/images/avatar/avatar-alt.svg",
@@ -37,6 +38,23 @@ export const authOptions = {
     }),
     credentialProvider,
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = parseInt(token.uid);
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
 };
 
 export default NextAuth(authOptions);

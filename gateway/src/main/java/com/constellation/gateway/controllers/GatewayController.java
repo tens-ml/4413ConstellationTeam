@@ -2,6 +2,7 @@ package com.constellation.gateway.controllers;
 
 import com.constellation.gateway.requests.ChangePasswordRequest;
 import com.constellation.gateway.requests.LoginRequest;
+import com.constellation.gateway.requests.SellItemRequest;
 import com.constellation.gateway.requests.SignupRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -56,4 +57,34 @@ public class GatewayController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find user");
         }
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/items")
+    public ResponseEntity<String> getItems(@RequestParam(required = false) String search) {
+        try {
+            String url = System.getenv("CATALOGSERVICE_URL") + "/";
+            if (search != null && !search.trim().isEmpty()) {
+                url += "?search=" + search;
+            }
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+            return ResponseEntity.ok(response.getBody());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find items");
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/items")
+    public ResponseEntity<String> sellItem(@RequestBody SellItemRequest sellItemRequest) {
+        System.out.println(sellItemRequest.getAuctionEnd());
+        try {
+            System.out.println("tries : " + System.getenv("CATALOGSERVICE_URL"));
+            ResponseEntity<String> response = restTemplate.postForEntity(System.getenv("CATALOGSERVICE_URL") + "/" , sellItemRequest, String.class);
+            System.out.println("response : " + response);
+            return ResponseEntity.ok(response.getBody());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Couldn't sell item");
+        }
+    }
+
 }

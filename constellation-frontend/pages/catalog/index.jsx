@@ -8,30 +8,48 @@ import UserPanel from "@/components/UserPanel";
 import useSearch from "@/lib/useSearch";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-
-const mockRows = [
-  { id: 1, name: "Product 1", price: 100, active: true, type: "dutch" },
-  { id: 2, name: "Product 2", price: 200, active: true, type: "dutch" },
-  { id: 3, name: "Product 3", price: 300, active: true, type: "dutch" },
-];
+import { useForm } from "react-hook-form";
+import useSWR from "swr";
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Catalog({ mockData = [] }) {
   const router = useRouter();
-  const headers = ["ID", "Name", "Price"];
-  const rows = mockRows
-    .filter((row) => row.name.toLowerCase().includes(router.query.filter || ""))
-    .map((row) => [row.id, row.name, row.price]);
 
-  const data = { headers, rows };
-
-  const { filter, setFilter, handleSearch } = useSearch();
-
+  // bounce if not authed
   const { data: session, status } = useSession();
   const user = session?.user;
 
   if (status === "unauthenticated") {
     router.push("/");
   }
+
+  // fetch items on page load
+  const { filter, setFilter, handleSearch } = useSearch();
+  const { data, error } = useSWR(
+    () => `${process.env.GATEWAY_URL}/items?search=${filter}`,
+    fetcher
+  );
+
+  // form handling
+  const { register, handleSubmit } = useForm();
+  const handleSellSubmit = (data) => {
+    fetch(`${process.env.GATEWAY_URL}/items`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...data, sellerId: user.id }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error();
+        }
+
+        alert("Item put on sale!");
+        router.push("/");
+      })
+      .catch((error) => {
+        alert("Failed to sell item");
+      });
+  };
 
   return (
     <Shell>
@@ -46,9 +64,6 @@ export default function Catalog({ mockData = [] }) {
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             />
-            <Button className="w-32" onClick={handleSearch}>
-              Search
-            </Button>
           </div>
           <CatalogTable className="mt-4" data={data} />
         </Paper>
@@ -56,24 +71,42 @@ export default function Catalog({ mockData = [] }) {
           <UserPanel user={user} />
           <Paper className="pt-4 grow flex flex-col">
             <Title className="text-xl">Sell Item</Title>
-            <form className="mt-4">
+            <form className="mt-4" onSubmit={handleSubmit(handleSellSubmit)}>
               <div className="flex justify-between space-x-4">
-                <Input className="grow" label="Item Name" required />
-                <Input className="grow" label="Description" required />
+                <Input
+                  className="grow"
+                  label="Item Name"
+                  required
+                  {...register("name")}
+                />
+                <Input
+                  className="grow"
+                  label="Description"
+                  required
+                  {...register("description")}
+                />
               </div>
               <div className="flex justify-between space-x-4 mt-2">
-                <Input className="grow" label="Auction Type" required />
+                <Input
+                  type="checkbox"
+                  className="grow"
+                  label="Dutch (Buy now)"
+                  required
+                  {...register("isDutch")}
+                />
                 <Input
                   className="grow"
                   type="number"
                   label="Start Price"
                   required
+                  {...register("initialPrice")}
                 />
                 <Input
                   className="grow"
                   type="datetime-local"
                   label="End Date"
                   required
+                  {...register("auctionEnd")}
                 />
               </div>
               <Button className="mt-4 w-full">Sell Item</Button>

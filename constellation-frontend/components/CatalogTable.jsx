@@ -24,7 +24,13 @@ const CatalogTable = ({ data, className }) => {
         <thead className="bg-gray-200 border-b">
           <tr>
             <th className="w-64">Select</th>
-            {data?.headers.map((header, index) => (
+            {[
+              "Name",
+              "Description",
+              "Auction Type",
+              "Current Price",
+              "Remaining Time",
+            ].map((header, index) => (
               <th
                 key={index}
                 className="text-center px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider"
@@ -35,7 +41,7 @@ const CatalogTable = ({ data, className }) => {
           </tr>
         </thead>
         <tbody>
-          {data?.rows.map((row, rowIndex) => (
+          {data?.map((row, rowIndex) => (
             <tr
               key={rowIndex}
               className={rowIndex % 2 === 0 ? "bg-white" : "bg-gray-50"}
@@ -47,14 +53,21 @@ const CatalogTable = ({ data, className }) => {
                   name="row-select"
                 />
               </td>
-              {row.map((cell, cellIndex) => (
-                <td
-                  key={cellIndex}
-                  className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700"
-                >
-                  {cell}
-                </td>
-              ))}
+              <td className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                {row.name}
+              </td>
+              <td className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                {row.description}
+              </td>
+              <td className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                {row.isDutch ? "Dutch" : "Forward"}
+              </td>
+              <td className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                need to add this
+              </td>
+              <td className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                need to add this
+              </td>
             </tr>
           ))}
         </tbody>
@@ -65,7 +78,7 @@ const CatalogTable = ({ data, className }) => {
                 Place Bid
               </Button>
             </td>
-            <td colSpan={data?.headers.length}></td>
+            <td colSpan={5}></td>
           </tr>
         </tfoot>
       </table>

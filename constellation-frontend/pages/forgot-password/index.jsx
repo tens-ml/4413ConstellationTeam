@@ -18,6 +18,7 @@ const ForgotPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     fetch(`${process.env.GATEWAY_URL}/users/${form.username}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -35,6 +36,7 @@ const ForgotPassword = () => {
         alert("Failed to update password, user does not exist");
       });
   };
+
   return (
     <Shell>
       <Paper width="400px" className="mt-12 flex flex-col">
