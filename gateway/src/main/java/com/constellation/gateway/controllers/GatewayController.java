@@ -25,12 +25,11 @@ import java.util.Map;
 @RestController
 public class GatewayController {
     private final RestTemplate restTemplate = new RestTemplate();
-    Dotenv dotenv = Dotenv.configure().load();
 
     @PostMapping(value = "/users/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> gateway(@RequestBody LoginRequest loginRequest) {
         try {
-            ResponseEntity<String> response = restTemplate.postForEntity(dotenv.get("USERSERVICE_URL") + "/login", loginRequest, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(System.getenv("USERSERVICE_URL") + "/login", loginRequest, String.class);
             return ResponseEntity.ok(response.getBody());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect");
