@@ -40,6 +40,7 @@ public class UserServiceController {
     @PutMapping("/")
     public ResponseEntity<User> update(@RequestBody ChangePasswordRequest changePasswordRequest) {
         String encryptedNewPassword = encrypt(changePasswordRequest.getNewPassword());
+
         // Right now we just use update for "forgot-password" functionality
         Optional<User> userOpt = userRepository.findByUsername(changePasswordRequest.getUsername());
         if (userOpt.isEmpty()) {
@@ -54,7 +55,6 @@ public class UserServiceController {
 
     @GetMapping("/{id}")
     public User read(@PathVariable int id) {
-        System.out.println("read");
         return userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
@@ -62,10 +62,14 @@ public class UserServiceController {
     public User authenticateUser(@RequestBody LoginRequest loginRequest) {
         String encryptedPassword = encrypt(loginRequest.getPassword());
         Optional<User> userOpt = userRepository.findByUsernameAndPassword(loginRequest.getUsername(), encryptedPassword);
+
         if (userOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username or password is incorrect");
         }
-        return userOpt.get();
+
+        User user = userOpt.get();
+        user.setPassword(null);
+        return user;
     }
 
     private static String encrypt(String input) {
