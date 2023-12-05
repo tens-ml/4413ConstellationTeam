@@ -61,3 +61,5 @@ const PlaceBid = () => {
     </Shell>
   );
 };
+
+export default PlaceBid;
