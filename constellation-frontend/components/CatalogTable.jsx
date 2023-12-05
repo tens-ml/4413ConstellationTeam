@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useState } from "react";
 import Button from "./Button";
 
 function getTimeRemaining(targetDateTime) {
@@ -26,22 +27,36 @@ function getTimeRemaining(targetDateTime) {
 
 const CatalogTable = ({ data, className, isLoading }) => {
   const router = useRouter();
-
+  const [selectedItem, setSelectedItem] = useState(null);
   const handlePlaceBid = () => {
-    // If available and dutch -> place bid -> make unavailable
-    // if not available and dutch -> auction ended page (buy now if available (user id = bid user id), otherwise show sold message)
-    // if available and forward -> place bid
-    // if not available and forward -> auction ended page (buy now if available (user id = bid user id), otherwise show sold message)
-    // forward: every time API is hit we will check if the auction has ended yet and if so, we will update available status.
-    const itemAvailable = true;
-    const itemId = 1;
-    const auctionType = "dutch";
-
-    if (itemAvailable && auctionType === "dutch") {
-      return router.push({ pathname: "/place-bid", query: { id: itemId } });
+    if (!selectedItem) return alert("Please select an item");
+    if (selectedItem.isDutch) {
+      if (selectedItem.highestBid === -1) {
+        return router.push({
+          pathname: "/place-bid",
+          query: { id: selectedItem.id },
+        });
+      } else {
+        return router.push({
+          pathname: "/auction-ended",
+          query: { id: selectedItem.id },
+        });
+      }
+    } else {
+      const timeRemaining = getTimeRemaining(selectedItem.auctionEnd);
+      if (timeRemaining === "Auction ended") {
+        return router.push({
+          pathname: "/auction-ended",
+          query: { id: selectedItem.id },
+        });
+      } else {
+        return router.push({
+          pathname: "/place-bid",
+          query: { id: selectedItem.id },
+        });
+      }
     }
   };
-  console.log(data);
   return (
     <div className={`overflow-x-auto ${className}`}>
       <table className="min-w-full bg-gray-100 shadow-md rounded-lg">
@@ -75,6 +90,7 @@ const CatalogTable = ({ data, className, isLoading }) => {
                   type="radio"
                   className="h-5 w-5 text-gray-600"
                   name="row-select"
+                  onClick={() => setSelectedItem(row)}
                 />
               </td>
               <td className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700">
@@ -87,10 +103,12 @@ const CatalogTable = ({ data, className, isLoading }) => {
                 {row.isDutch ? "Dutch" : "Forward"}
               </td>
               <td className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                $ {row.highestBid.toFixed(2)}
+                $ {row.highestBid === -1 ? row.initialPrice : row.highestBid}
               </td>
               <td className="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                {getTimeRemaining(row.auctionEnd)}
+                {row.isDutch && row.highestBid !== -1
+                  ? "Auction Ended"
+                  : getTimeRemaining(row.auctionEnd)}
               </td>
             </tr>
           ))}
