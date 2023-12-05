@@ -27,7 +27,7 @@ import java.util.Map;
 @RestController
 public class GatewayController {
     private final RestTemplate restTemplate = new RestTemplate();
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @PostMapping(value = "/users/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> gateway(@RequestBody LoginRequest loginRequest) {
         try {
@@ -38,7 +38,7 @@ public class GatewayController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> signup(@RequestBody SignupRequest signupRequest) {
         try {
@@ -49,7 +49,7 @@ public class GatewayController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @PutMapping(value = "/users/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateUser(@PathVariable String username, @RequestBody ChangePasswordRequest changePasswordRequest) {
         try {
@@ -60,7 +60,7 @@ public class GatewayController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @GetMapping("/items")
     public ResponseEntity<String> getItems(@RequestParam(required = false) String search) {
         try {
@@ -79,7 +79,7 @@ public class GatewayController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @PostMapping("/items")
     public ResponseEntity<String> sellItem(@RequestBody SellItemRequest sellItemRequest) {
         System.out.println(sellItemRequest.getAuctionEnd());
