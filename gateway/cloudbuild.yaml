@@ -4,6 +4,9 @@ steps:
     args: ['build', '-t', 'gcr.io/cons-406304/gateway:$COMMIT_SHA', 'gateway']
     env:
       - "USERSERVICE_URL=${_USERSERVICE_URL}"
+      - "CATALOGSERVICE_URL=${_CATALOGSERVICE_URL}"
+      - "BIDSERVICE_URL=${_BIDSERVICE_URL}"
+      - "PAYMENTSERVICE_URL=${_PAYMENTSERVICE_URL}"
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/cons-406304/gateway:$COMMIT_SHA']
@@ -14,6 +17,9 @@ steps:
            'deploy',
            'api-gateway',
            '--set-env-vars=USERSERVICE_URL=${_USERSERVICE_URL}',
+           '--set-env-vars=CATALOGSERVICE_URL=${_CATALOGSERVICE_URL}',
+           '--set-env-vars=BIDSERVICE_URL=${_BIDSERVICE_URL}',
+           '--set-env-vars=PAYMENTSERVICE_URL=${_PAYMENTSERVICE_URL}',
            '--image',
            'gcr.io/cons-406304/gateway:$COMMIT_SHA',
            '--region',

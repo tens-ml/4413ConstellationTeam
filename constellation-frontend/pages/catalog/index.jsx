@@ -25,7 +25,7 @@ export default function Catalog({ mockData = [] }) {
 
   // fetch items on page load
   const { filter, setFilter, handleSearch } = useSearch();
-  const { data, error } = useSWR(
+  const { data, error, isLoading } = useSWR(
     () => `${process.env.GATEWAY_URL}/items?search=${filter}`,
     fetcher
   );
@@ -65,7 +65,7 @@ export default function Catalog({ mockData = [] }) {
               onChange={(e) => setFilter(e.target.value)}
             />
           </div>
-          <CatalogTable className="mt-4" data={data} />
+          <CatalogTable className="mt-4" data={data} isLoading={isLoading} />
         </Paper>
         <div className="flex space-x-4 mt-4">
           <UserPanel user={user} />

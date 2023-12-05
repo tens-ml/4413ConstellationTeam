@@ -4,10 +4,12 @@ import com.constellation.gateway.requests.ChangePasswordRequest;
 import com.constellation.gateway.requests.LoginRequest;
 import com.constellation.gateway.requests.SellItemRequest;
 import com.constellation.gateway.requests.SignupRequest;
+import com.constellation.gateway.responses.EnrichedItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Data;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -67,7 +69,11 @@ public class GatewayController {
                 url += "?search=" + search;
             }
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-            return ResponseEntity.ok(response.getBody());
+
+            JSONArray items = new JSONArray(response.getBody());
+            enrichItems(items);
+
+            return ResponseEntity.ok(items.toString());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find items");
         }
@@ -78,12 +84,21 @@ public class GatewayController {
     public ResponseEntity<String> sellItem(@RequestBody SellItemRequest sellItemRequest) {
         System.out.println(sellItemRequest.getAuctionEnd());
         try {
-            System.out.println("tries : " + System.getenv("CATALOGSERVICE_URL"));
             ResponseEntity<String> response = restTemplate.postForEntity(System.getenv("CATALOGSERVICE_URL") + "/" , sellItemRequest, String.class);
-            System.out.println("response : " + response);
             return ResponseEntity.ok(response.getBody());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Couldn't sell item");
+        }
+    }
+
+    private void enrichItems(JSONArray items) {
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject item = items.getJSONObject(i);
+            try {
+                ResponseEntity<String> bidResponse = restTemplate.getForEntity(System.getenv("BIDSERVICE_URL") + "/highest/" + item.getInt("id"), String.class);
+            } catch (Exception e) {
+                item.put("highestBid", item.get("initialPrice"));
+            }
         }
     }
 
