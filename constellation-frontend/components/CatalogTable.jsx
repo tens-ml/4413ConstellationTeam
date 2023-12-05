@@ -34,12 +34,12 @@ const CatalogTable = ({ data, className, isLoading }) => {
       if (selectedItem.highestBid === -1) {
         return router.push({
           pathname: "/place-bid",
-          query: { id: selectedItem.id },
+          query: { itemId: selectedItem.id },
         });
       } else {
         return router.push({
           pathname: "/auction-ended",
-          query: { id: selectedItem.id },
+          query: { itemId: selectedItem.id },
         });
       }
     } else {
@@ -47,12 +47,12 @@ const CatalogTable = ({ data, className, isLoading }) => {
       if (timeRemaining === "Auction ended") {
         return router.push({
           pathname: "/auction-ended",
-          query: { id: selectedItem.id },
+          query: { itemId: selectedItem.id },
         });
       } else {
         return router.push({
           pathname: "/place-bid",
-          query: { id: selectedItem.id },
+          query: { itemId: selectedItem.id },
         });
       }
     }

@@ -1,9 +1,6 @@
 package com.constellation.gateway.controllers;
 
-import com.constellation.gateway.requests.ChangePasswordRequest;
-import com.constellation.gateway.requests.LoginRequest;
-import com.constellation.gateway.requests.SellItemRequest;
-import com.constellation.gateway.requests.SignupRequest;
+import com.constellation.gateway.requests.*;
 import com.constellation.gateway.responses.EnrichedItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -66,6 +63,20 @@ public class GatewayController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping(value="/items/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getItem(@PathVariable Integer id) {
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(
+                    System.getenv("CATALOGSERVICE_URL") + "/" + id, String.class);
+            JSONObject item = new JSONObject(response.getBody());
+            enrichItem(item);
+            return ResponseEntity.ok(item.toString());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find item");
+        }
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping("/items")
     public ResponseEntity<String> getItems(@RequestParam(required = false) String search) {
         try {
@@ -97,16 +108,33 @@ public class GatewayController {
         }
     }
 
-    private void enrichItems(JSONArray items) {
-        for (int i = 0; i < items.length(); i++) {
-            JSONObject item = items.getJSONObject(i);
-            try {
-                ResponseEntity<String> bidResponse = restTemplate.getForEntity(
-                        System.getenv("BIDSERVICE_URL") + "/highest/" + item.getInt("id"), String.class);
-            } catch (Exception e) {
-                item.put("highestBid", -1);
-            }
+    @CrossOrigin(origins = "*")
+    @PostMapping("/bids")
+    private ResponseEntity<String> placeBid(@RequestBody BidRequest bidRequest) {
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                    System.getenv("BIDSERVICE_URL"), bidRequest, String.class);
+            return ResponseEntity.ok(response.getBody());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Couldn't place bid");
         }
     }
 
+    private void enrichItems(JSONArray items) {
+        for (int i = 0; i < items.length(); i++) {
+            JSONObject item = items.getJSONObject(i);
+            enrichItem(item);
+        }
+    }
+
+    private void enrichItem(JSONObject item) {
+        try {
+            ResponseEntity<String> bidResponse = restTemplate.getForEntity(
+                    System.getenv("BIDSERVICE_URL") + "/highest/" + item.getInt("id"), String.class);
+            item.put("highestBid", new JSONObject(bidResponse.getBody()).getBigDecimal("price"));
+            item.put("highestBidderId", new JSONObject(bidResponse.getBody()).getInt("userId"));
+        } catch (Exception e) {
+            item.put("highestBid", -1);
+        }
+    }
 }

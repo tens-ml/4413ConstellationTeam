@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface BidRepository extends CrudRepository<Bid, Integer> {
-    @Query("SELECT b FROM Bid b WHERE b.item.id = :itemId ORDER BY b.price DESC")
+    @Query("SELECT b FROM Bid b WHERE b.itemId = :itemId ORDER BY b.price DESC")
     List<Bid> findBidsByItemIdOrderByPriceDesc(@Param("itemId") Integer itemId);
 
     default Optional<Bid> findHighestBid(Integer itemId) {

@@ -1,5 +1,6 @@
 package com.constellation.bidservice.model;
 
+import com.constellation.bidservice.requests.BidRequest;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,11 +22,7 @@ public class Bid {
     @Column(name = "price", nullable = false, precision = 20, scale = 2)
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
-    private User user;
+    private Integer userId;
 
-    @ManyToOne
-    @JoinColumn(name = "itemId", nullable = false)
-    private Item item;
+    private Integer itemId;
 }

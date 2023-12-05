@@ -2,48 +2,37 @@ import Button from "@/components/Button";
 import Paper from "@/components/Paper";
 import Shell from "@/components/Shell";
 import Title from "@/components/Title";
-import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import useSWR from "swr";
 
-const mockPurchaseInfo = {
-  name: "test",
-  description: "test",
-  shipCost: 10,
-  bidPrice: 100,
-  highestBidder: 123,
-  expediteCost: 2,
-};
-
-const WinnerView = ({ purchaseInfo = {} }) => {
+const fetcher = (url) => fetch(url).then((res) => res.json());
+const WinnerView = ({ item }) => {
   const [expedite, setExpedite] = useState(false);
-  const router = useRouter();
 
   const totalCost =
-    purchaseInfo.shipCost +
-    purchaseInfo.bidPrice +
-    (expedite ? purchaseInfo.expediteCost : 0);
-
+    item?.highestBid + item.shippingPrice + (expedite ? item.expeditePrice : 0);
   return (
     <>
       <Title className="mb-4">Auction Ended</Title>
       <p className="text-gray-700 font-medium">
-        <b>Item Name:</b> {purchaseInfo.name}
+        <b>Item Name:</b> {item.name}
       </p>
       <p className="text-gray-700 font-medium">
-        <b>Item Description:</b> {purchaseInfo.description}
+        <b>Item Description:</b> {item.description}
       </p>
       <p className="text-gray-700 font-medium">
-        <b>Shipping Cost:</b> {purchaseInfo.shipCost}
+        <b>Shipping Cost:</b> {item.shippingPrice}
       </p>
       <p className="text-gray-700 font-medium">
-        <b>Bid Price:</b> {purchaseInfo.bidPrice}
+        <b>Winning Price:</b> {item.highestBid}
       </p>
       <p className="text-gray-700 font-medium">
-        <b>Highest Bidder:</b> {purchaseInfo.highestBidder}
+        <b>Highest Bidder:</b> {item.highestBidderId}
       </p>
       <p className="text-gray-700 font-medium">
-        <b>Expedite Cost:</b> {purchaseInfo.expediteCost}
+        <b>Expedite Cost:</b> {item.expeditePrice}
       </p>
       <div class="mt-4 flex flex-col items-center ">
         <div className="flex space-x-2">
@@ -60,58 +49,59 @@ const WinnerView = ({ purchaseInfo = {} }) => {
         </div>
       </div>
       <Button className="mt-4">Pay Now (${totalCost})</Button>
-      <Button className="mt-2" onClick={() => router.back()}>
-        Back
-      </Button>
     </>
   );
 };
 
-const LoserView = () => {
+const LoserView = ({ winner }) => {
   return (
     <>
       <Title className="mb-4">Auction Ended</Title>
-      <p>You are not the winner</p>
+      <p>You are not the winner, {} is the winner</p>
     </>
   );
 };
 
-const AuctionEnded = ({ user }) => {
-  const isWinner = true;
+const AuctionEnded = () => {
+  const { data: session } = useSession();
+  const user = session?.user;
+
+  const router = useRouter();
+  const { itemId } = router.query;
+
+  const {
+    data: item,
+    error,
+    isLoading,
+  } = useSWR(
+    () => (itemId ? `${process.env.GATEWAY_URL}/items/${itemId}` : null),
+    fetcher
+  );
+
+  const PageContent = () => {
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+    if (error) {
+      return <p>Failed to load</p>;
+    }
+    if (!item) {
+      return <p>Item not found</p>;
+    }
+    if (user?.id === item.highestBidderId) {
+      return <WinnerView item={item} />;
+    } else {
+      return <LoserView />;
+    }
+  };
 
   return (
     <Shell>
       <Paper width="400px" className="mt-8 flex flex-col">
-        {isWinner ? (
-          <WinnerView purchaseInfo={mockPurchaseInfo} />
-        ) : (
-          <LoserView />
-        )}
+        <PageContent />
       </Paper>
     </Shell>
   );
 };
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  const user = session?.user;
-  const itemId = context.params?.itemId || -1;
-  const winnnerId = -1;
-
-  console.log(itemId);
-
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { user, itemId },
-  };
-}
 
 export default AuctionEnded;

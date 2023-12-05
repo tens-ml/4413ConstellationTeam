@@ -1,12 +1,13 @@
 package com.constellation.bidservice.controllers;
 
+import com.constellation.bidservice.model.Item;
+import com.constellation.bidservice.model.User;
 import com.constellation.bidservice.repository.BidRepository;
 import com.constellation.bidservice.model.Bid;
+import com.constellation.bidservice.requests.BidRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -30,4 +31,23 @@ public class BidServiceController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/")
+    public ResponseEntity<String> placeBid(@RequestBody BidRequest bidRequest) {
+        System.out.println("Placing bid");
+        try {
+            Bid bid = new Bid();
+            bid.setBidTime(bidRequest.getBidTime());
+            bid.setPrice(bidRequest.getPrice());
+            bid.setItemId(bidRequest.getItemId());
+            bid.setUserId(bidRequest.getUserId());
+            bidRepository.save(bid);
+            return ResponseEntity.ok("Bid placed");
+        } catch (Exception e) {
+            System.out.println("Error while placing bid");
+            return ResponseEntity.badRequest().body("Error while placing bid");
+        }
+    }
+
+
 }

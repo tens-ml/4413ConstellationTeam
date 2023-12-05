@@ -11,11 +11,25 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CatalogServiceController {
     @Autowired
     private ItemRepository itemRepository;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Item> getItem(@PathVariable Integer id) {
+        System.out.println("Getting item with id=" + id);
+        try {
+            Optional<Item> item = itemRepository.findById(id);
+            if (item.isEmpty()) throw new Exception();
+            return ResponseEntity.ok(item.get());
+        } catch (Exception e) {
+            System.out.println("Error while getting item");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found", e);
+        }
+    }
 
     @GetMapping(value="/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Item>> getItems(@RequestParam(required = false) String search) {

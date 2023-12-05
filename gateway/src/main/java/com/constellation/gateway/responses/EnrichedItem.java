@@ -15,6 +15,8 @@ public class EnrichedItem {
     private String name;
     private String description;
     private Boolean isDutch;
+    private BigDecimal initialPrice;
     private BigDecimal currentPrice;
     private LocalDateTime auctionEnd;
+    private Integer highestBidderId;
 }
