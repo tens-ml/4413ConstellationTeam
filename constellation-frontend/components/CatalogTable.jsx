@@ -94,7 +94,7 @@ const CatalogTable = ({ data, className, isLoading }) => {
               </td>
             </tr>
           ))}
-          {!isLoading && data.length === 0 && (
+          {!isLoading && data?.length === 0 && (
             <tr>
               <td colSpan={6} className="text-center py-4">
                 No items found
