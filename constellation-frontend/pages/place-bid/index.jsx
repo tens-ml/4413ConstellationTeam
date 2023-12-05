@@ -3,7 +3,6 @@ import Input from "@/components/Input";
 import Paper from "@/components/Paper";
 import Shell from "@/components/Shell";
 import Title from "@/components/Title";
-import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const PlaceBid = () => {
@@ -62,27 +61,3 @@ const PlaceBid = () => {
     </Shell>
   );
 };
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  const user = session?.user;
-  const itemId = context.params?.itemId || -1;
-  const winnnerId = -1;
-
-  console.log(itemId);
-
-  if (!user) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { user, itemId },
-  };
-}
-
-export default PlaceBid;
