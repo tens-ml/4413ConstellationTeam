@@ -25,6 +25,9 @@ export default function Catalog({ mockData = [] }) {
 
   // fetch items on page load
   const { filter, setFilter, handleSearch } = useSearch();
+  console.log(
+    "request: " + `${process.env.GATEWAY_URL}/items?search=${filter}`
+  );
   const { data, error, isLoading } = useSWR(
     () => `${process.env.GATEWAY_URL}/items?search=${filter}`,
     fetcher
