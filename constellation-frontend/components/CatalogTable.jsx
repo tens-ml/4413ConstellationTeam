@@ -101,6 +101,13 @@ const CatalogTable = ({ data, className, isLoading }) => {
               </td>
             </tr>
           )}
+          {isLoading && (
+            <tr>
+              <td colSpan={6} className="text-center py-4">
+                Loading...
+              </td>
+            </tr>
+          )}
         </tbody>
         <tfoot className="bg-gray-200 border-b">
           <tr>

@@ -27,6 +27,7 @@ import java.util.Map;
 @RestController
 public class GatewayController {
     private final RestTemplate restTemplate = new RestTemplate();
+
     @CrossOrigin(origins = "*")
     @PostMapping(value = "/users/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> gateway(@RequestBody LoginRequest loginRequest) {
