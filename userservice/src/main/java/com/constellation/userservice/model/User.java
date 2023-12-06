@@ -24,6 +24,7 @@ public class User {
     private String streetAddress;
     private String postalCode;
     private String city;
+    private String province;
     private String country;
 
     // From method that will take a SignupRequest object and return a User object
@@ -35,6 +36,7 @@ public class User {
         user.setLastName(signupRequest.getLastName());
         user.setStreetAddress(signupRequest.getStreetAddress());
         user.setPostalCode(signupRequest.getPostalCode());
+        user.setProvince(signupRequest.getProvince());
         user.setCity(signupRequest.getCity());
         user.setCountry(signupRequest.getCountry());
         return user;

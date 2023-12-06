@@ -120,6 +120,32 @@ public class GatewayController {
         }
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping("/payments")
+    private ResponseEntity<Integer> makePayment(@RequestBody PaymentRequest paymentRequest) {
+        try {
+            ResponseEntity<Integer> response = restTemplate.postForEntity(
+                    System.getenv("PAYMENTSERVICE_URL"), paymentRequest, Integer.class);
+            return ResponseEntity.ok(response.getBody());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Couldn't make payment");
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/payments/{id}")
+    private ResponseEntity<String> getPayment(@PathVariable Integer id) {
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(
+                    System.getenv("PAYMENTSERVICE_URL") + "/" + id, String.class);
+
+            JSONObject payment = new JSONObject(response.getBody());
+            enrichPayment(payment);
+            return ResponseEntity.ok(payment.toString());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't find payment");
+        }
+    }
     private void enrichItems(JSONArray items) {
         for (int i = 0; i < items.length(); i++) {
             JSONObject item = items.getJSONObject(i);
@@ -137,4 +163,22 @@ public class GatewayController {
             item.put("highestBid", -1);
         }
     }
+
+   // enrich payment with user and item details
+   private void enrichPayment(JSONObject payment) {
+       try {
+           ResponseEntity<String> userResponse = restTemplate.getForEntity(
+                   System.getenv("USERSERVICE_URL") + "/" + payment.getInt("userId"), String.class);
+           payment.put("user", new JSONObject(userResponse.getBody()));
+       } catch (Exception e) {
+           payment.put("user", new JSONObject());
+       }
+       try {
+           ResponseEntity<String> itemResponse = restTemplate.getForEntity(
+                   System.getenv("CATALOGSERVICE_URL") + "/" + payment.getInt("itemId"), String.class);
+           payment.put("item", new JSONObject(itemResponse.getBody()));
+       } catch (Exception e) {
+           payment.put("item", new JSONObject());
+       }
+   }
 }

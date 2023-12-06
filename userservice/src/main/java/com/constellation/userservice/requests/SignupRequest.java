@@ -16,4 +16,5 @@ public class SignupRequest {
     private String postalCode;
     private String city;
     private String country;
+    private String province;
 }

@@ -8,7 +8,7 @@ import { useState } from "react";
 import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
-const WinnerView = ({ item }) => {
+const WinnerView = ({ item, router }) => {
   const [expedite, setExpedite] = useState(false);
 
   const totalCost =
@@ -48,7 +48,17 @@ const WinnerView = ({ item }) => {
           </label>
         </div>
       </div>
-      <Button className="mt-4">Pay Now (${totalCost})</Button>
+      <Button
+        className="mt-4"
+        onClick={() => {
+          router.push({
+            pathname: `/payment`,
+            query: { itemId: item.id, expedite: expedite ? "yes" : "no" },
+          });
+        }}
+      >
+        Pay Now (${totalCost})
+      </Button>
     </>
   );
 };
@@ -89,7 +99,7 @@ const AuctionEnded = () => {
       return <p>Item not found</p>;
     }
     if (user?.id === item.highestBidderId) {
-      return <WinnerView item={item} />;
+      return <WinnerView item={item} router={router} />;
     } else {
       return <LoserView />;
     }

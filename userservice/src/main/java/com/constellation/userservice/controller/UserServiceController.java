@@ -58,7 +58,9 @@ public class UserServiceController {
 
     @GetMapping("/{id}")
     public User read(@PathVariable int id) {
-        return userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        user.setPassword(null);
+        return user;
     }
 
     @PostMapping("/login")

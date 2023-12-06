@@ -81,6 +81,9 @@ const PlaceBid = () => {
               <p className="text-gray-700 font-medium">
                 <b>Item Description:</b> {item.description}
               </p>
+              <p className="text-gray-700 font-medium">
+                <b>Shipping Price:</b> ${item.shippingPrice.toFixed(2)}
+              </p>
             </div>
             <div className="border border-black p-4 mt-4">
               {item.isDutch && (

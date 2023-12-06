@@ -1,7 +1,5 @@
 package com.constellation.bidservice.controllers;
 
-import com.constellation.bidservice.model.Item;
-import com.constellation.bidservice.model.User;
 import com.constellation.bidservice.repository.BidRepository;
 import com.constellation.bidservice.model.Bid;
 import com.constellation.bidservice.requests.BidRequest;
@@ -9,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController

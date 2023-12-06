@@ -15,6 +15,7 @@ const Signup = () => {
     city: "",
     postalCode: "",
     country: "",
+    province: "",
   });
 
   const handleChange = (e) => {
@@ -115,6 +116,14 @@ const Signup = () => {
                 placeholder="Country"
                 name="country"
                 value={form.country}
+                onChange={handleChange}
+                required
+              />
+              <Input
+                className="mt-12"
+                placeholder="Province"
+                name="province"
+                value={form.province}
                 onChange={handleChange}
                 required
               />
