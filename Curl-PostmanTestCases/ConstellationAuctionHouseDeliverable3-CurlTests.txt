@@ -1,0 +1,69 @@
+Payment Curl Test Cases:
+
+README: Do the following first:
+
+curl -X POST -H "Content-Type: application/json" -d '{ "username":"testUser", "password":"Sam", "firstName":"Sam", "lastName":"Samantha", "streetAddress": "York", "postalCode": "G5G5G5", "city":"Toronto", "country":"Canada", "province":"Ontario"}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/users
+
+Output: {"id":312,"username":"testUser","password":null,"firstName":"Sam","lastName":"Samantha","streetAddress":"York","postalCode":"G5G5G5","city":"Toronto","province":"Ontario","country":"Canada"}%  
+
+README: Then copy the "id" value from the first argument in the result above. In this case 312, it would be different for you. If you get "User already exists with this username" error change the username to something else like testUser1, testUser2, etc.
+
+Erroneous entries:
+
+POST:
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1,"amount": 13.00,"expiryDate": "12/24","ccv": 666,"userId": "312","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "Card number must be 15/16 digits"
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 12345678901234567,"amount": 13.00,"expiryDate": "12/24","ccv": 666,"userId": "312","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "Card number must be 15/16 digits"
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1234567890123456,"amount": -1,"expiryDate": "12/24","ccv": 666,"userId": "312","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "Amount must be positive"
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1234567890123456,"amount": 13.00,"expiryDate": "13/24","ccv": 666,"userId": "312","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "Expiry date must be in MM/YY format"
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1234567890123456,"amount": 13.00,"expiryDate": "0/24","ccv": 666,"userId": "312","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "Expiry date must be in MM/YY format"
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1234567890123456,"amount": 13.00,"expiryDate": "12/24","ccv": 66666,"userId": "312","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "CCV must be 3/4 digits"
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1234567890123456,"amount": 13.00,"expiryDate": "12/24","ccv": 66,"userId": "312","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "CCV must be 3/4 digits"
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1234567890123456,"amount": 13.00,"expiryDate": "12/24","ccv": 666,"userId": "66666","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "User does not exist"
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1234567890123456,"amount": 13.00,"expiryDate": "12/24","ccv": 666,"userId": "312","itemId": 66666}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: "Item does not exist"
+
+GET:
+
+curl -X GET https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments/66666
+
+Output: "Couldn't find payment"
+
+Successful entries:
+
+curl -X POST -H "Content-Type: application/json" -d '{"cardNumber": 1234567890123456,"amount": 13.00,"expiryDate": "12/24","ccv": 666,"userId": "312","itemId": 4}' https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments
+
+Output: 555
+
+README: Please use the output (payment id) above, in this case 555 for the command below; the payment id would be different for you.
+
+GET:
+
+curl -X GET https://api-gateway-6xzxsrhmsa-uc.a.run.app/payments/555
+
+Output: {"expiryDate":"12/24","itemId":4,"amount":13,"item":{"sellerId":52,"shippingPrice":5,"expeditePrice":2,"auctionEnd":"2023-12-15T21:55:00","initialPrice":5,"name":"someitem","available":true,"description":"4","id":4,"daysToShip":5,"isDutch":true},"ccv":666,"id":555,"userId":312,"user":{"firstName":"Sam","lastName":"Samantha","country":"Canada","password":null,"province":"Ontario","streetAddress":"York","city":"Toronto","postalCode":"G5G5G5","id":312,"username":"testUser"},"cardNumber":1234567890123456}
