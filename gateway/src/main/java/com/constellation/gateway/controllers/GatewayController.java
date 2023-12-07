@@ -124,6 +124,12 @@ public class GatewayController {
     @PostMapping("/payments")
     private ResponseEntity<Integer> makePayment(@RequestBody PaymentRequest paymentRequest) {
         try {
+            paymentRequest.validate();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        try {
             ResponseEntity<Integer> response = restTemplate.postForEntity(
                     System.getenv("PAYMENTSERVICE_URL"), paymentRequest, Integer.class);
             return ResponseEntity.ok(response.getBody());
