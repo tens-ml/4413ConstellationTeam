@@ -16,7 +16,7 @@ public class Payment {
 
     private Integer userId;
     private Integer itemId;
-    private Integer cardNumber;
+    private BigDecimal cardNumber;
     private Integer ccv;
     private String expiryDate;
     private BigDecimal amount;
