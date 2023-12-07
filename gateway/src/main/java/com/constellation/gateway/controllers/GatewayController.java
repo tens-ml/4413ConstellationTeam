@@ -112,6 +112,12 @@ public class GatewayController {
     @PostMapping("/bids")
     private ResponseEntity<String> placeBid(@RequestBody BidRequest bidRequest) {
         try {
+            bidRequest.validate();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        try {
             ResponseEntity<String> response = restTemplate.postForEntity(
                     System.getenv("BIDSERVICE_URL"), bidRequest, String.class);
             return ResponseEntity.ok(response.getBody());
