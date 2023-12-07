@@ -81,7 +81,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"john\",\r\n    \"password\":\"1\",\r\n    \"firstname\":\"john\",\r\n    \"lastname\":\"addams\",\r\n    \"streetAddress\": \"York\",\r\n    \"postalCode\": \"G5G5G5\",\r\n    \"city\":\"Toronto\",\r\n    \"country\":\"Canada\",\r\n    \"province\":\"Ontario\"\r\n}",
+					"raw": "{\r\n    \"username\":\"john\",\r\n    \"password\":\"1\",\r\n    \"firstName\":\"john\",\r\n    \"lastName\":\"addams\",\r\n    \"streetAddress\": \"York\",\r\n    \"postalCode\": \"G5G5G5\",\r\n    \"city\":\"Toronto\",\r\n    \"country\":\"Canada\",\r\n    \"province\":\"Ontario\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -111,7 +111,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"newUser\",\r\n    \"password\":\"Sam\",\r\n    \"firstname\":\"Sam\",\r\n    \"lastname\":\"Samantha\",\r\n    \"streetAddress\": \"York\",\r\n    \"postalCode\": \"G5G5G5\",\r\n    \"city\":\"Toronto\",\r\n    \"country\":\"Canada\",\r\n    \"province\":\"Ontario\"\r\n}",
+					"raw": "{\r\n    \"username\":\"newUser23\",\r\n    \"password\":\"Sam\",\r\n    \"firstName\":\"Sam\",\r\n    \"lastName\":\"Samantha\",\r\n    \"streetAddress\": \"York\",\r\n    \"postalCode\": \"G5G5G5\",\r\n    \"city\":\"Toronto\",\r\n    \"country\":\"Canada\",\r\n    \"province\":\"Ontario\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -251,13 +251,13 @@
 			"response": []
 		},
 		{
-			"name": "Forward Auction bidding test case 8",
+			"name": "Forward Auction bidding Successful higher price then current bid test case 8",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":255,\r\n    \"bidTime\":\"\",\r\n    \"price\":55,\r\n    \"userId\":255,\r\n    \"itemId\":7\r\n}",
+					"raw": "{\r\n    \"id\":255,\r\n    \"bidTime\":\"\",\r\n    \"price\":76,\r\n    \"userId\":255,\r\n    \"itemId\":7\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -306,6 +306,36 @@
 					"path": [
 						"users",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ForwardAuctionBidding unsuccesful lower price than current bid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":255,\r\n    \"bidTime\":\"\",\r\n    \"price\":30,\r\n    \"userId\":255,\r\n    \"itemId\":7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-gateway-6xzxsrhmsa-uc.a.run.app/bids",
+					"protocol": "https",
+					"host": [
+						"api-gateway-6xzxsrhmsa-uc",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"bids"
 					]
 				}
 			},
