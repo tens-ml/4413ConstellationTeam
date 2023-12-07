@@ -8,7 +8,16 @@ steps:
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['run', 'deploy', 'bid-service', '--image', 'gcr.io/cons-406304/bid-service:$COMMIT_SHA', '--region', 'us-central1', '--allow-unauthenticated']
+    args: [ 'run',
+            'deploy',
+            'user-service',
+            '--image',
+            'gcr.io/cons-406304/bid-service:$COMMIT_SHA',
+            '--region',
+            'us-central1',
+            '--allow-unauthenticated',
+            '--min-instances',
+            '1' ]
 options:
   logging: CLOUD_LOGGING_ONLY
 images:

@@ -24,8 +24,9 @@ steps:
            'gcr.io/cons-406304/gateway:$COMMIT_SHA',
            '--region',
            'us-central1',
-           '--allow-unauthenticated'
-    ]
+           '--allow-unauthenticated',
+           '--min-instances',
+           '1']
 options:
   logging: CLOUD_LOGGING_ONLY
 images:
