@@ -340,6 +340,66 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Sell item request dutch auction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sellerId\":\"255\",\r\n    \"name\":\"house\",\r\n    \"description\":\"6 bedroom house\",\r\n    \"isDutch\": true,\r\n    \"initialPrice\": 14,\r\n    \"auctionEnd\": \"2024-03-13T20:38:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-gateway-6xzxsrhmsa-uc.a.run.app/items",
+					"protocol": "https",
+					"host": [
+						"api-gateway-6xzxsrhmsa-uc",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sell item request forward auction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sellerId\":255,\r\n    \"name\":\"toyota\",\r\n    \"description\":\"2016 toyota\",\r\n    \"isDutch\": false,\r\n    \"initialPrice\": 19000,\r\n    \"auctionEnd\": \"2024-03-13T20:38:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-gateway-6xzxsrhmsa-uc.a.run.app/items",
+					"protocol": "https",
+					"host": [
+						"api-gateway-6xzxsrhmsa-uc",
+						"a",
+						"run",
+						"app"
+					],
+					"path": [
+						"items"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
