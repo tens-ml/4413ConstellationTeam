@@ -40,18 +40,19 @@ public class PaymentRequest {
 
         RestTemplate restTemplate = new RestTemplate();
         try {
-            restTemplate.getForObject(System.getenv("USERSERVICE_URL") + "/users/" + this.userId, String.class);
+            restTemplate.getForObject(System.getenv("USERSERVICE_URL") + "/" + this.userId, String.class);
         } catch (Exception e) {
             // do nothing
             throw new IllegalArgumentException("User does not exist");
         }
 
         try {
-            restTemplate.getForObject(System.getenv("CATALOGSERVICE_URL") + "/items/" + this.itemId, String.class);
+            restTemplate.getForObject(System.getenv("CATALOGSERVICE_URL") + "/" + this.itemId, String.class);
         } catch (Exception e) {
             // do nothing
             throw new IllegalArgumentException("Item does not exist");
         }
 
+        System.out.println("validated");
     }
 }
