@@ -31,7 +31,7 @@ public class PaymentRequest {
 
         // apply regex
         if (!this.expiryDate.matches("^((0[1-9]|1[0-2])\\/\\d{2})$")) {
-            throw new IllegalArgumentException("Expiry date must be in MM/YY or MM/YYYY format");
+            throw new IllegalArgumentException("Expiry date must be in MM/YY format");
         }
 
         if (this.amount.compareTo(BigDecimal.ZERO) < 0) {
