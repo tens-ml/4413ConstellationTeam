@@ -114,7 +114,7 @@ const Payment = () => {
             />
             <Input
               className="mt-4"
-              label="Expiry Date"
+              label="Expiry Date (MM/YY)"
               required
               {...register("expiryDate")}
             />

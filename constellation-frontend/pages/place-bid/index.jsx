@@ -11,6 +11,13 @@ import useSWR from "swr";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const truncate = (num) => Math.floor(num * 100) / 100;
 
+function getTimeRemaining(targetDateTime) {
+  const targetDate = new Date(targetDateTime);
+  const now = new Date();
+
+  return targetDate - now;
+}
+
 const PlaceBid = () => {
   const router = useRouter();
   const { data: session } = useSession();
@@ -32,6 +39,15 @@ const PlaceBid = () => {
       const minPrice =
         item.highestBid === -1 ? item.initialPrice : item.highestBid;
       setBid(truncate(minPrice + 0.01));
+    }
+    if (item) {
+      const diff = getTimeRemaining(item.auctionEnd);
+      setTimeout(() => {
+        router.push({
+          pathname: "/auction-ended",
+          query: { itemId: itemId },
+        });
+      }, diff);
     }
   }, [item]);
 
@@ -100,7 +116,7 @@ const PlaceBid = () => {
                       : item.initialPrice.toFixed(2)}
                   </p>
                   <p className="text-gray-700 font-medium">
-                    <b>Highest Bidder:</b> {item.highestBidderId}
+                    <b>Highest Bidder:</b> {item.highestBidderId || "None"}
                   </p>
                 </>
               )}
