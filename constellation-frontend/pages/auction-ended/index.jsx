@@ -39,7 +39,7 @@ const WinnerView = ({ item, router }) => {
           <input
             id="expedite"
             type="checkbox"
-            class="form-checkbox h-5 w-5 text-gray-600 rounded border-gray-300 focus:border-gray-300 focus:ring focus:ring-offset-0 focus:ring-gray-500 focus:ring-opacity-50"
+            className="form-checkbox h-5 w-5 text-gray-600 rounded border-gray-300 focus:border-gray-300 focus:ring focus:ring-offset-0 focus:ring-gray-500 focus:ring-opacity-50"
             checked={expedite}
             onChange={(e) => setExpedite(e.target.checked)}
           />
@@ -63,11 +63,12 @@ const WinnerView = ({ item, router }) => {
   );
 };
 
-const LoserView = ({ winner }) => {
+const LoserView = ({ router }) => {
   return (
     <>
       <Title className="mb-4">Auction Ended</Title>
-      <p>You are not the winner, {} is the winner</p>
+      <p>You are not the winner!</p>
+      <Button onClick={() => router.push("/catalog")}>Catalog</Button>
     </>
   );
 };
@@ -101,7 +102,7 @@ const AuctionEnded = () => {
     if (user?.id === item.highestBidderId) {
       return <WinnerView item={item} router={router} />;
     } else {
-      return <LoserView />;
+      return <LoserView router={router} />;
     }
   };
 
